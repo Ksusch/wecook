@@ -18,7 +18,8 @@ router.post('/add/offering', (req, res, next) => {
       ingredients: req.body.ingredients,
       category: req.body.category,
       image: req.body.image,
-      delivery: req.body.delivery
+      delivery: req.body.delivery,
+      user: req.user.id
   })
     .then(offering =>
       res.json({

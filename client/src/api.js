@@ -36,7 +36,6 @@ export default {
       .catch(err => console.log(err));
   },
 
-<<<<<<< HEAD
   createOffering(state){
     let data={
       title: state.title,
@@ -54,10 +53,6 @@ export default {
       .then(response => console.log(response))
       .catch(err => console.log(err));
 
-=======
-  isLoggedIn() {
-    return JSON.parse(localStorage.getItem("user"))
->>>>>>> c5d744181b9726da1797f4eb4da93ca1d3742cf3
   }
   
 };
