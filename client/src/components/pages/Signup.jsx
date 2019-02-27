@@ -21,7 +21,7 @@ export default class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.email.length > 0 && this.state.password.length > 0) {
-      api.signup(this.state.email, this.state.password, this.state.address);
+      api.signup(this.state.email, this.state.password, this.state.address, this.state.name);
     }
   }
 
