@@ -7,7 +7,6 @@ const offeringSchema = new mongoose.Schema({
   availability: String,
   ingredients: Array,
   category: String,
-  image: String,
   delivery: Boolean,
   user: {
     type: mongoose.Schema.Types.ObjectId,
@@ -18,7 +17,11 @@ const offeringSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Review'
     }
-  ]
+  ],
+  image: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Image'
+  }
 });
 
 const Offering = mongoose.model('Offering', offeringSchema);

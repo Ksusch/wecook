@@ -15,7 +15,12 @@ const userSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Review'
     }
-  ]
+  ],
+  image:
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Image'
+    }
 });
 
 const User = mongoose.model('User', userSchema);
