@@ -17,11 +17,12 @@ export default {
       .then(response => console.log(response))
       .catch(err => console.log(err));
   },
-  signup(email, password, address) {
+  signup(email, password, address, name) {
     let data = {
       email: email,
       password: password,
-      address: address
+      address: address,
+      name: name
     };
     return service
       .post('/auth/signup', data)
