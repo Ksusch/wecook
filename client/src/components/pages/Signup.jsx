@@ -19,14 +19,14 @@ export default class Login extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.username.length > 0 && this.state.password.length > 0) {
+    if (this.state.email.length > 0 && this.state.password.length > 0) {
       api.signup(this.state.email, this.state.password, this.state.address);
     }
   }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={e => this.handleSubmit(e)}>
         <FormGroup>
           <Label for="email">Email</Label>
           <Input
@@ -57,10 +57,9 @@ export default class Login extends Component {
             onChange={e => this.handleChange(e)}
           />
         </FormGroup>
-        <Button type="submit" onSubmit={e => this.handleSubmit(e)}>
+        <Button type="submit">
           Submit
         </Button>
-        />
       </Form>
     );
   }

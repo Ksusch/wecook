@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  baseURL: 'http://localhost:3000/api',
+  baseURL: 'http://localhost:4000',
   withCredentials: true
 });
 
@@ -12,7 +12,7 @@ export default {
       email: email,
       password: password
     };
-    axios
+    return service
       .post('/auth/login', data)
       .then(response => console.log(response))
       .catch(err => console.log(err));
@@ -23,7 +23,7 @@ export default {
       password: password,
       address: address
     };
-    axios
+    return service
       .post('/auth/signup', data)
       .then(response => console.log(response))
       .catch(err => console.log(err));

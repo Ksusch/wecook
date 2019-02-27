@@ -32,5 +32,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', require('../routes/index'));
 app.use('/api', require('../routes/api'));
+app.use('/auth', require('../routes/auth'));
 
 module.exports = app;

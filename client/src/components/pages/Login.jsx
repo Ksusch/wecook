@@ -49,7 +49,6 @@ export default class Login extends Component {
         <Button type="submit" onSubmit={e => this.handleSubmit(e)}>
           Submit
         </Button>
-        />
       </Form>
     );
   }
