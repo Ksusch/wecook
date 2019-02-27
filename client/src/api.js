@@ -28,5 +28,27 @@ export default {
       .post('/auth/signup', data)
       .then(response => console.log(response))
       .catch(err => console.log(err));
+  },
+
+  createOffering(state){
+    let data={
+      title: state.title,
+      description: state.description,
+      quantity: state.quantity,
+      fromDate: state.fromDate,
+      toDate: state.toDate,
+      ingredients: state.ingredients,
+      category: state.category,
+      image: state.image,
+      delivery: state.delivery
+    };
+    return service
+      .post('/add/offering', data)
+      .then(response => console.log(response))
+      .catch(err => console.log(err));
+
   }
+  
 };
+
+

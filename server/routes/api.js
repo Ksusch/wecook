@@ -10,14 +10,15 @@ router.get('/offerings', (req, res, next) => {
 
 router.post('/add/offering', (req, res, next) => {
   Offering.create({
-    name: req.body.name,
-    quantity: req.body.quantity,
-    orders: req.body.orders,
-    availability: req.body.availability,
-    ingredients: req.body.ingredients,
-    category: req.body.category,
-    image: req.body.image,
-    delivery: req.body.delivery
+    title: req.body.title,
+      description: req.body.description,
+      quantity: req.body.quantity,
+      fromDate: req.body.fromDate,
+      toDate: req.body.toDate,
+      ingredients: req.body.ingredients,
+      category: req.body.category,
+      image: req.body.image,
+      delivery: req.body.delivery
   })
     .then(offering =>
       res.json({
