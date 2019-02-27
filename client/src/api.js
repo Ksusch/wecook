@@ -14,7 +14,10 @@ export default {
     };
     return service
       .post('/auth/login', data)
-      .then(response => console.log(response))
+      .then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data))
+        return res.data
+      })
       .catch(err => console.log(err));
   },
   signup(email, password, address) {
@@ -25,7 +28,14 @@ export default {
     };
     return service
       .post('/auth/signup', data)
-      .then(response => console.log(response))
+      .then(res => {
+        localStorage.setItem("user", JSON.stringify(res.data))
+        return res.data
+      })
       .catch(err => console.log(err));
+  },
+
+  isLoggedIn() {
+    return JSON.parse(localStorage.getItem("user"))
   }
 };

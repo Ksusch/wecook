@@ -18,14 +18,16 @@ export default class Login extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.username.length > 0 && this.state.password.length > 0) {
-      api.login(this.state.email, this.state.password);
+    if (this.state.email.length > 0 && this.state.password.length > 0) {
+      api.login(this.state.email, this.state.password).then(res => {
+        this.props.history.push('/');
+      });
     }
   }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={e => this.handleSubmit(e)}>
         <FormGroup>
           <Label for="email">Email</Label>
           <Input
@@ -46,9 +48,7 @@ export default class Login extends Component {
             onChange={e => this.handleChange(e)}
           />
         </FormGroup>
-        <Button type="submit" onSubmit={e => this.handleSubmit(e)}>
-          Submit
-        </Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
