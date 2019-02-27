@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { login } from '../../api';
+import api from '../../api';
 
 export default class Login extends Component {
   constructor(props) {
@@ -19,7 +19,7 @@ export default class Login extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.username.length > 0 && this.state.password.length > 0) {
-      login(this.state.email, this.state.password);
+      api.login(this.state.email, this.state.password);
     }
   }
 
