@@ -23,12 +23,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 //  app.use(express.static(path.join(_dirname,'../client/build')))
 
-//  app.use(session({
-//    secret: process.env.SESSION_SECRET,
-//    resave: true,
-//    saveUninitialized: true,
-//    store: new MongoStore({mongooseConnection: mongoose.connection})
-//  }))
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
+}))
+require("./passport")(app)
 
 app.use('/', require('../routes/index'));
 app.use('/api', require('../routes/api'));

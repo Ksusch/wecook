@@ -8,7 +8,8 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      address: "",
+      address: '',
+      name: '',
     };
   }
 
@@ -27,6 +28,16 @@ export default class Login extends Component {
   render() {
     return (
       <Form onSubmit={e => this.handleSubmit(e)}>
+        <FormGroup>
+          <Label for="name">Full Name</Label>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="name"
+            onChange={e => this.handleChange(e)}
+          />
+        </FormGroup>
         <FormGroup>
           <Label for="email">Email</Label>
           <Input
