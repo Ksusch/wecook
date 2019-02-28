@@ -3,22 +3,26 @@ import { Button, Form, FormGroup, Label, Input } from "reactstrap";
 
 class FormWrapper extends Component {
 	constructor(props) {
-        super(props);
-        let stateObj = {};
-        this.props.formGroups.forEach(
-            element => (stateObj[element.name] = "")
-        );
-        console.log(stateObj)
+		super(props);
+		let stateObj = {};
+		this.props.formGroups.forEach(element => (stateObj[element.name] = ""));
+		console.log(stateObj);
 		this.state = stateObj;
 	}
 	handleChange(e) {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
-    }
-    handleSubmit(e) {
+	}
+	handleSubmit(e) {
 		e.preventDefault();
-        this.props.handler(this.state)
+		if (e.target.name !== "upload") {
+			this.props.handler(this.state);
+		} else {
+			const image = new FormData();
+			image.append("imageUrl", e.target.files[0]);
+			this.props.upload(image);
+		}
 	}
 	render() {
 		return (
@@ -47,8 +51,8 @@ class FormWrapper extends Component {
 
 class FormInputLabel extends Component {
 	render() {
-        let text = this.props.name[0].toUpperCase() + this.props.name.substr(1)
-        return (
+		let text = this.props.name[0].toUpperCase() + this.props.name.substr(1);
+		return (
 			<FormGroup className={this.props.class || ""}>
 				<Label for={this.props.name}>{text}</Label>
 				<Input
@@ -77,4 +81,22 @@ class FormButton extends Component {
 	}
 }
 
-export default FormWrapper
+export class UploadWidget extends Component {
+	uploadWidget() {
+		window.cloudinary.openUploadWidget(
+			{ cloud_name: "dgxu6dbuw", upload_preset: "profile" },
+			function(error, result) {
+				console.log(result);
+			}
+		);
+	}
+	render() {
+		return (
+			<React.Fragment>
+				<Button className={this.props.class || ""} onClick={this.uploadWidget.bind(this)}>Upload Image</Button>
+			</React.Fragment>
+		);
+	}
+}
+
+export default FormWrapper;

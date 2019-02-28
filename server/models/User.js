@@ -4,23 +4,7 @@ const userSchema = new mongoose.Schema({
   password: String,
   name: String,
   address: String,
-  offerings: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Offerings'
-    }
-  ],
-  reviews: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Review'
-    }
-  ],
-  image:
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Image'
-    }
+  image: String,
 });
 
 const User = mongoose.model('User', userSchema);

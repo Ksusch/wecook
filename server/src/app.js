@@ -31,7 +31,6 @@ app.use(session({
 }))
 require("./passport")(app)
 
-app.use('/', require('../routes/index'));
 app.use('/api', require('../routes/api'));
 app.use('/auth', require('../routes/auth'));
 

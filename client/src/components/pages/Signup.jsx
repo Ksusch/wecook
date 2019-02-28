@@ -4,7 +4,7 @@ import FormWrapper from "../FormElements";
 import api from '../../api';
 
 export default class Signup extends Component {
-  handleSubmit(state) {
+  handleSignup(state) {
 		api.signup(state).then(res => {
 			this.props.history.push("/home");
 		});
@@ -47,7 +47,7 @@ export default class Signup extends Component {
 					class: "",
 					text: "Submit",
 				}}
-				handler={state => this.handleSubmit(state)}
+				handler={state => this.handleSignup(state)}
 			/>
       </Container>
 		);

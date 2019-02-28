@@ -38,7 +38,13 @@ export default {
 	createOffering(state) {
 		return service
 			.post("api/add/offering", state)
-			.then(response => console.log(response))
+			.then(res => console.log(res))
 			.catch(err => console.log(err));
 	},
+	uploadImage(file) {
+		console.log(file)
+		return service.post('api/image/upload', file)
+		  .then(res => res.data)
+		  .catch(this.errorHandler);
+	  }
 };
