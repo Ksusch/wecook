@@ -35,15 +35,8 @@ export default {
 		localStorage.removeItem("user");
 		return service.get("/logout");
 	},
-	createOffering(state) {
-		return service
-			.post("api/add/offering", state)
-			.then(res => console.log(res))
-			.catch(err => console.log(err));
-	},
-	uploadImage(file) {
-		console.log(file)
-		return service.post('api/image/upload', file)
+	addImageUrl(url, type) {
+		return service.post('api/image/upload', {imageUrl: url, type: type })
 		  .then(res => res.data)
 		  .catch(this.errorHandler);
 	  }

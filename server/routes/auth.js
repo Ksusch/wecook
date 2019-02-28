@@ -1,11 +1,8 @@
-require("dotenv");
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
 const User = require("../models/User");
 const nodemailer = require("../src/nodemailer");
-
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 

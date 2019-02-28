@@ -1,68 +1,60 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const { isActiveUser } = require("../src/middlewares");
+const Pet = require("../models/Pet");
+const User = require("../models/User");
 
-// const Offering = require('../models/Offering');
+router.get("/pet", isActiveUser, (req, res, next) => {
+	Pet.find()
+    .then(pets => res.json(pets))
+    .catch(err => console.log(err));
+});
 
-// router.get('/offerings', (req, res, next) => {
-//   Offering.find()
-//     .then(offerings => res.json(offerings))
-//     .catch(err => console.log(err));
-// });
+router.post("/pet", isActiveUser, (req, res, next) => {
+	Pet.create({
+		name: req.body.name,
+		animal: req.body.animal,
+		description: req.body.description,
+		image: req.body.image,
+		owner: req.user.id,
+	})
+    .then(pet =>
+        res.json({
+            success: true,
+            pet,
+        })
+    )
+    .catch(err => console.log(err));
+});
 
-// router.post('/add/offering', (req, res, next) => {
-//   Offering.create({
-//     title: req.body.title,
-//       description: req.body.description,
-//       quantity: req.body.quantity,
-//       fromDate: req.body.fromDate,
-//       toDate: req.body.toDate,
-//       ingredients: req.body.ingredients,
-//       category: req.body.category,
-//       image: req.body.image,
-//       delivery: req.body.delivery,
-//       user: req.user.id
-//   })
-//     .then(offering =>
-//       res.json({
-//         success: true,
-//         offering
-//       })
-//     )
-//     .catch(err => console.log(err));
-// });
+router.put("/pet", isActiveUser, (req, res, next) => {
+	Pet.findOneAndUpdate(
+		{ _id: req.body._id },
+		{
+			name: req.body.name,
+            animal: req.body.animal,
+            description: req.body.description,
+            image: req.body.image,
+		}
+	)
+		.then(pet =>
+			res.json({
+				message: "pet updated",
+				pet,
+			})
+		)
+		.catch(err => console.log(err));
+});
 
-// router.put('/update/offering', (req, res, next) => {
-//   Offering.findOneAndUpdate(
-//     { _id: req.body._id },
-//     {
-//       name: req.body.name,
-//       quantity: req.body.quantity,
-//       orders: req.body.orders,
-//       availability: req.body.availability,
-//       ingredients: req.body.ingredients,
-//       category: req.body.category,
-//       image: req.body.image,
-//       delivery: req.body.delivery
-//     }
-//   )
-//     .then(offering =>
-//       res.json({
-//         message: 'offering updated',
-//         offering
-//       })
-//     )
-//     .catch(err => console.log(err));
-// });
-
-// router.delete('/delete/offering', (req, res, next) => {
-//   Offering.findOneAndDelete({ _id: req.body._id })
-//     .then(offering =>
-//       res.json({
-//         message: 'offering deleted',
-//         offering
-//       })
-//     )
-//     .catch(err => console.log(err));
-// });
+router.delete("/pet", isActiveUser, (req, res, next) => {
+	Pet.findOneAndDelete({ _id: req.body._id })
+    .then(pet =>
+        res.json({
+            message: "pet deleted",
+            pet,
+        })
+    )
+    .catch(err => console.log(err));
+});
 
 module.exports = router;
