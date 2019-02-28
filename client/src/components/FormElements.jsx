@@ -81,22 +81,4 @@ class FormButton extends Component {
 	}
 }
 
-export class UploadWidget extends Component {
-	uploadWidget() {
-		window.cloudinary.openUploadWidget(
-			{ cloud_name: "dgxu6dbuw", upload_preset: "profile" },
-			function(error, result) {
-				console.log(result);
-			}
-		);
-	}
-	render() {
-		return (
-			<React.Fragment>
-				<Button className={this.props.class || ""} onClick={this.uploadWidget.bind(this)}>Upload Image</Button>
-			</React.Fragment>
-		);
-	}
-}
-
 export default FormWrapper;
