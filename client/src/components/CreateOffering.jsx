@@ -8,7 +8,7 @@ export default class CreateOffering extends Component {
         this.state = {
             title: '',
             description: "",
-            quantity: 0,
+            quantity: 10,
             fromDate: "",
             toDate: "",
             ingredients: "",
@@ -33,9 +33,18 @@ export default class CreateOffering extends Component {
       handleSubmit(e) {
         e.preventDefault();
         api.createOffering(this.state)
+        .then(res => this.props.history.push('/'))
       }
     
   render() {
+    let date = new Date(),
+      day = String(date.getDate()),
+      month = String(date.getMonth() + 1),
+      year = String(date.getFullYear());
+
+    if (day.length < 2) day = 0 + day
+    if (month.length < 2) month = 0 + month
+
     return (
        <Form onSubmit={e => this.handleSubmit(e)}>
         <FormGroup>
@@ -59,12 +68,13 @@ export default class CreateOffering extends Component {
           />
         </FormGroup>
         <FormGroup>
-          <Label for="quantity">Quantity</Label>
+          <Label for="quantity">Number of Dishes</Label>
           <Input
             type="number"
             name="quantity"
             id="quantity"
             min="10"
+            value="10"
             onChange={e => this.handleChange(e)}
           />
         </FormGroup>
@@ -72,17 +82,19 @@ export default class CreateOffering extends Component {
           <Label for="fromDate">Avaialble From</Label>
           <Input
             type="date"
-            min={String(new Date())}
+            min={`${year}-${month}-${day}`}
+            value={`${year}-${month}-${day}`}
             name="fromDate"
             id="fromDate"
             onChange={e => this.handleChange(e)}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="toDate">Avaialble From</Label>
+          <Label for="toDate">Avaialble To</Label>
           <Input
             type="date"
-            min={String(new Date())}
+            min={`${year}-${month}-${day}`}
+            value={`${year}-${month}-${day}`}
             name="toDate"
             id="toDate"
             onChange={e => this.handleChange(e)}

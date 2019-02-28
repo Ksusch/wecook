@@ -13,7 +13,7 @@ const offeringSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  review: [
+  reviews: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Review'
