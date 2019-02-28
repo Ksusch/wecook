@@ -1,19 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-// include CLOUDINARY:
-const uploader = require('../src/cloudinary');
-
-router.post('/image/upload', uploader.single("imageUrl"), (req, res, next) => {
-    console.log('file is: ', req.file)
-    if (!req.file) {
-      next(new Error('No file uploaded!'));
-      return;
-    }
-    console.log(req.file.secure.url)
-    res.json({ secure_url: req.file.secure_url });
-})
-
 // const Offering = require('../models/Offering');
 
 // router.get('/offerings', (req, res, next) => {
