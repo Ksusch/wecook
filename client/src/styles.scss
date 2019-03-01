@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 
 // Definition of variables
 $primary: #32c3ff;
@@ -28,6 +29,7 @@ body {
 // --------------------
 // Style for App component
 .App {
+  font-family: 'Roboto Slab', serif;
   text-align: center;
 
   .App-logo {
