@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Nav, NavItem } from 'reactstrap';
 import { NavLink, Link } from 'react-router-dom';
 import '../styles.scss';
-import api from '../api'
+import api from '../api/api'
 
 export default class Navbar extends Component {
 	render() {
