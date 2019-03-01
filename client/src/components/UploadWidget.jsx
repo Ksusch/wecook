@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
-import api from "../api";
+import api from "../api/api";
 
 export default class UploadWidget extends Component {
 	uploadWidget() {

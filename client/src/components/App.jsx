@@ -3,7 +3,7 @@ import '../styles.scss';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
-import api from '../api';
+import api from '../api/api';
 import { Switch, Route, NavLink, Link } from 'react-router-dom';
 
 class App extends Component {
