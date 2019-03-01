@@ -6,7 +6,6 @@ class FormWrapper extends Component {
 		super(props);
 		let stateObj = {};
 		this.props.formGroups.forEach(element => (stateObj[element.name] = ""));
-		console.log(stateObj);
 		this.state = stateObj;
 	}
 	handleChange(e) {
@@ -76,24 +75,6 @@ class FormButton extends Component {
 				>
 					{this.props.text}
 				</Button>
-			</React.Fragment>
-		);
-	}
-}
-
-export class UploadWidget extends Component {
-	uploadWidget() {
-		window.cloudinary.openUploadWidget(
-			{ cloud_name: "dgxu6dbuw", upload_preset: "profile" },
-			function(error, result) {
-				console.log(result);
-			}
-		);
-	}
-	render() {
-		return (
-			<React.Fragment>
-				<Button className={this.props.class || ""} onClick={this.uploadWidget.bind(this)}>Upload Image</Button>
 			</React.Fragment>
 		);
 	}
