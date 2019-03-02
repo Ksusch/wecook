@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Container } from "reactstrap";
 import FormWrapper from "../FormElements";
-import api from "../../api";
+import api from "../../api/api";
 
 export default class Login extends Component {
 	handleLogin(state) {

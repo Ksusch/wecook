@@ -6,7 +6,6 @@ class FormWrapper extends Component {
 		super(props);
 		let stateObj = {};
 		this.props.formGroups.forEach(element => (stateObj[element.name] = ""));
-		console.log(stateObj);
 		this.state = stateObj;
 	}
 	handleChange(e) {

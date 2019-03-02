@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 
 // Definition of variables
 $primary: #32c3ff;
@@ -27,6 +28,7 @@ body {
 // --------------------
 // Style for App component
 .App {
+  font-family: 'Roboto Slab', serif;
   text-align: center;
 
   .App-logo {
@@ -101,4 +103,10 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+// mapbox GL container
+.map {
+  width: 600px;
+  height: 600px
 }
