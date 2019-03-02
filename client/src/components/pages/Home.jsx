@@ -1,24 +1,35 @@
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
+import { BrowserRouter, Link } from 'react-router-dom';
+import Login from "../pages/Login";
+import Signup from '../pages/Signup'
 import UploadWidget from '../UploadWidget';
 
 export default class Home extends Component {
   render() {
     return (
       <Container>
-        <h2>Welcome</h2>
+				<div className="header">
+					<h2>Welcome to wePet</h2>
+					<img src="../../images/pawprint.png" alt="paws"/>
+				</div>
         {/* <UploadWidget imageType="profilePic" /> */}
         <div className="home-container">
-          <p className="left-container">
+					<div className="left-container">
+						<p>
             A website from pet-lovers to pet-lovers.
-            <br />
-            You want to give an opportunity ...
-          </p>
+						</p>
+          	<p>
+            Join the community and look for pets in your surrounding to visit, to sit or become a host for your pet. 
+						</p>
+						<Link to="/signup">Signup</Link> or 
+						<Link to="/login"> Login</Link>
+					</div>
           <div className="circular">
             <img
               className="home-image"
               src="../../images/home-image.jpg"
-              alt="pets"
+              alt="welcome"
             />
           </div>
         </div>
