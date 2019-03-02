@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 
 // Definition of variables
 $primary: #32c3ff;
@@ -86,4 +87,15 @@ body {
 .map {
   width: 600px;
   height: 600px
+}
+
+.oauth-container {
+  max-width: 225px;
+  max-height: 40px;
+  text-align: center;
+  margin: auto
+}
+
+.provider-name {
+  padding: 5px;
 }
