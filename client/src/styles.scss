@@ -10,7 +10,8 @@ $primary: #32c3ff;
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
 }
 
 .info {
@@ -88,4 +89,22 @@ body {
 .map {
   width: 600px;
   height: 600px
+}
+
+
+//style for navbar
+.nav {
+  background-color: #32c3ff
+}
+
+
+//style for petCard
+.petCardContainer{
+  border: 1px solid red;
+  padding: 10px;
+  margin-top: 100px;
+}
+
+.petCard{
+  border: 1px solid green;
 }

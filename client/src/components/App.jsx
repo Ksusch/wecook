@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { Container } from "reactstrap";
 import '../styles.scss';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile'
 import { Switch, Route } from 'react-router-dom';
-import Navbar from './Navbar'
+import NavBar from './NavBar'
 
 class App extends Component {
   render() {
     return (
-      <Container className="App">
-        <Navbar />
+      <div className="App">
+        <NavBar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/login" component={Login} />
@@ -20,7 +19,7 @@ class App extends Component {
           <Route path="/profile" component={Profile} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-      </Container>
+      </div>
     );
   }
 }
