@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url("https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css");
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 
 // Definition of variables
@@ -107,4 +108,13 @@ body {
 
 .petCard{
   border: 1px solid green;
+.oauth-container {
+  max-width: 225px;
+  max-height: 40px;
+  text-align: center;
+  margin: auto
+}
+
+.provider-name {
+  padding: 5px;
 }

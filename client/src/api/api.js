@@ -35,9 +35,4 @@ export default {
 		localStorage.removeItem("user");
 		return service.get("/logout");
 	},
-	addImageUrl(url, type) {
-		return service.post('api/image/upload', {imageUrl: url, type: type })
-		  .then(res => res.data)
-		  .catch(this.errorHandler);
-	  }
 };

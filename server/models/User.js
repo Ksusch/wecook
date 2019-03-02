@@ -8,7 +8,10 @@ const userSchema = new mongoose.Schema({
   status: {
     confirmationToken: "",
     active: false // this one is used for email confirmation etc. 
-  }
+  },
+  facebookId: String,
+  googleId: String,
+  twitterId: String,
 });
 
 const User = mongoose.model('User', userSchema);

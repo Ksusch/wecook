@@ -1,6 +1,11 @@
-function isActiveUser(req, res, next) {
+const isActiveUser = function(req, res, next) {
     if (req.isAuthenticated() && req.user.status.active) next()
     else next({ status: 403, message: 'Unauthorized or inactive' })
 }
 
-module.exports = { isActiveUser }
+const addSocketIdtoSession = (req, res, next) => {
+    req.session.socketId = req.query.socketId
+    next()
+}
+
+module.exports = { isActiveUser, addSocketIdtoSession }

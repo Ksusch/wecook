@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Container } from "reactstrap";
 import FormWrapper from "../FormElements";
 import api from "../../api/api";
+import OAuthWrapper from "../OAuth"
 
 export default class Login extends Component {
 	handleLogin(state) {
@@ -13,6 +14,7 @@ export default class Login extends Component {
 		return (
 			<Container>
 				<h2>Login</h2>
+				<OAuthWrapper/>
 				<FormWrapper
 					formGroups={[
 						{
