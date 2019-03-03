@@ -3,70 +3,11 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Gaegu');
 
-// Definition of variables
-$primary: #32c3ff;
-
-// --------------------
-// Style reusable for all components
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #EDF1F4;
-  font-family: 'Roboto Slab', serif;
-  text-align: center;
-}
-
-.info {
-  margin: 20px;
-  padding: 10px 20px;
-  border-radius: 10px;
-  display: inline-block;
-  background-color: #5776e9;
-  color: white;
-}
-
-.info.info-danger {
-  background-color: #e73f3f;
-}
-
-// --------------------
-// Style for App component
-.App {
-  font-family: 'Roboto Slab', serif;
-  text-align: center;
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-    height: 80px;
-  }
-
-  .App-header {
-    background-color: $primary;
-    padding: 20px;
-    color: white;
-
-    a {
-      color: white;
-      padding: 0 5px;
-      text-decoration: unset;
-    }
-
-    a.active {
-      font-weight: bold;
-    }
-  }
-
-  .App-title {
-    font-size: 1.5em;
-  }
-
-  .App-intro {
-    font-size: large;
-  }
-}
-
-// --------------------
 // Style for Home component
+.automargin {
+  margin: auto
+}
+
 .Home {
   p {
     font-size: 1.2em;
@@ -149,12 +90,34 @@ h2 {
   border: 1px solid green;
 }
 
-.btn-wrapper {
-  margin: auto;
+.loginsignup-wrapper {
+  width: 220px;
+  height: 240px;
+}
+.connection-icon {
+  // border-radius: 100%; 
+  width: 100px;
+  height: 100px;
 }
 
-.connection-icon {
-  border-radius: 100%; 
-  width: 110px;
-  height: 110px;
+.connection-icon:hover {
+  color: #4285F4;
+  width: 102px;
+  height: 102px;
+}
+
+.login-wrapper {
+  max-width: 500px;
+  height: auto;
+  margin: auto;
+  padding-top: 10%;
+  text-align: left;
+}
+
+.loginsignup-main {
+  margin-top: 10%;
+}
+
+#proceed-with{ 
+  padding: 10px 0;
 }
