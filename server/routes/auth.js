@@ -14,7 +14,6 @@ const express = require("express"),
 // console.log("getting io in auth init: ", app.get("io"))
 
 router.post("/signup", (req, res, next) => {
-	console.log("req: ", req)
 	if (!req.body.email || !req.body.password) { //TODO: Move this to the frontend!
 		res.status(400).json({
 			message: "Email address and password are both required",
@@ -23,7 +22,7 @@ router.post("/signup", (req, res, next) => {
 	}
 	User.findOne({ email: req.body.email })
 		.then(user => {
-			if (user !== null) {
+			if (user) {
 				res.status(409).json({
 					message: "This email address is already registered with the server.",
 				});
@@ -42,24 +41,18 @@ router.post("/signup", (req, res, next) => {
 					req.body.password,
 					bcrypt.genSaltSync(10)
 				),
-				address: req.body.address,
 				name: req.body.name,
-				status: {
-					confirmationToken: token,
-					active: false, // this one is used for email confirmation etc.
-				},
+				confirmationToken: token,
+				active: false
 			});
 		})
 		.then(user => {
-			console.log("got here")
+			console.log("got to this point", user)
 			req.login(user, err => {
 				if (err) {
-					res.status(500).json({ 
-						message: "Server Error" 
-					});
-					return;
+					console.error("Server Error", err)
 				}
-				res.status(401).json({
+				else res.status(200).json({
 					message: "A confirmation email has been sent to your mailbox"
 				});
 				nodemailer.createEmail(
@@ -68,8 +61,8 @@ router.post("/signup", (req, res, next) => {
 					"Confirm your email",
 					`Please confirm your email by proceeding to the following link: ${
 						process.env.SERVER_ADDRESS
-					}${process.env.PORT}/auth/confirm/${
-						user.status.confirmationToken
+					}3000/confirm/${
+						user.confirmationToken
 					}`
 				);
 			});
@@ -79,17 +72,19 @@ router.post("/signup", (req, res, next) => {
 
 router.post("/confirm", (req, res) => {
 	User.findOneAndUpdate(
-		{ "status.confirmationToken": req.body.token },
-		{ status: { $elemMatch: { active: true } } }
+		{ "confirmationToken": req.body.token },
+		{ $set: { active: true } }
 	)
-		.then(user => res.status(200).json(user))
+		.then(user => {
+			console.log("at this point", user, req.body.token)
+			res.status(200).json(user)})
 		.catch(() => res.status(401).json({ 
 			message: "Invalid confirmation token"
 		}))
 });
 
 router.post("/login", localAuth, (req, res) => {
-	if (req.user.status.active) {
+	if (req.user.active) {
 		let user = req.user;
 		user.password = undefined
 		res.status(200).json(user)
@@ -100,7 +95,6 @@ router.post("/login", localAuth, (req, res) => {
 })
 	
 router.get('/verifyAuthentication', (req, res) => {
-    // req.isAuthenticated() is defined by passport
     if (req.isAuthenticated()) {
         res.status(200).json({ 
 			message: "User authenticated"

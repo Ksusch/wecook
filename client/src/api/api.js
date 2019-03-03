@@ -32,7 +32,7 @@ class AuthService {
 		return this.service.get("/verifyAuthentication")
 	}
 	confirmEmail(token) {
-		return this.service.post("/confirm", token)
+		return this.service.post("/confirm", {token: token} )
 	}
 }
 

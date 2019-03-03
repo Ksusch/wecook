@@ -16,7 +16,8 @@ class App extends Component {
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
-		this.handleLogout = this.handleLogout.bind(this)
+		this.handleConfirm = this.handleConfirm.bind(this)
+		this.handleConfirm = this.handleConfirm.bind(this)
 	}
 
 	componentDidMount() {
@@ -35,6 +36,7 @@ class App extends Component {
 		} 
 	}
 	handleLogin(user) {		
+		console.log("handleLogin fired on app")
 		this.StorageService.set("user", user);
 		this.setState({
 			user: user
@@ -49,25 +51,16 @@ class App extends Component {
 		this.StorageService.remove("user")
 	}
 
-	// check if a session exists, otherwise direct to login/signup
-	// if a session does exist, check for stored user
-	// if stored user exists retrieve it and user pets, otherwise retrieve data from server
-	// at some point need to retrieve globalUsers and Pets.
-	// update context with the retrieved data and push to user home
+	handleConfirm(token) {
+		this.AuthService.confirmEmail(token)
+		.then(user => this.setState({
+			user: user
+		})).then(console.log(this.state.user))
+		
+		.catch(err => console.error(err))
+	}
+
 	render() {
-		console.log("user", this.state.user)
-	// 	console.log(this.props)
-	// 	if (this.props.history !== undefined) {
-	// 	if (this.state.user === null) {
-	// 		this.props.history.push("/loginSignup");
-	// 	} else if (
-	// 		this.props.match.url !== "/home" ||
-	// 		this.props.match.url !== "/profile" ||
-	// 		!this.props.match.params.confirmationToken
-	// 	) {
-	// 		this.props.history.push("/home");
-	// 	}
-	// }
 		return (
 			<Container className="App">
 				{this.state.user !== null ? <Navbar user={this.state.user}/> : <div/>} 
@@ -99,7 +92,10 @@ class App extends Component {
 								<Redirect to="/"/>
 						)}
 					/>
-					<Route path="/confirm/:confirmationToken" Component={AuthService.EmailConfirmation}/>
+					<Route path="/confirm/:confirmationToken" render={(props) => {
+						this.handleConfirm(props.match.params.confirmationToken)
+						return (<Redirect to="/"/>)
+					}}/>
 					<Route path="/logout" render={() => {
 						this.handleLogout()
 						return (

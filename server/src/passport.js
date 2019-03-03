@@ -77,36 +77,30 @@ module.exports = () => {
 				console.log("got to auth callback function, passport.js")
 				User.findOne({ [ID]: profile.id })
 					.then(user => {
+						console.log(profile, user)
 						if (!user) {
 							let name, image;
 							switch (origin) {
 								case "google":
-									image = profile.photos[0].value.replace(
-										/sz=50/gi,
-										"sz=250"
-									);
-									name = profile.displayName;
+									image = profile.photos[0].value
+									// .replace(
+									// 	/sz=50/gi,
+									// 	"sz=250"
+									// );
+									name = profile.displayName
 									break;
 								case "facebook":
 									image = profile.photos[0].value;
-									name = Object.values(profile.name).join(
-										" "
-									);
+									name = profile.displayName
 									break;
 								case "twitter":
-									image = profile.photos[0].value.replace(
-										/_normal/,
-										""
-									);
-									name = profile.username;
+									image = profile.profile_image_url
+									name = profile.name;
 							}
 							User.create({
 								name: name,
 								image: image,
-								status: {
-									confirmationToken: null,
-									active: true,
-								},
+								active: true,
 								[ID]: profile.id,
 							})
 								.then(user => done(null, user))

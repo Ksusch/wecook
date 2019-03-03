@@ -18,7 +18,6 @@ export default class Login extends Component {
 		this.props.handler(this.state);
 	}
 	render() {
-		console.log(this.props)
 		return (
 			<div className="login-wrapper">
 				<Form onSubmit={e => this.handleSubmit(e)}>
@@ -39,11 +38,11 @@ export default class Login extends Component {
 						/>
 					</FormGroup>
 					<FormGroup className="d-flex justify-content-between">
-						<Button className="btn btn-success" onClick={e => this.props.handleToggle(e)}>
+						<Button className="btn btn-primary" onClick={e => this.props.handleToggle(e)}>
 							<i className="fas fa-arrow-left" /> Back
 						</Button>
 						
-						<Button type="submit" className="btn btn-info" onClick={e => this.props.toggleSignup(e)}>
+						<Button type="submit" className="btn btn-primary" onClick={e => this.props.toggleSignup(e)}>
 							<i className="fas fa-user-plus fa-1x" /> Signup
 						</Button>
 						<Button type="submit" className="btn btn-primary">

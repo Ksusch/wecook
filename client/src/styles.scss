@@ -94,16 +94,15 @@ h2 {
   width: 220px;
   height: 240px;
 }
+
 .connection-icon {
   // border-radius: 100%; 
   width: 100px;
   height: 100px;
 }
 
-.connection-icon:hover {
-  color: #4285F4;
-  width: 102px;
-  height: 102px;
+.btn-primary:hover {
+  background-color: #4285F4;
 }
 
 .login-wrapper {

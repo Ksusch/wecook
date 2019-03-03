@@ -28,8 +28,10 @@ export default class LoginSignup extends Component {
 		}))
 	}
 	handleLogin(state) {
+		console.log("state got to handleLogin", state)
 		this.AuthService.login(state)
 			.then(user => {
+				console.log("got user back")
 				this.props.handler(user);
 			})
 			.catch(err => console.error(err));
@@ -37,7 +39,13 @@ export default class LoginSignup extends Component {
 	handleSignup(state) {
 		this.AuthService.signup(state)
 			.then(res => {
-				this.setState({ message: res.message });
+				if (res.status && res.status == 200) {
+					this.setState({
+						confirm: true,
+						login: false,
+						signup: false
+					})	
+				}
 			})
 			.catch(err => console.error(err));
 	}
