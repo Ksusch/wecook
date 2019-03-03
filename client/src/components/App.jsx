@@ -7,7 +7,6 @@ import Profile from "./pages/Profile";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthService, StorageService } from "../api/api";
-import { prototype } from "stream";
 
 class App extends Component {
 	constructor(props) {
@@ -71,7 +70,7 @@ class App extends Component {
 	// }
 		return (
 			<Container className="App">
-				<Navbar user={this.state.user}/>
+				{this.state.user !== null ? <Navbar user={this.state.user}/> : <div/>} 
 				<Switch>
 					<Route
 						exact path="/"

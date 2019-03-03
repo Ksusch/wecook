@@ -148,13 +148,13 @@ h2 {
 .petCard{
   border: 1px solid green;
 }
-.oauth-container {
-  max-width: 225px;
-  max-height: 40px;
-  text-align: center;
-  margin: auto
+
+.btn-wrapper {
+  margin: auto;
 }
 
-.provider-name {
-  padding: 5px;
+.connection-icon {
+  border-radius: 100%; 
+  width: 110px;
+  height: 110px;
 }
