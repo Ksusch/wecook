@@ -5,7 +5,7 @@ import React, { Component } from "react";
 import io from "socket.io-client";
 import ServerUrl from "../api/api";
 import { Button } from "reactstrap";
-const providers = ["google", "facebook", "twitter", "instagram"];
+const providers = ["google", "facebook", "twitter"];
 // socket.on('connect', () => {console.log(socket.id)});
 
 // console.log(socket)
@@ -46,7 +46,7 @@ class OAuthWrapper extends Component {
 	render() {
 		return (
 			this.state.socket ? 
-			<div className="d-flex">
+			<React.Fragment>
 				{providers.map(v => (
 					<OAuth
 						provider={v}
@@ -55,7 +55,7 @@ class OAuthWrapper extends Component {
 						handler={user => this.props.handler(user)}
 					/>
 				))}
-			</div>
+			</React.Fragment>
 			:
 			<div/>
 		);
@@ -126,21 +126,23 @@ class OAuth extends Component {
 	render() {
 		let iconClass;
 		if (this.props.provider === "google") {
-			iconClass = "fab fa-google fa-5x";
+			iconClass = "fab fa-google fa-3x";
 		} else if (this.props.provider === "twitter") {
-			iconClass = "fab fa-twitter fa-5x";
+			iconClass = "fab fa-twitter fa-3x";
 		} else if (this.props.provider === "facebook") {
-			iconClass = "fab fa-facebook-f fa-5x";
-		}	else {
-			iconClass = "fab fa-instagram fa-5x";
-		}
+			iconClass = "fab fa-facebook-f fa-3x";
+		}	
+		// else {
+		// 	iconClass = "fab fa-instagram fa-5x";
+		// }
+		let providerName = this.props.provider[0].toUpperCase() + this.props.provider.substr(1)
 		return (
-			<div className="btn-wrapper">
+			<div>
 				<Button
 					onClick={this.startAuth.bind(this)}
-					className="connection-icon"
+					className="btn btn-primary connection-icon"
 				>
-				<i className={`${iconClass}`}/>
+				<i className={`${iconClass}`}/>{providerName}
 				</Button>
 			</div>
 		);

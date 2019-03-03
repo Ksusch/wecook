@@ -1,19 +1,13 @@
-import React, { Component } from 'react';
-import {
-	Navbar,
-	NavbarBrand,
-	Nav,
-	NavItem,
-	NavLink,
-} from 'reactstrap';
-import '../styles.scss';
+import React, { Component } from "react";
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import "../styles.scss";
 
 export default class NavBar extends Component {
 	render() {
 		return (
 			<div>
 				<Navbar color="light" light expand="md">
-					<NavbarBrand href="/" >WEPET</NavbarBrand>
+					<NavbarBrand href="/">WEPET</NavbarBrand>
 					{/* <NavbarToggler onClick={this.toggle} />
 					<Collapse isOpen={this.state.isOpen} navbar> */}
 					<Nav className="ml-auto" navbar>
@@ -23,9 +17,9 @@ export default class NavBar extends Component {
 						<NavItem>
 							<NavLink href="/">Look for pets</NavLink>
 						</NavItem>
-							<NavItem>{this.props.user !== null && <NavLink to="/logout">Logout</NavLink>}
+						<NavItem>
+							<NavLink href="/logout">Logout</NavLink>
 						</NavItem>
-
 					</Nav>
 				</Navbar>
 			</div>
