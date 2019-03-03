@@ -1,20 +1,10 @@
-import React, { Component } from "react";
-import { Container } from "reactstrap";
-import FormWrapper from "../FormElements";
-import api from "../../api/api";
-import OAuthWrapper from "../OAuth"
-
+import React, { Component } from 'react'
+import FormWrapper from "./FormElements";
 export default class Login extends Component {
-	handleLogin(state) {
-		api.login(state).then(res => {
-			this.props.history.push("/home");
-		});
-	}
 	render() {
 		return (
-			<Container>
+			<div>
 				<h2>Login</h2>
-				<OAuthWrapper/>
 				<FormWrapper
 					formGroups={[
 						{
@@ -35,9 +25,10 @@ export default class Login extends Component {
 						class: "",
 						text: "Submit",
 					}}
-					handler={state => this.handleLogin(state)}
+					handler={state => this.props.handler(state)}
+          message={this.props.message}
 				/>
-			</Container>
+			</div>
 		);
 	}
 }

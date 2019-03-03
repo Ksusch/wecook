@@ -37,7 +37,4 @@ app.use(passport.initialize());
 app.use(passport.session());
 passportInit();
 
-app.use("/api", require("../routes/api"));
-app.use("/auth", require("../routes/auth"));
-
 module.exports = app;

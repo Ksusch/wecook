@@ -1,33 +1,76 @@
+// code in this file is based on an excellent medium article
+// link: https://codeburst.io/react-authentication-with-twitter-google-facebook-and-github-862d59583105
+
 import React, { Component } from "react";
 import io from "socket.io-client";
-import FontAwesome from 'react-fontawesome';
-import { Button } from "reactstrap";
-const baseUrl = "http://localhost:4000/auth",
-	socket = io(baseUrl),
-	providers = ["google", "facebook", "twitter"];
+import ServerUrl from "../api/api";
 
+const providers = ["google", "facebook", "twitter"];
+// socket.on('connect', () => {console.log(socket.id)});
+
+// console.log(socket)
 class OAuthWrapper extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {
+			socket: false	
+		}
+		this.socket = io(ServerUrl)
+		this.checkSocket = this.checkSocket.bind(this)
+	}
+	
+	componentDidMount() {
+		this.checkSocket()
+	}
+
+	checkSocket() {
+		let socketCheck;
+		if (this.socket.id === undefined) {	
+			// this.socket.on('reconnect_attempt', () => {console.log("reconnect_attempt: ", this.socket)})
+			// this.socket.on('connect', () => {console.log("connect: ")})
+			// this.socket.on('error', (error) => {console.log("error :", error)})
+			// this.socket.on('disconnect', () => {console.log("disconnect :")})
+			// this.socket.on('data', () => {console.log("data :")})
+			// this.socket.on('message', () => {console.log("message :")})
+			socketCheck = setInterval(() => {
+				if (this.socket.id !== undefined) {
+					this.setState({
+						socket: true
+					})
+					clearInterval(socketCheck);
+				}
+			}, 500);
+		}
+	}
+
 	render() {
 		return (
+			this.state.socket ? 
 			<div className="d-flex">
-				{providers.map(provider => (
-					<OAuth provider={provider} key={provider} socket={socket} />
+				{providers.map(v => (
+					<OAuth
+						provider={v}
+						key={v}
+						socket={this.socket}
+						handler={user => this.props.handler(user)}
+					/>
 				))}
 			</div>
+			:
+			<div/>
 		);
 	}
 }
 
 class OAuth extends Component {
 	state = {
-		user: {},
 		disabled: "",
 	};
 
 	componentDidMount() {
 		this.props.socket.on(this.props.provider, user => {
 			this.popup.close();
-			this.setState({ user });
+			this.props.handler(user);
 		});
 	}
 
@@ -51,7 +94,7 @@ class OAuth extends Component {
 			height = 600,
 			left = window.innerWidth / 2 - width / 2,
 			top = window.innerHeight / 2 - height / 2,
-			url = `${baseUrl}/${this.props.provider}?socketId=${
+			url = `${ServerUrl}/auth/${this.props.provider}?socketId=${
 				this.props.socket.id
 			}`;
 
@@ -81,14 +124,23 @@ class OAuth extends Component {
 	}
 
 	render() {
-		const providerName = this.props.provider[0].toUpperCase() + this.props.provider.substr(1)
+		let iconClass;
+		if (this.props.provider === "google") {
+			iconClass = "fab fa-google-plus-square";
+		} else if (this.props.provider === "twitter") {
+			iconClass = "fab fa-twitter-square";
+		} else {
+			iconClass = "fab fa-facebook-square";
+		}
 		return (
 			<div className="oauth-container">
-				<Button onClick={this.startAuth.bind(this)} className="btn-info"> 
-					<span className="provider-name">Continue with {providerName}</span> 					
-					<FontAwesome name={this.props.provider}/>
-				</Button>
-			</div>			
+				<div className={"button-wrapper fadein-fast"}>
+					<button
+						onClick={this.startAuth.bind(this)}
+						className={`${iconClass} provider-button`}
+					/>
+				</div>
+			</div>
 		);
 	}
 }

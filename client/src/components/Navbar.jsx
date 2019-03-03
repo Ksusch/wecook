@@ -19,9 +19,7 @@ export default class Navbar extends Component {
 						<NavLink to="/">Offer pet</NavLink>
 					</NavItem>
 					<NavItem>
-						{!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-						{!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-						{api.isLoggedIn() && <Link to="/" onClick={api.logout}>Logout</Link>}
+						{this.props.user !== null && <NavLink to="/logout">Logout</NavLink>}
 					</NavItem>
 				</Nav>
 			</div>
