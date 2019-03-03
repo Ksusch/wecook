@@ -62,10 +62,10 @@ export default class LoginSignup extends Component {
 								toggleSignup={e => this.toggleSignup(e)}
 							/>
 				) : (
-					<div>
+					<div className="d-flex flex-column justify-content-center loginsignup-main">
+					<h5 className="automargin" id="proceed-with">Proceed with</h5>	
+					<div className="automargin d-flex justify-content-between flex-wrap loginsignup-wrapper">
 					
-					<div className="d-flex justify-content-between flex-wrap loginsignup-wrapper">
-					<h4>Proceed with</h4>
 						<OAuthWrapper
 							handler={user => this.props.handler(user)}
 						/>

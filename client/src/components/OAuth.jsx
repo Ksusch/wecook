@@ -19,6 +19,25 @@ class OAuthWrapper extends Component {
     this.checkSocket = this.checkSocket.bind(this);
   }
 
+  checkSocket() {
+    let socketCheck;
+    if (this.socket.id === undefined) {
+      // this.socket.on('reconnect_attempt', () => {console.log("reconnect_attempt: ", this.socket)})
+      // this.socket.on('connect', () => {console.log("connect: ")})
+      // this.socket.on('error', (error) => {console.log("error :", error)})
+      // this.socket.on('disconnect', () => {console.log("disconnect :")})
+      // this.socket.on('data', () => {console.log("data :")})
+      // this.socket.on('message', () => {console.log("message :")})
+      socketCheck = setInterval(() => {
+        if (this.socket.id !== undefined) {
+          this.setState({
+            socket: true
+          });
+          clearInterval(socketCheck);
+        }
+      }, 500);
+    }
+  }
   componentDidMount() {
     this.checkSocket();
   }

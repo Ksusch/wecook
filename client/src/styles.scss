@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css?family=Gaegu');
 
 // Style for Home component
+.automargin {
+  margin: auto
+}
+
 .Home {
   p {
     font-size: 1.2em;
@@ -87,15 +91,19 @@ h2 {
 }
 
 .loginsignup-wrapper {
-  width: 225px;
-  height: 250px;
-  margin: 10% auto;
-
+  width: 220px;
+  height: 240px;
 }
 .connection-icon {
   // border-radius: 100%; 
   width: 100px;
   height: 100px;
+}
+
+.connection-icon:hover {
+  color: #4285F4;
+  width: 102px;
+  height: 102px;
 }
 
 .login-wrapper {
@@ -106,3 +114,10 @@ h2 {
   text-align: left;
 }
 
+.loginsignup-main {
+  margin-top: 10%;
+}
+
+#proceed-with{ 
+  padding: 10px 0;
+}
