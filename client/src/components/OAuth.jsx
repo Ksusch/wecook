@@ -122,25 +122,28 @@ class OAuth extends Component {
     this.setState({ user: {} });
   }
 
-  render() {
-    let iconClass;
-    if (this.props.provider === 'google') {
-      iconClass = 'fab fa-google fa-5x';
-    } else if (this.props.provider === 'twitter') {
-      iconClass = 'fab fa-twitter fa-5x';
-    } else if (this.props.provider === 'facebook') {
-      iconClass = 'fab fa-facebook-f fa-5x';
-    } else {
-      iconClass = 'fab fa-instagram fa-5x';
-    }
-    return (
-      <div className="btn-wrapper">
-        <Button onClick={this.startAuth.bind(this)} className="connection-icon">
-          <i className={`${iconClass}`} />
-        </Button>
-      </div>
-    );
-  }
+	render() {
+		let iconClass;
+		if (this.props.provider === "google") {
+			iconClass = "fab fa-google fa-5x";
+		} else if (this.props.provider === "twitter") {
+			iconClass = "fab fa-twitter fa-5x";
+		} else if (this.props.provider === "facebook") {
+			iconClass = "fab fa-facebook-f fa-5x";
+		}	else {
+			iconClass = "fab fa-instagram fa-5x";
+		}
+		return (
+			<div className="btn-wrapper">
+				<Button
+					onClick={this.startAuth.bind(this)}
+					className="connection-icon"
+				>
+				<i className={`${iconClass}`}/>
+				</Button>
+			</div>
+		);
+	}
 }
 
 export default OAuthWrapper;
