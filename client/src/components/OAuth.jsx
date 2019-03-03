@@ -135,22 +135,6 @@ class OAuth extends Component {
 			iconClass = "fab fa-instagram fa-5x";
 		}
 		return (
-<<<<<<< HEAD
-			<div className="oauth-container">
-<<<<<<< HEAD
-				<Button onClick={this.startAuth.bind(this)} className="btn-info">
-					<span className="provider-name">Continue with {providerName}</span>
-					<FontAwesome name={this.props.provider} />
-				</Button>
-=======
-				<div className={"button-wrapper fadein-fast"}>
-					<button
-						onClick={this.startAuth.bind(this)}
-						className={`${iconClass} provider-button`}
-					/>
-				</div>
->>>>>>> c3c492e25e0dd116f76f36935f44f2be5ea5d416
-=======
 			<div className="btn-wrapper">
 				<Button
 					onClick={this.startAuth.bind(this)}
@@ -158,7 +142,6 @@ class OAuth extends Component {
 				>
 				<i className={`${iconClass}`}/>
 				</Button>
->>>>>>> 22da2517bd3a00b0d23283fdf12e0cd94a4f3892
 			</div>
 		);
 	}
