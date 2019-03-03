@@ -6,9 +6,7 @@ import {
 	NavItem,
 	NavLink,
 } from 'reactstrap';
-import { Link } from 'react-router-dom';
 import '../styles.scss';
-import api from '../api/api'
 
 export default class NavBar extends Component {
 	render() {
@@ -25,10 +23,7 @@ export default class NavBar extends Component {
 						<NavItem>
 							<NavLink href="/">Look for pets</NavLink>
 						</NavItem>
-						<NavItem>
-							{!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-							{!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-							{api.isLoggedIn() && <Link to="/" onClick={api.logout}>Logout</Link>}
+							<NavItem>{this.props.user !== null && <NavLink to="/logout">Logout</NavLink>}
 						</NavItem>
 
 					</Nav>
