@@ -1,11 +1,11 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Gaegu');
 
 // Style for Home component
 .automargin {
-  margin: auto
+  margin: auto;
 }
 
 .Home {
@@ -20,11 +20,11 @@
 }
 
 h2 {
-    margin: 30px;
-    font-size: 50px;
-    font-family: 'Gaegu', cursive;  
+  margin: 30px;
+  font-size: 50px;
+  font-family: 'Gaegu', cursive;
 }
-  
+
 .header img {
   width: 30px;
 }
@@ -33,18 +33,12 @@ h2 {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  // align-items: center;
 }
 
 .left-container {
   width: 300px;
   text-align: left;
-}
-
-.home-image {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  // align-items: baseline;
 }
 
 .circular {
@@ -56,37 +50,37 @@ h2 {
   box-shadow: 5px 5px 10px silver;
 }
 .circular img {
+  height: 300px;
+  width: 300px;
   min-width: 100%;
   min-height: 100%;
-  // xwidth: auto;
-  height: auto;
+
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  // align-items: baseline;
 }
 
 // mapbox GL container
 .map {
   width: 600px;
-  height: 600px
+  height: 600px;
 }
-
 
 //style for navbar
 .nav {
-  background-color: #32c3ff
+  background-color: #32c3ff;
 }
 
-
 //style for petCard
-.petCardContainer{
+.petCardContainer {
   border: 1px solid red;
   padding: 10px;
   margin-top: 100px;
 }
 
-.petCard{
+.petCard {
   border: 1px solid green;
 }
 
@@ -95,13 +89,13 @@ h2 {
   height: 240px;
 }
 .connection-icon {
-  // border-radius: 100%; 
+  // border-radius: 100%;
   width: 100px;
   height: 100px;
 }
 
 .connection-icon:hover {
-  color: #4285F4;
+  color: #4285f4;
   width: 102px;
   height: 102px;
 }
@@ -118,6 +112,6 @@ h2 {
   margin-top: 10%;
 }
 
-#proceed-with{ 
+#proceed-with {
   padding: 10px 0;
 }
