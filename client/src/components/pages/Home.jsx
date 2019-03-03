@@ -21,8 +21,7 @@ export default class Home extends Component {
               Join the community and look for pets in your surrounding to visit,
               to sit or become a host for your pet.
             </p>
-            <Link to="/signup">Signup</Link> or
-            <Link to="/login"> Login</Link>
+            <Link to="/loginSignup">Signup/Login</Link>
           </div>
           <div className="circular">
             <img
