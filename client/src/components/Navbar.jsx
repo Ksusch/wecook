@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'reactstrap';
-import { NavLink, Link } from 'react-router-dom';
+import {
+	Navbar,
+	NavbarBrand,
+	Nav,
+	NavItem,
+	NavLink,
+} from 'reactstrap';
 import '../styles.scss';
-import api from '../api/api'
 
-export default class Navbar extends Component {
+export default class NavBar extends Component {
 	render() {
 		return (
 			<div>
-				<Nav>
-					<NavItem>
-						<NavLink to="/" exact>Home</NavLink>
-					</NavItem>
-					<NavItem>
-						<NavLink to="/">Pet a pet</NavLink>
-					</NavItem>
-					<NavItem>
-						<NavLink to="/">Offer pet</NavLink>
-					</NavItem>
-					<NavItem>
-						{!api.isLoggedIn() && <NavLink to="/signup">Signup</NavLink>}
-						{!api.isLoggedIn() && <NavLink to="/login">Login</NavLink>}
-						{api.isLoggedIn() && <Link to="/" onClick={api.logout}>Logout</Link>}
-					</NavItem>
-				</Nav>
+				<Navbar color="light" light expand="md">
+					<NavbarBrand href="/" >WEPET</NavbarBrand>
+					{/* <NavbarToggler onClick={this.toggle} />
+					<Collapse isOpen={this.state.isOpen} navbar> */}
+					<Nav className="ml-auto" navbar>
+						<NavItem>
+							<NavLink href="/">Find my pet a company</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink href="/">Look for pets</NavLink>
+						</NavItem>
+							<NavItem>{this.props.user !== null && <NavLink to="/logout">Logout</NavLink>}
+						</NavItem>
+
+					</Nav>
+				</Navbar>
 			</div>
-		)
+		);
 	}
 }

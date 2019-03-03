@@ -29,7 +29,6 @@ export default class MapBox extends Component {
 		this.initMap();
 		if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(position => {
-                console.log("geolocation active ", position)
 				let lng = position.coords.longitude,
 					lat = position.coords.latitude,
 					marker = new mapboxgl.Marker({ color: "blue" });

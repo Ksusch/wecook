@@ -1,4 +1,5 @@
 @import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Gaegu');
 
@@ -10,8 +11,9 @@ $primary: #32c3ff;
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
   background-color: #EDF1F4;
+  font-family: 'Roboto Slab', serif;
+  text-align: center;
 }
 
 .info {
@@ -127,4 +129,32 @@ h2 {
 .map {
   width: 600px;
   height: 600px
+}
+
+
+//style for navbar
+.nav {
+  background-color: #32c3ff
+}
+
+
+//style for petCard
+.petCardContainer{
+  border: 1px solid red;
+  padding: 10px;
+  margin-top: 100px;
+}
+
+.petCard{
+  border: 1px solid green;
+}
+.oauth-container {
+  max-width: 225px;
+  max-height: 40px;
+  text-align: center;
+  margin: auto
+}
+
+.provider-name {
+  padding: 5px;
 }

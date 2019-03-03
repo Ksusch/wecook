@@ -1,13 +1,21 @@
-const express = require("express");
-const passport = require("passport");
-const router = express.Router();
-const User = require("../models/User");
-const nodemailer = require("../src/nodemailer");
-const bcrypt = require("bcrypt");
-const bcryptSalt = 10;
+const express = require("express"),
+	passport = require("passport"),
+	router = express.Router(),
+	bcrypt = require("bcrypt"),
+	nodemailer = require("../src/nodemailer"),
+	app = require("../src/app"),
+	User = require("../models/User"),
+	{ addSocketIdtoSession } = require("../src/middlewares"),
+	twitterAuth = passport.authenticate("twitter"),
+	googleAuth = passport.authenticate("google", { scope: ["profile"] }),
+	facebookAuth = passport.authenticate("facebook"),
+	localAuth = passport.authenticate("local");
+
+// console.log("getting io in auth init: ", app.get("io"))
 
 router.post("/signup", (req, res, next) => {
-	if (!req.body.email || !req.body.password) {
+	console.log("req: ", req)
+	if (!req.body.email || !req.body.password) { //TODO: Move this to the frontend!
 		res.status(400).json({
 			message: "Email address and password are both required",
 		});
@@ -17,7 +25,7 @@ router.post("/signup", (req, res, next) => {
 		.then(user => {
 			if (user !== null) {
 				res.status(409).json({
-					message: "This email address is already in use",
+					message: "This email address is already registered with the server.",
 				});
 				return;
 			}
@@ -32,7 +40,7 @@ router.post("/signup", (req, res, next) => {
 				email: req.body.email,
 				password: bcrypt.hashSync(
 					req.body.password,
-					bcrypt.genSaltSync(bcryptSalt)
+					bcrypt.genSaltSync(10)
 				),
 				address: req.body.address,
 				name: req.body.name,
@@ -42,80 +50,97 @@ router.post("/signup", (req, res, next) => {
 				},
 			});
 		})
-		.then(createdUser => {
-			req.logIn(createdUser, () => {
-				createdUser.password = undefined;
-				res.json(createdUser);
-			});
-			nodemailer.createEmail(
-				process.env.GMAIL_USER,
-				req.body.email,
-				"Confirm your email",
-				`Please confirm your email by proceeding to the following link: ${
-					process.env.SERVER_ADDRESS
-				}${process.env.PORT}/auth/confirm/${
-					createdUser.status.confirmationToken
-				}`
-			);
-		})
-		.catch(err => next(err));
-});
-
-router.get("/confirm/:confirmationToken", (req, res, next) => {
-	User.findOneAndUpdate(
-		{ "status.confirmationToken": req.params.confirmationToken },
-		{ status: {$elemMatch: {active: true }}}
-	)
-	.then(user => console.log("User email confirmed!", user))
-	.catch(err => next(err));
-});
-
-router.post("/login", (req, res, next) => {
-	User.findOne({ email: req.body.email })
 		.then(user => {
-			if (!user) {
-				next(new Error("Incorrect email "));
-				return;
-			}
-			if (!bcrypt.compareSync(req.body.password, user.password)) {
-				next(new Error("Password is wrong"));
-				return;
-			}
-			if (!user.status.active) {
-				next(new Error("User email not confirmed"));
-				return;
-			}
-			req.logIn(user, () => {
-				user.password = undefined;
-				res.json(user);
+			console.log("got here")
+			req.login(user, err => {
+				if (err) {
+					res.status(500).json({ 
+						message: "Server Error" 
+					});
+					return;
+				}
+				res.status(401).json({
+					message: "A confirmation email has been sent to your mailbox"
+				});
+				nodemailer.createEmail(
+					process.env.GMAIL_USER,
+					req.body.email,
+					"Confirm your email",
+					`Please confirm your email by proceeding to the following link: ${
+						process.env.SERVER_ADDRESS
+					}${process.env.PORT}/auth/confirm/${
+						user.status.confirmationToken
+					}`
+				);
 			});
 		})
 		.catch(err => next(err));
 });
 
-router.post("/login-with-passport-local-strategy", (req, res, next) => {
-	passport.authenticate("local", (err, user, failureDetails) => {
-		if (err) {
-			res.status(500).json({ message: "Something went wrong" });
-			return;
-		}
-		if (!user) {
-			res.status(401).json(failureDetails);
-			return;
-		}
-		req.login(user, err => {
-			if (err) {
-				res.status(500).json({ message: "Something went wrong" });
-				return;
-			}
-			res.json(req.user);
-		});
-	})(req, res, next);
+router.post("/confirm", (req, res) => {
+	User.findOneAndUpdate(
+		{ "status.confirmationToken": req.body.token },
+		{ status: { $elemMatch: { active: true } } }
+	)
+		.then(user => res.status(200).json(user))
+		.catch(() => res.status(401).json({ 
+			message: "Invalid confirmation token"
+		}))
 });
+
+router.post("/login", localAuth, (req, res) => {
+	if (req.user.status.active) {
+		let user = req.user;
+		user.password = undefined
+		res.status(200).json(user)
+	}
+	else {
+		res.status(403)
+	}
+})
+	
+router.get('/verifyAuthentication', (req, res) => {
+    // req.isAuthenticated() is defined by passport
+    if (req.isAuthenticated()) {
+        res.status(200).json({ 
+			message: "User authenticated"
+		});
+    }
+    else {
+		res.status(403).json({ 
+			message: 'Unauthorized' 
+		})
+	}
+});
+//OAuth paths
+
+router.get('/twitter', addSocketIdtoSession, twitterAuth)
+router.get('/google', addSocketIdtoSession, googleAuth)
+router.get('/facebook', addSocketIdtoSession, facebookAuth)
+
+// callback routes -- these must correlate with the ones defined in each API
+router.get('/twitter/callback', twitterAuth, (req) => {
+	console.log("got to twitter callback")
+	let user = req.user
+	user.password = undefined;
+	app.get("io").in(req.session.socketId).emit("twitter", user);
+})
+router.get('/google/callback', googleAuth, (req) => {
+	let user = req.user
+	user.password = undefined;
+	app.get("io").in(req.session.socketId).emit("google", user);
+})
+router.get('/facebook/callback', facebookAuth, (req) => {
+	let user = req.user
+	user.password = undefined;
+	app.get("io").in(req.session.socketId).emit("facebook", user);
+})
+
+//logout - same for all variations
 
 router.get("/logout", (req, res) => {
 	req.logout();
-	res.json({ message: "You are out!" });
+	res.json({ message: "Log out" });
 });
 
 module.exports = router;
