@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Container } from "reactstrap";
-import "../styles.scss";
-import Home from "./pages/Home";
-import LoginSignup from "./pages/LoginSignup";
-import Profile from "./pages/Profile";
-import { Switch, Route, Redirect } from "react-router-dom";
-import Navbar from "./Navbar";
-import { AuthService, StorageService } from "../api/api";
+import React, { Component } from 'react';
+import { Container } from 'reactstrap';
+import '../styles.scss';
+import Home from './pages/Home';
+import LoginSignup from './pages/LoginSignup';
+import Profile from './pages/Profile';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import Navbar from './Navbar';
+import { AuthService, StorageService } from '../api/api';
 
 class App extends Component {
 	constructor(props) {
@@ -16,7 +16,7 @@ class App extends Component {
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
-		this.handleConfirm = this.handleConfirm.bind(this)
+		this.handleLogout = this.handleLogout.bind(this)
 		this.handleConfirm = this.handleConfirm.bind(this)
 	}
 
