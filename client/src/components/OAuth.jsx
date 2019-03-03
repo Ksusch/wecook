@@ -4,8 +4,8 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import ServerUrl from "../api/api";
-
-const providers = ["google", "facebook", "twitter"];
+import { Button } from "reactstrap";
+const providers = ["google", "facebook", "twitter", "instagram"];
 // socket.on('connect', () => {console.log(socket.id)});
 
 // console.log(socket)
@@ -126,13 +126,16 @@ class OAuth extends Component {
 	render() {
 		let iconClass;
 		if (this.props.provider === "google") {
-			iconClass = "fab fa-google-plus-square";
+			iconClass = "fab fa-google fa-5x";
 		} else if (this.props.provider === "twitter") {
-			iconClass = "fab fa-twitter-square";
-		} else {
-			iconClass = "fab fa-facebook-square";
+			iconClass = "fab fa-twitter fa-5x";
+		} else if (this.props.provider === "facebook") {
+			iconClass = "fab fa-facebook-f fa-5x";
+		}	else {
+			iconClass = "fab fa-instagram fa-5x";
 		}
 		return (
+<<<<<<< HEAD
 			<div className="oauth-container">
 <<<<<<< HEAD
 				<Button onClick={this.startAuth.bind(this)} className="btn-info">
@@ -147,6 +150,15 @@ class OAuth extends Component {
 					/>
 				</div>
 >>>>>>> c3c492e25e0dd116f76f36935f44f2be5ea5d416
+=======
+			<div className="btn-wrapper">
+				<Button
+					onClick={this.startAuth.bind(this)}
+					className="connection-icon"
+				>
+				<i className={`${iconClass}`}/>
+				</Button>
+>>>>>>> 22da2517bd3a00b0d23283fdf12e0cd94a4f3892
 			</div>
 		);
 	}
