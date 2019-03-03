@@ -16,15 +16,15 @@ export default class Petcard extends Component {
 	render() {
 		return (
 			<div>
-					<Card className="petCard">
-						<CardImg top width="100%" src={this.props.image} alt={this.props.name} image />
-						<CardBody>
-							<CardTitle>Name:{this.props.name}</CardTitle>
-							<CardSubtitle>Animal:{this.props.animal}</CardSubtitle>
-							<CardText>Description:{this.props.description}</CardText>
-							<Button>Contact me!</Button>
-						</CardBody>
-					</Card>
+				<Card className="petCard">
+					<CardImg top width="100%" src={this.props.image} alt={this.props.name} image />
+					<CardBody>
+						<CardTitle>Name:{this.props.name}</CardTitle>
+						<CardSubtitle>Animal:{this.props.animal}</CardSubtitle>
+						<CardText>Description:{this.props.description}</CardText>
+						<Button>Contact me!</Button>
+					</CardBody>
+				</Card>
 			</div>
 		)
 	}

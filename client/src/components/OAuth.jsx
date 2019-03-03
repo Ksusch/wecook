@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
 import FontAwesome from 'react-fontawesome';
+
 import { Button } from "reactstrap";
 const baseUrl = "http://localhost:4000/auth",
 	socket = io(baseUrl),
@@ -53,7 +54,7 @@ class OAuth extends Component {
 			top = window.innerHeight / 2 - height / 2,
 			url = `${baseUrl}/${this.props.provider}?socketId=${
 				this.props.socket.id
-			}`;
+				}`;
 
 		return window.open(
 			url,
@@ -84,11 +85,11 @@ class OAuth extends Component {
 		const providerName = this.props.provider[0].toUpperCase() + this.props.provider.substr(1)
 		return (
 			<div className="oauth-container">
-				<Button onClick={this.startAuth.bind(this)} className="btn-info"> 
-					<span className="provider-name">Continue with {providerName}</span> 					
-					<FontAwesome name={this.props.provider}/>
+				<Button onClick={this.startAuth.bind(this)} className="btn-info">
+					<span className="provider-name">Continue with {providerName}</span>
+					<FontAwesome name={this.props.provider} />
 				</Button>
-			</div>			
+			</div>
 		);
 	}
 }
