@@ -6,7 +6,7 @@ export default class Home extends Component {
     return (
       <div>
         <div className="header">
-          <h2>Welcome to wePet</h2>
+          <h1>Welcome to wePet</h1>
           <img src="../../images/pawprint.png" alt="paws" />
         </div>
         {/* <UploadWidget imageType="profilePic" /> */}
