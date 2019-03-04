@@ -12,12 +12,18 @@ export default class Home extends Component {
         {/* <UploadWidget imageType="profilePic" /> */}
         <div className="home-container">
           <div className="left-container">
-            <p>A website from pet-lovers to pet-lovers.</p>
+            <p>A website by pet-lovers to pet-lovers.</p>
             <p>
               Join the community and look for pets in your surrounding to visit,
               to sit or become a host for your pet.
             </p>
+<<<<<<< HEAD
             {!this.props.user ? <Link to="/loginSignup">Login/Signup</Link> : <div/>}
+=======
+            {this.props.user === null ? (
+              <Link to="/loginSignup">Login/Signup</Link>
+            ) : null}
+>>>>>>> a8f7d07d24759f1c9ac7edbafe392fd4a3f49138
           </div>
 
           <div className="circular">
