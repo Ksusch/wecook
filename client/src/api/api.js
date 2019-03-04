@@ -11,9 +11,17 @@ class ApiService {
       withCredentials: true
     });
   }
-
   getPets(user) {
     return this.service.get('/pet', user);
+  }
+  createPet(user) {
+    return this.service.post('/pet', user);
+  }
+  updatePet(id, user) {
+    return this.service.put('/pet/' + id, user);
+  }
+  deletePet(id, user) {
+    return this.service.delete(`/pet/${id}`, user);
   }
 }
 

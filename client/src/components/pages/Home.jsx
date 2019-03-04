@@ -17,9 +17,13 @@ export default class Home extends Component {
               Join the community and look for pets in your surrounding to visit,
               to sit or become a host for your pet.
             </p>
+<<<<<<< HEAD
+            {!this.props.user ? <Link to="/loginSignup">Login/Signup</Link> : <div/>}
+=======
             {this.props.user === null ? (
               <Link to="/loginSignup">Login/Signup</Link>
             ) : null}
+>>>>>>> a8f7d07d24759f1c9ac7edbafe392fd4a3f49138
           </div>
 
           <div className="circular">
