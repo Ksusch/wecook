@@ -16,20 +16,15 @@ nav > div {
   width: 300px;
 }
 
-#profile-picture {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-}
 .navbar-link {
   i {
-    color: gray
+    color: gray;
   }
 }
 
 .active {
   i {
-    color: black
+    color: black;
   }
 }
 
@@ -99,6 +94,40 @@ h1 {
   height: 600px;
 }
 
+// pet card and crud
+
+.pet-card {
+  width: 450px;
+  height: 250px;
+  border: 1px solid black;
+  text-align: justify;
+}
+
+.pet-image-wrapper {
+  width: 150px;
+  height: 150px;
+  margin: 25% 0;
+  border: 1px solid black;
+}
+
+.pet-details {
+  list-style: none;
+  padding-top: 5px;
+}
+
+.pet-description {
+  padding: 10px;
+}
+
+.add-pet-button {
+  width: 450px;
+  height: 250px;
+}
+
+.text-wrap {
+  word-wrap: break-word;
+}
+
 //style for navbar
 .nav {
   background-color: #32c3ff;
@@ -127,7 +156,7 @@ h1 {
 }
 
 .btn-primary:hover {
-  background-color: #4285F4;
+  background-color: #4285f4;
 }
 
 .login-wrapper {
