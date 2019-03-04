@@ -63,16 +63,12 @@ class App extends Component {
 	render() {
 		return (
 			<Container className="App">
-				{this.state.user !== null ? <Navbar user={this.state.user}/> : <div/>} 
+			<Navbar user={this.state.user}/>
+				{/* {this.state.user !== null ? <Navbar user={this.state.user}/> : <div/>}  */}
 				<Switch>
 					<Route
 						exact path="/"
-						render={props => (
-							this.state.user !== null ?
-								<Home {...props} user={this.state.user} />
-								:
-								<Redirect to="/loginSignup"/>
-						)}
+						render={props => <Home {...props} user={this.state.user} />}
 					/>
 					<Route
 						path="/profile"

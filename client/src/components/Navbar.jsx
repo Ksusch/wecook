@@ -17,9 +17,20 @@ export default class NavBar extends Component {
 						<NavItem>
 							<NavLink href="/">Look for pets</NavLink>
 						</NavItem>
-						<NavItem>
-							<NavLink href="/logout">Logout</NavLink>
-						</NavItem>
+						{this.props.user ? (
+							<NavItem>
+								<NavLink href="/profile">Profile</NavLink>
+							</NavItem>
+						) : (
+							<div />
+						)}
+						{this.props.user ? (
+							<NavItem>
+								<NavLink href="/logout">Logout</NavLink>
+							</NavItem>
+						) : (
+							<div />
+						)}
 					</Nav>
 				</Navbar>
 			</div>
