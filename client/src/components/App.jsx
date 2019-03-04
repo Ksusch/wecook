@@ -83,7 +83,7 @@ class App extends Component {
 	render() {
 		console.log("user in app state: ", this.state.user);
 		return (
-			<Container className="App">
+			<div className="App">
 				<Navbar user={this.state.user} />
 				<Switch>
 					<Route
@@ -137,7 +137,7 @@ class App extends Component {
 						}}
 					/>
 				</Switch>
-			</Container>
+			</div>
 		);
 	}
 }
