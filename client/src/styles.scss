@@ -3,6 +3,36 @@
 @import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
 @import url('https://fonts.googleapis.com/css?family=Gaegu');
 
+// Navbar
+nav {
+  font-family: 'Gaegu', cursive;
+  line-height: 40px;
+  font-size: 2rem;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+nav > div {
+  width: 300px;
+}
+
+#profile-picture {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.navbar-link {
+  i {
+    color: gray
+  }
+}
+
+.active {
+  i {
+    color: black
+  }
+}
+
 // Style for Home component
 .automargin {
   margin: auto;

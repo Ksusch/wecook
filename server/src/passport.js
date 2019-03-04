@@ -8,7 +8,6 @@ const passport = require("passport"),
 
 module.exports = () => {
 	passport.serializeUser((user, cb) => cb(null, user.id));
-
 	passport.deserializeUser((id, cb) => {
 		console.log("deserializer fired", id);
 		User.findOne(
@@ -20,7 +19,7 @@ module.exports = () => {
 					{ facebookId: id },
 				],
 			},
-			function(err, user) {
+			function (err, user) {
 				console.log("got to deserializer callback");
 				console.log(user);
 				if (err) {
@@ -113,7 +112,7 @@ module.exports = () => {
 			};
 		} else {
 			return (username, password, cb) => {
-				User.findOne({ email: username }, function(err, user) {
+				User.findOne({ email: username }, function (err, user) {
 					if (err) {
 						return cb(err);
 					}

@@ -1,49 +1,62 @@
-import React, { Component } from 'react';
-import { Container, Row, Col } from 'reactstrap';
-import Petcard from '../Petcard';
-import { Link } from 'react-router-dom';
-
+import React, { Component } from "react";
+import UploadWidget from "../UploadWidget";
+import { ApiService } from "../../api/api"
+import Img from 'react-image'
 // import '../styles.scss';
 
-export default class Profile extends Component {
-  render() {
-    return (
-      <Container>
-        <Container>
-          <row className="userprofile">
-            <h1>About you</h1>
-            <img src={this.props.image} alt="userpic" className="center" />{' '}
-            <br />
-            Email:{this.props.email} <br />
-            Address:{this.props.address} <br />
-          </row>
-        </Container>
-
-        <row>
-          <h1>Your lovely pet</h1>
-          <Container className="petCardContainer">
-            <Row>
-              <Col>
-                <Petcard />
-              </Col>
-              <Col>
-                <Petcard />
-              </Col>
-              <Col>
-                <Petcard />
-              </Col>
-            </Row>
-          </Container>
-          <Link to="/managePets" className="btn btn-primary">
-            Manage your Pets
-          </Link>
-        </row>
-
-        <row>
-          <h1>The pets you have petted:</h1>
-          <Petcard />
-        </row>
-      </Container>
-    );
+class Profile extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      name: null,
+      about: null
+    }
+    this.ApiService = new ApiService()
   }
+  handleChange(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+  handleImage(url) {
+    console.log("url received", url)
+    this.ApiService.updateUser({
+      image: url}).then(user => this.props.handler(user))
+  }
+  handleSubmit(e) {
+    e.preventDefault()
+    if (this.state.name !== null || this.state.about !== null) {
+      this.ApiService.updateUser(this.state)
+      .then(user => this.props.handler(user))
+    }
+  }
+  render() {
+    console.log(this.props.user)
+		return (
+			<div>
+      <div>
+          picture: 
+          <Img src={this.props.user.image} alt="profile"/>
+        </div>
+      <div>
+          Name: {this.props.user.name}
+        </div>
+        <div>
+          About: {this.props.user.about}
+        </div>
+        <UploadWidget
+							imageType="profilePic"
+							handler={url => this.handleImage(url)}
+							class="upload-widget"
+						/>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+            Name: <input type="text" name="name" onChange={(e) => this.handleChange(e)}/>
+            About: <input type="textarea" name="about" onChange={(e) => this.handleChange(e)}/>
+            <button type="submit">Submit me!</button>
+        </form>
+      </div>
+		);
+	}
 }
+
+export default Profile
