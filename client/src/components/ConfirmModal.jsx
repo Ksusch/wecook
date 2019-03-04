@@ -5,10 +5,6 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Form,
-  FormGroup,
-  Label,
-  Input
 } from 'reactstrap';
 import '../styles.scss';
 

@@ -22,10 +22,14 @@ export default class UploadWidget extends Component {
 				{ cloud_name: "dgxu6dbuw", upload_preset: "petPic" },
 				function (err, res) {
 					if (err) {
+						console.error(err);
 						return;
 					}
-					return res.info.secure.url;
-				}.then(url => this.ApiService.addImageUrl(url, "Pet"))
+					if (res.event === "success") {
+						console.log("success, this is the info: ", res.info)
+						this.props.handler(res.info.url)
+					}
+				}.bind(this)
 			);
 		}
 	}

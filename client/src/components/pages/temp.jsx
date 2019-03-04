@@ -20,7 +20,7 @@
 // 						<br />
 // 						Email:{this.props.email} <br />
 // 						Address:{this.props.address} <br />
-						
+
 // 					</Row>
 // 				</Container>
 
@@ -51,3 +51,44 @@
 // 		);
 // 	}
 // }
+
+// TAKE FROM MANAGEPETS COMPONENT
+//   < Button className = "btn btn-success" >
+//     <i className="fas fa-fish" />
+//         </Button >
+//   {
+//     this.state.pets.map(pet => (
+//       <div>
+//         <p>{pet.name}</p>
+//         <Button
+//           className="btn btn-success"
+//           onClick={() => this.editPet(pet)}
+//         >
+//           <i className="fas fa-pencil-alt" />
+//         </Button>
+//         <Button
+//           className="btn btn-secondary"
+//           onClick={() => this.deletePet(pet)}
+//         >
+//           <i className="fas fa-minus" />
+//         </Button>
+//       </div>
+//     ))
+//   }
+//   < Button
+// className = "btn btn-secondary"
+//   // onClick={() => this.deletePet(pet)}
+//   >
+//   <i className="fas fa-plus" />
+//         </Button >
+//   <PetModal
+//     modalOpen={this.state.modalOpen}
+//     toggleModal={this.modalToggle}
+//     pet={this.state.modalPet}
+//   />
+//   <ConfirmModal
+//     confirmOpen={this.state.confirmOpen}
+//     toggleModal={this.confirmationToggle}
+//     pet={this.state.modalPet}
+//     confirmDelete={this.confirmDelete}
+//   />
