@@ -6,7 +6,8 @@ import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import { AuthService, StorageService } from '../api/api';
-import ManagePets from './AddPet';
+
+const AppContext = React.createContext();
 
 class App extends Component {
   constructor(props) {
@@ -92,12 +93,16 @@ class App extends Component {
           <Route
             exact
             path="/"
-            render={props => <Home {...props} user={this.state.user} />}
+            render={props => (
+              <AppContext.Provider value={this.state}>
+                <Home {...props} user={this.state.user} />
+              </AppContext.Provider>
+            )}
           />
           <Route
             path="/profile"
             render={props =>
-              this.user !== null ? (
+              this.state.user !== null ? (
                 <Profile
                   {...props}
                   user={this.state.user}

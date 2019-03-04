@@ -19,7 +19,7 @@ export default class Home extends Component {
             </p>
 
             {!this.props.user ? (
-              <button type="button" class="btn btn-dark">
+              <button type="button" className="btn btn-dark">
                 <Link to="/loginSignup">Login/Signup</Link>
               </button>
             ) : (
