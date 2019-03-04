@@ -37,9 +37,10 @@ class App extends Component {
 		}
 	}
 	handleLogin(user) {
-		this.StorageService.set("user", user);
+		let userData = user.data ? user.data : user
+		this.StorageService.set("user", userData);
 		this.setState({
-			user: user,
+			user: userData,
 		});
 	}
 	handleLogout() {
