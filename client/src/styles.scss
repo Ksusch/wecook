@@ -145,3 +145,40 @@ h1 {
 #proceed-with {
   padding: 10px 0;
 }
+
+.profile-pic{
+  height: 100%;
+  max-height: 250px;
+  width: 100%;
+  max-width: 250px;
+  border-radius: 50%;
+}
+
+#cameraContainer {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+
+#cameraimg {
+  height: 6vh;
+  width: 3.5vw
+}
+
+#test {
+  display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+#logo{
+  padding-right: 15px ;
+}
+

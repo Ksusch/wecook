@@ -34,27 +34,44 @@ class Profile extends Component {
   render() {
     console.log(this.props.user)
     return (
-      <div className="container mt-sm-1 mb-5">
-        <div className="row justify-content-md-center">
-          <div className="col-lg-4 pb-md-1 pl-5">
-            <Img src={this.props.user.image} alt="profile" />
+      <div>
+
+        <div className="container mt-sm-4 mb-5">
+          <div id="test" className="row">
+            <div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center">
+              <Img className="profile-pic" src={this.props.user.image} alt="profile" />
+            </div>
+            <div id="cameraContainer">
+              {/* <img id="cameraimg" src="/images/camera.png" alt="editphoto" /> */}
+              <i id="cameralogo" className="fas fa-camera-retro fa-2x"></i>
+              <br />
+              <UploadWidget
+                imageType="profilePic"
+                handler={url => this.handleImage(url)}
+                class="upload-widget"
+              />
+            </div>
           </div>
-          <div className="col-lg ml-lg-5 pr-lg-5 text-lg-left text-center">
-            <h3>Welcome {this.props.user.name}</h3>
-            <p>About: {this.props.user.about}</p>
+
+          <div id="test" className="col text-center">
+            <h3>Welcome - {this.props.user.name}!</h3><br />
           </div>
-          <UploadWidget
-            imageType="profilePic"
-            handler={url => this.handleImage(url)}
-            class="upload-widget"
-          />
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-            Name: <input type="text" name="name" onChange={(e) => this.handleChange(e)} />
-            About: <input type="textarea" name="about" onChange={(e) => this.handleChange(e)} />
-            <button type="submit">Submit me!</button>
-          </form>
+          <div id="test" className="col text-center">
+
+            <p><strong>Bio:</strong> {this.props.user.about}</p>
+          </div>
+          <i id="cameraimg" className="fas fa-marker"></i>
         </div>
-      </div>
+
+
+
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          Name: <input type="text" name="name" onChange={(e) => this.handleChange(e)} />
+          About: <input type="textarea" name="about" onChange={(e) => this.handleChange(e)} />
+          <button type="submit">Submit me!</button>
+        </form>
+
+      </div >
     );
   }
 }

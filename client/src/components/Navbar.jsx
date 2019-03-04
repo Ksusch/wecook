@@ -7,6 +7,7 @@ export default class NavBar extends Component {
 		return (
 			<nav className="d-flex justify-content-between">
 				<NavLink to="/" exact className="navbar-link align-self-start">
+					<span id="logo">WePet</span>
 					<i className="fas fa-paw" />
 				</NavLink>
 				<div className="align-self-end d-flex justify-content-between">
@@ -18,15 +19,15 @@ export default class NavBar extends Component {
 							<i className="fas fa-user" />
 						</NavLink>
 					) : (
-						<div />
-					)}
+							<div />
+						)}
 					{this.props.user ? (
 						<NavLink to="/logout" exact className="navbar-link">
 							<i className="fas fa-sign-out-alt" />
 						</NavLink>
 					) : (
-						<div />
-					)}
+							<div />
+						)}
 				</div>
 			</nav>
 		);

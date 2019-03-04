@@ -103,14 +103,14 @@ class App extends Component {
 						path="/profile"
 						render={props =>
 							this.state.user !== null ? (
-									<Profile
-										{...props}
-										user={this.state.user}
-										handler={user => this.handleLogin(user)}
-									/>
+								<Profile
+									{...props}
+									user={this.state.user}
+									handler={user => this.handleLogin(user)}
+								/>
 							) : (
-								<Redirect to="/" />
-							)
+									<Redirect to="/profile" />
+								)
 						}
 					/>
 					<Route
@@ -122,8 +122,8 @@ class App extends Component {
 									handler={user => this.handleLogin(user)}
 								/>
 							) : (
-								<Redirect to="/" />
-							)
+									<Redirect to="/" />
+								)
 						}
 					/>
 					<Route
