@@ -61,17 +61,14 @@ export default class PetModal extends Component {
     return (
       <div>
         <Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
-          <ModalHeader toggle={this.toggle}>Add a Pet</ModalHeader>
-          <ModalBody>
-            <UploadWidget
-              handler={url => this.handleImage(url)}
-              imageType="petPic"
-            />
-            <Form onSubmit={e => this.handleSubmit(e)}>
+          <Form onSubmit={e => this.handleSubmit(e)}>
+            <ModalHeader toggle={this.toggle}>
+              <h3>Add a Pet</h3>
+            </ModalHeader>
+            <ModalBody>
               <FormGroup>
                 <Input
-                  placeholder="Pet name"
-                  bsSize="lg"
+                  placeholder="Pet Name"
                   name="name"
                   onChange={e => this.handleChange(e)}
                 />
@@ -87,18 +84,26 @@ export default class PetModal extends Component {
                 <Input
                   type="textarea"
                   name="description"
-                  placeholder="Pet description"
+                  placeholder="Pet Description"
                   onChange={e => this.handleChange(e)}
                 />
               </FormGroup>
               <FormGroup>
+                <UploadWidget
+                  class="addpicture"
+                  handler={url => this.handleImage(url)}
+                  imageType="petPic"
+                />
+              </FormGroup>
+            </ModalBody>
+            <ModalFooter>
+              <FormGroup>
                 <Button className="btn btn-primary" type="submit">
-                  <i className="fas fa-plus" />
+                  <i className="fas fa-save" />
                 </Button>
               </FormGroup>
-            </Form>
-          </ModalBody>
-          <ModalFooter />
+            </ModalFooter>
+          </Form>
         </Modal>
       </div>
     );

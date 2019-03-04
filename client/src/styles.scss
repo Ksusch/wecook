@@ -44,8 +44,10 @@ nav > div {
   align-items: center;
 }
 
-h1 {
-  margin: 30px;
+h1,
+h2,
+h3,
+h4 {
   // font-size: 50px;
   font-family: 'Gaegu', cursive;
 }
@@ -173,4 +175,17 @@ h1 {
 
 #proceed-with {
   padding: 10px 0;
+}
+
+.addpicture {
+  margin-bottom: 10px;
+}
+
+.centered0 {
+  width: 100%;
+  text-align: center;
+}
+
+.right {
+  text-align: right;
 }
