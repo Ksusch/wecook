@@ -6,7 +6,7 @@ import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import { AuthService, StorageService } from '../api/api';
-import AddPet from './AddPet';
+import Pets from './Pets';
 
 const AppContext = React.createContext();
 
@@ -141,7 +141,7 @@ class App extends Component {
               return <Redirect to="/" />;
             }}
           />
-          <Route path="/manage" render={props => <AddPet />} />
+          <Route path="/manage" render={props => <Pets />} />
         </Switch>
       </div>
     );
