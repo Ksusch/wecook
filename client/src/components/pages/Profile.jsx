@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import UploadWidget from "../UploadWidget";
 import { ApiService } from "../../api/api";
-import { Container } from 'reactstrap';
-import Img from 'react-image'
+import Img from "react-image";
 // import '../styles.scss';
 
 class Profile extends Component {
@@ -60,4 +59,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default Profile;
