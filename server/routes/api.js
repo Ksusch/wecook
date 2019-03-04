@@ -30,9 +30,9 @@ router.post('/pet', isActiveUser, (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.put('/pet', isActiveUser, (req, res, next) => {
+router.put('/pet/:id', isActiveUser, (req, res, next) => {
   Pet.findOneAndUpdate(
-    { _id: req.body._id },
+    { _id: req.params.id },
     {
       name: req.body.name,
       animal: req.body.animal,
@@ -49,8 +49,8 @@ router.put('/pet', isActiveUser, (req, res, next) => {
     .catch(err => console.log(err));
 });
 
-router.delete('/pet', isActiveUser, (req, res, next) => {
-  Pet.findOneAndDelete({ _id: req.body._id })
+router.delete('/pet/:id', isActiveUser, (req, res, next) => {
+  Pet.findOneAndDelete({ _id: req.params.id })
     .then(pet =>
       res.json({
         message: 'pet deleted',
