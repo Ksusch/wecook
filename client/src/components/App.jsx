@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Container } from "reactstrap";
 import "../styles.scss";
 import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
@@ -7,6 +6,8 @@ import Profile from "./pages/Profile";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthService, StorageService } from "../api/api";
+
+const AppContext = React.createContext();
 
 class App extends Component {
 	constructor(props) {
@@ -20,11 +21,14 @@ class App extends Component {
 		this.handleConfirm = this.handleConfirm.bind(this);
 	}
 	componentDidUpdate(prevProps, prevState) {
-		if (prevState.user !== null && this.state.user !== null && prevState.user !== this.state.user) {
+		if (
+			prevState.user !== null &&
+			this.state.user !== null &&
+			prevState.user !== this.state.user
+		) {
 			this.StorageService.set("user", this.state.user);
-		}
-		else if (prevState.user !== null && this.state.user === null) {
-			console.log("fired on ComponentDidUpdate, App.jsx. User was null")
+		} else if (prevState.user !== null && this.state.user === null) {
+			console.log("fired on ComponentDidUpdate, App.jsx. User was null");
 			let user = this.StorageService.get("user");
 			if (user !== null) {
 				this.AuthService.verify(user).then(res => {
@@ -37,7 +41,7 @@ class App extends Component {
 					}
 				});
 			}
-			console.log("user", this.state.user)
+			console.log("user", this.state.user);
 		}
 	}
 	componentDidMount() {
@@ -90,18 +94,20 @@ class App extends Component {
 						exact
 						path="/"
 						render={props => (
-							<Home {...props} user={this.state.user} />
+							<AppContext.Provider value={this.state}>
+								<Home {...props} user={this.state.user} />
+							</AppContext.Provider>
 						)}
 					/>
 					<Route
 						path="/profile"
 						render={props =>
-							this.user !== null ? (
-								<Profile
-									{...props}
-									user={this.state.user}
-									handler={user => this.handleLogin(user)}
-								/>
+							this.state.user !== null ? (
+									<Profile
+										{...props}
+										user={this.state.user}
+										handler={user => this.handleLogin(user)}
+									/>
 							) : (
 								<Redirect to="/" />
 							)

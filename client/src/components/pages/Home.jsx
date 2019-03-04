@@ -18,7 +18,7 @@ export default class Home extends Component {
               to sit or become a host for your pet.
             </p>
 
-            {!this.props.user ? <button type="button" class="btn btn-dark"><Link to="/loginSignup">Login/Signup</Link></button> : <div />}
+            {!this.props.user ? <button type="button" className="btn btn-dark"><Link to="/loginSignup">Login/Signup</Link></button> : <div />}
           </div>
 
           <div className="circular">
