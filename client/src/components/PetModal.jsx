@@ -15,13 +15,6 @@ import UploadWidget from './UploadWidget';
 export default class PetModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modal: false,
-      image: null,
-      name: null,
-      animal: null,
-      description: null
-    };
     this.toggle = this.toggle.bind(this);
   }
 
@@ -29,27 +22,26 @@ export default class PetModal extends Component {
     this.props.toggleModal();
   }
   handleChange(e) {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
+    this.props.handleChange(e.target.name, e.target.value);
   }
   handleSubmit(e) {
+    const { name, animal, description, image } = this.props.pet;
     e.preventDefault();
     if (
-      this.state.name &&
-      this.state.name.length > 0 &&
-      this.state.animal &&
-      this.state.animal.length > 0 &&
-      this.state.description &&
-      this.state.description.length > 0
+      name &&
+      name.length > 0 &&
+      animal &&
+      animal.length > 0 &&
+      description &&
+      description.length > 0
     ) {
-      let pet = {
-        name: this.state.name,
-        animal: this.state.animal,
-        description: this.state.description,
-        image: this.state.image
+      const pet = {
+        name,
+        animal,
+        description,
+        image
       };
-      this.props.handler(pet);
+      this.props.handler(pet, this.props.petId);
       this.toggle();
     }
   }
@@ -63,7 +55,7 @@ export default class PetModal extends Component {
         <Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
           <Form onSubmit={e => this.handleSubmit(e)}>
             <ModalHeader toggle={this.toggle}>
-              <h3>Add a Pet</h3>
+              <h3>{this.props.editMode ? 'Edit Pet' : 'Add a Pet'}</h3>
             </ModalHeader>
             <ModalBody>
               <FormGroup>

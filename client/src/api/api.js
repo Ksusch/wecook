@@ -20,11 +20,11 @@ class ApiService {
   createPet(pet) {
     return this.service.post('/pet', pet);
   }
-  updatePet(id, user) {
-    return this.service.put('/pet/' + id, user);
+  updatePet(pet, id) {
+    return this.service.put('/pet/' + id, pet);
   }
-  deletePet(id, user) {
-    return this.service.delete(`/pet/${id}`, user);
+  deletePet(pet, id) {
+    return this.service.delete(`/pet/${id}`, pet);
   }
   addImageUrl(url, type, id = null) {
     console.log('I am saving the image to the backend.');
