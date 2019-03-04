@@ -44,7 +44,6 @@ class Profile extends Component {
             <div id="cameraContainer">
               {/* <img id="cameraimg" src="/images/camera.png" alt="editphoto" /> */}
               <i id="cameralogo" className="fas fa-camera-retro fa-2x"></i>
-              <br />
               <UploadWidget
                 imageType="profilePic"
                 handler={url => this.handleImage(url)}
