@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import '../styles.scss';
 
-export default class PetModal extends Component {
+export default class ConfirmModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -20,10 +20,15 @@ export default class PetModal extends Component {
     };
 
     this.toggle = this.toggle.bind(this);
+    this.confirmDelete = this.confirmDelete.bind(this);
   }
 
   toggle() {
     this.props.toggleModal();
+  }
+
+  confirmDelete(e) {
+    this.props.confirmDelete(e);
   }
 
   render() {
@@ -32,27 +37,17 @@ export default class PetModal extends Component {
 
     return (
       <div>
-        <Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
+        <Modal isOpen={this.props.confirmOpen} toggle={this.toggle}>
           <ModalHeader toggle={this.toggle}>{this.props.pet.name}</ModalHeader>
           <ModalBody>
-            <Form>
-              <Input placeholder={this.props.pet.name} bsSize="lg" />
-              <br />
-              <Input placeholder="Animal" />
-              <br />
-              <FormGroup>
-                <Label for="exampleText">Description</Label>
-                <Input type="textarea" name="text" />
-              </FormGroup>
-              TODO: add form here
-            </Form>
+            <a>Are you sure you want to delete this pet from library?</a>
           </ModalBody>
           <ModalFooter>
-            <Button color="primary" onClick={this.toggle}>
-              Do Something
+            <Button color="primary" onClick={e => this.props.confirmDelete(e)}>
+              Yes!
             </Button>{' '}
             <Button color="secondary" onClick={this.toggle}>
-              Cancel
+              No!
             </Button>
           </ModalFooter>
         </Modal>
