@@ -1,30 +1,44 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
-import api from "../api/api";
+import { ApiService } from "../api/api";
 
 export default class UploadWidget extends Component {
+	constructor(props) {
+		super(props)
+		this.ApiService = new ApiService()
+	}
 	uploadWidget() {
 		if (this.props.imageType === "profilePic") {
+			console.log("i fired")
 			window.cloudinary.openUploadWidget(
 				{ cloud_name: "dgxu6dbuw", upload_preset: "profilePic" },
-				function(err, res) {
+				function (err, res) {
 					if (err) {
+						console.log("got an error", err)
 						console.error(err);
 						return;
 					}
-					return res.info.secure.url;
-				}.then(url => api.addImageUrl(url, "userProfile"))
-			);
+					if (res.event === "success") {
+						console.log(res.info)
+						this.ApiService.addImageUrl(res.info.secure_url, "User")
+							.then(user => {
+								console.log("I have added the image in Upload Widget")
+								this.props.handler(user)
+							})
+					}
+					console.log("openuploadwiget event", res.event)
+					console.log("openuploadwiget event", res)
+				}.bind(this)
+			)
 		} else {
 			window.cloudinary.openUploadWidget(
 				{ cloud_name: "dgxu6dbuw", upload_preset: "petPic" },
-				function(err, res) {
+				function (err, res) {
 					if (err) {
-						console.error(err);
 						return;
 					}
 					return res.info.secure.url;
-				}.then(url => api.addImageUrl(url, "petProfile"))
+				}.then(url => this.ApiService.addImageUrl(url, "Pet"))
 			);
 		}
 	}

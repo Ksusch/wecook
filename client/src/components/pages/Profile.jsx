@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import Petcard from '../Petcard';
 import { Link } from 'react-router-dom';
+import UploadWidget from '../UploadWidget';
 
 // import '../styles.scss';
 
@@ -16,6 +17,7 @@ export default class Profile extends Component {
             <br />
             Email:{this.props.email} <br />
             Address:{this.props.address} <br />
+            <UploadWidget imageType="profilePic" handler={user => this.props.handler(user)} class="upload-widget" />
           </row>
         </Container>
 

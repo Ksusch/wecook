@@ -20,7 +20,7 @@ module.exports = () => {
 					{ facebookId: id },
 				],
 			},
-			function(err, user) {
+			function (err, user) {
 				console.log("got to deserializer callback");
 				console.log(user);
 				if (err) {
@@ -113,7 +113,7 @@ module.exports = () => {
 			};
 		} else {
 			return (username, password, cb) => {
-				User.findOne({ email: username }, function(err, user) {
+				User.findOne({ email: username }, function (err, user) {
 					if (err) {
 						return cb(err);
 					}

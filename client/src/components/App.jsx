@@ -37,7 +37,6 @@ class App extends Component {
 		}
 	}
 	handleLogin(user) {
-		console.log("handleLogin fired on app");
 		this.StorageService.set("user", user);
 		this.setState({
 			user: user,
@@ -62,6 +61,7 @@ class App extends Component {
 			.then(console.log(this.state.user));
 	}
 	render() {
+		console.log("user in app state: ", this.state.user)
 		return (
 			<Container className="App">
 				<Navbar user={this.state.user} />
@@ -76,7 +76,7 @@ class App extends Component {
 					<Route
 						path="/profile"
 						render={props => (
-							<Profile {...props} user={this.state.user} />
+							<Profile {...props} user={this.state.user} handler={user => this.handleLogin(user)} />
 						)}
 					/>
 					<Route
@@ -88,8 +88,8 @@ class App extends Component {
 									handler={user => this.handleLogin(user)}
 								/>
 							) : (
-								<Redirect to="/" />
-							)
+									<Redirect to="/" />
+								)
 						}
 					/>
 					<Route

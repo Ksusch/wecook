@@ -3,6 +3,9 @@ const router = express.Router();
 const { isActiveUser } = require('../src/middlewares');
 const Pet = require('../models/Pet');
 const User = require('../models/User');
+const passport = require('passport');
+const localAuth = passport.authenticate('local');
+
 
 router.get('/pet', isActiveUser, (req, res, next) => {
   // TODO get only pets from this user
@@ -59,5 +62,41 @@ router.delete('/pet/:id', isActiveUser, (req, res, next) => {
     )
     .catch(err => console.log(err));
 });
+
+// add image
+
+router.post("/image/add", (req, res, next) => {
+  console.log("I am trying to update the user photo", req.body.imageUrl, req.user)
+  if (req.body.type === "User") {
+    User.findOneAndUpdate(
+      {
+        $or: [
+          { _id: req.user.id },
+          { googleId: req.user.id },
+          { twitterId: req.user.id },
+          { facebookId: req.user.id },
+        ],
+      },
+      {
+        image: req.body.imageUrl
+      }
+    )
+      .then(user => {
+        console.log("I have updated the user photo", user)
+        let userData = user
+        userData.password = undefined
+        res.status(200).json(userData)
+      })
+      .catch(err => console.error(err))
+  }
+  else {
+    Pet.findOneAndUpdate(
+      { _id: req.body.id },
+      { image: req.body.imageUrl }
+    )
+      .then(pet => res.status(200).json(pet))
+      .catch(err => console.error(err))
+  }
+})
 
 module.exports = router;

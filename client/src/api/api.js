@@ -23,6 +23,10 @@ class ApiService {
   deletePet(id, user) {
     return this.service.delete(`/pet/${id}`, user);
   }
+  addImageUrl(url, type, id = null) {
+    console.log("I am saving the image to the backend.")
+    return this.service.post("/image/add", { imageUrl: url, model: type, owner: id })
+  }
 }
 
 class AuthService {

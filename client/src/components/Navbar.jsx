@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink } from "reactstrap";
+import { Navbar, NavbarBrand, Nav, NavItem } from "reactstrap";
+import { NavLink } from "react-router-dom";
 import "../styles.scss";
 
 export default class NavBar extends Component {
@@ -12,25 +13,25 @@ export default class NavBar extends Component {
 					<Collapse isOpen={this.state.isOpen} navbar> */}
 					<Nav className="ml-auto" navbar>
 						<NavItem>
-							<NavLink href="/">Find my pet a company</NavLink>
+							<NavLink to="/">Find my pet a company</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink href="/">Look for pets</NavLink>
+							<NavLink to="/">Look for pets</NavLink>
 						</NavItem>
 						{this.props.user ? (
 							<NavItem>
-								<NavLink href="/profile">Profile</NavLink>
+								<NavLink to="/profile">Profile</NavLink>
 							</NavItem>
 						) : (
-							<div />
-						)}
+								<div />
+							)}
 						{this.props.user ? (
 							<NavItem>
-								<NavLink href="/logout">Logout</NavLink>
+								<NavLink to="/logout">Logout</NavLink>
 							</NavItem>
 						) : (
-							<div />
-						)}
+								<div />
+							)}
 					</Nav>
 				</Navbar>
 			</div>
