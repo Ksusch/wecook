@@ -8,7 +8,6 @@ const passport = require("passport"),
 
 module.exports = () => {
 	passport.serializeUser((user, cb) => cb(null, user.id));
-
 	passport.deserializeUser((id, cb) => {
 		console.log("deserializer fired", id);
 		User.findOne(
