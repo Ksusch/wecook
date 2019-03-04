@@ -4,7 +4,6 @@ import "../styles.scss";
 import Home from "./pages/Home";
 import LoginSignup from "./pages/LoginSignup";
 import Profile from "./pages/Profile";
-import ManagePets from "./pages/ManagePets";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Navbar from "./Navbar";
 import { AuthService, StorageService } from "../api/api";
@@ -20,7 +19,27 @@ class App extends Component {
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleConfirm = this.handleConfirm.bind(this);
 	}
-
+	componentDidUpdate(prevProps, prevState) {
+		if (prevState.user !== null && this.state.user !== null && prevState.user !== this.state.user) {
+			this.StorageService.set("user", this.state.user);
+		}
+		else if (prevState.user !== null && this.state.user === null) {
+			console.log("fired on ComponentDidUpdate, App.jsx. User was null")
+			let user = this.StorageService.get("user");
+			if (user !== null) {
+				this.AuthService.verify(user).then(res => {
+					if (res.status === 200) {
+						this.setState({
+							user: user,
+						});
+					} else {
+						this.StorageService.remove("user");
+					}
+				});
+			}
+			console.log("user", this.state.user)
+		}
+	}
 	componentDidMount() {
 		// check if a user exists and storage
 		let user = this.StorageService.get("user");
@@ -37,7 +56,7 @@ class App extends Component {
 		}
 	}
 	handleLogin(user) {
-		let userData = user.data ? user.data : user
+		let userData = user.data ? user.data : user;
 		this.StorageService.set("user", userData);
 		this.setState({
 			user: userData,
@@ -62,7 +81,7 @@ class App extends Component {
 			.then(console.log(this.state.user));
 	}
 	render() {
-		console.log("user in app state: ", this.state.user)
+		console.log("user in app state: ", this.state.user);
 		return (
 			<div className="App">
 				<Navbar user={this.state.user} />
@@ -76,9 +95,17 @@ class App extends Component {
 					/>
 					<Route
 						path="/profile"
-						render={props => (
-							<Profile {...props} user={this.state.user} handler={user => this.handleLogin(user)} />
-						)}
+						render={props =>
+							this.user !== null ? (
+								<Profile
+									{...props}
+									user={this.state.user}
+									handler={user => this.handleLogin(user)}
+								/>
+							) : (
+								<Redirect to="/" />
+							)
+						}
 					/>
 					<Route
 						path="/loginSignup"
@@ -89,8 +116,8 @@ class App extends Component {
 									handler={user => this.handleLogin(user)}
 								/>
 							) : (
-									<Redirect to="/" />
-								)
+								<Redirect to="/" />
+							)
 						}
 					/>
 					<Route
