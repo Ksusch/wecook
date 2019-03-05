@@ -6,7 +6,7 @@ export default class UploadWidget extends Component {
 		if (this.props.imageType === 'profilePic') {
 			window.cloudinary.openUploadWidget(
 				{ cloud_name: 'dgxu6dbuw', upload_preset: 'profilePic' },
-				function (err, res) {
+				function(err, res) {
 					if (err) {
 						console.error(err);
 						return;
@@ -19,7 +19,7 @@ export default class UploadWidget extends Component {
 		} else {
 			window.cloudinary.openUploadWidget(
 				{ cloud_name: 'dgxu6dbuw', upload_preset: 'petPic' },
-				function (err, res) {
+				function(err, res) {
 					if (err) {
 						console.error(err);
 						return;

@@ -6,24 +6,21 @@ import PetModal from './PetModal';
 export default class PetCard extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			image: null,
-			name: null,
-			animal: null,
-			description: null,
-		};
+		this.state = {};
 		this.modalToggle = this.modalToggle.bind(this);
 	}
 	modalToggle() {
 		this.setState(prevState => ({
-			modalOpen: !prevState.modalOpen,
+			modalOpen: !prevState.modalOpen
 		}));
 	}
 	deletePet() {
-		this.props.handleDelete(this.props.idx);
+		console.log(this.props);
+		this.props.handleDelete(this.props.pet._id);
 	}
 	updatePet(pet) {
-		this.props.handleUpdate(this.props.idx, pet);
+		console.log('in pet card, pet in props is', this.props.pet);
+		this.props.handleUpdate(this.props.pet._id, pet);
 	}
 	render() {
 		return (
@@ -48,8 +45,11 @@ export default class PetCard extends Component {
 				</div>
 				<div>
 					<div className="pet-image-wrapper">
-						{this.props.pet.image ? (<img src={this.props.pet.image} alt="this pet" />) : 
-							<div/> } 
+						{this.props.pet.image ? (
+							<img src={this.props.pet.image} alt="this pet" />
+						) : (
+							<img src="" alt="this pet" />
+						)}
 					</div>
 				</div>
 				<div>
@@ -57,7 +57,7 @@ export default class PetCard extends Component {
 						<li>Name: {this.props.pet.name || ''}</li>
 						<li>
 							Animal: {this.props.pet.animal || ''}
-							<i className={`fas fa-${this.props.pet.animal}`} />
+							<i className={`fas fa-${this.props.pet.animal.toLowerCase()}`} />
 						</li>
 					</ul>
 					<div className="pet-description">
@@ -68,7 +68,7 @@ export default class PetCard extends Component {
 					modalOpen={this.state.modalOpen}
 					toggleModal={this.modalToggle}
 					handler={pet => this.updatePet(pet)}
-					pet={this.state}
+					pet={this.props.pet}
 				/>
 			</div>
 		);

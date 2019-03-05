@@ -12,7 +12,6 @@ export default class AddPetButton extends Component {
 			animal: null,
 			description: null
 		};
-		this.ApiService = new ApiService();
 		this.modalToggle = this.modalToggle.bind(this);
 	}
 
@@ -22,7 +21,7 @@ export default class AddPetButton extends Component {
 		}));
 	}
 	addPet(pet) {
-		this.ApiService.createPet(pet);
+		this.props.handler(pet);
 	}
 
 	render() {
@@ -36,6 +35,11 @@ export default class AddPetButton extends Component {
 						modalOpen={this.state.modalOpen}
 						toggleModal={this.modalToggle}
 						handler={pet => this.addPet(pet)}
+						pet={{
+							image: undefined,
+							name: undefined,
+							description: undefined
+						}}
 					/>
 					<i className="fas fa-plus fa-5x" />
 				</Button>
