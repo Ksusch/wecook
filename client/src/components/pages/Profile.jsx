@@ -89,7 +89,7 @@ class Profile extends Component {
 				</div>
 				<div>
 					<Button className="btn btn-primary" onClick={this.modalToggle}>
-						<i className="fas fa-edit" />
+						<i className="fas fa-pen" />
 					</Button>
 					<UpdateUserModal
 						user={this.props.user}

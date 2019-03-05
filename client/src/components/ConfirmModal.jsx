@@ -39,10 +39,10 @@ export default class ConfirmModal extends Component {
 					</ModalBody>
 					<ModalFooter>
 						<Button color="primary" onClick={e => this.props.confirmDelete(e)}>
-              Yes!
+              Delete
 						</Button>{' '}
 						<Button color="secondary" onClick={this.toggle}>
-              No!
+              Keep
 						</Button>
 					</ModalFooter>
 				</Modal>
