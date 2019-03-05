@@ -1,17 +1,27 @@
 import React, { Component } from 'react';
-import UploadWidget from '../UploadWidget';
+//import UploadWidget from '../UploadWidget';
 import { ApiService } from '../../api/api';
+import UpdateUserModal from '../UpdateUserModal';
 import Img from 'react-image';
-// import '../styles.scss';
+import { Button } from 'reactstrap';
+import '../../styles.scss';
 
 class Profile extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			name: null,
-			about: null
+			modalOpen: false
 		};
 		this.ApiService = new ApiService();
+		this.modalToggle = this.modalToggle.bind(this);
+		this.handleChange = this.handleChange.bind(this);
+		this.handleImage = this.handleImage.bind(this);
+		this.handleUserUpdate = this.handleUserUpdate.bind(this);
+	}
+	modalToggle() {
+		this.setState(prevState => ({
+			modalOpen: !prevState.modalOpen
+		}));
 	}
 	handleChange(e) {
 		this.setState({
@@ -23,53 +33,50 @@ class Profile extends Component {
 			image: url
 		}).then(user => this.props.handler(user));
 	}
-	handleSubmit(e) {
-		e.preventDefault();
-		if (this.state.name !== null || this.state.about !== null) {
-			this.ApiService.updateUser(this.state)
-				.then(user => this.props.handler(user));
-		}
+	handleUserUpdate(state) {
+		this.ApiService.updateUser(state).then(user => this.props.handler(user));
 	}
 	render() {
-		console.log('user object as received in props', this.props.user);
+		console.log('user object as received in props', this.props.user.image);
 		return (
 			<div>
-
 				<div className="container mt-sm-4 mb-5">
 					<div id="test" className="row">
 						<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center">
-							<Img className="profile-pic" src={this.props.user.image} alt="profile" />
+							{this.props.user.image == '' ? (
+								<i className="fas fa-user-alt fa-3x" />
+							) : (
+								<Img
+									className="profile-pic"
+									src={this.props.user.image}
+									alt="profile"
+								/>
+							)}
 						</div>
-						<div id="cameraContainer">
-							{/* <img id="cameraimg" src="/images/camera.png" alt="editphoto" /> */}
-							<i id="cameralogo" className="fas fa-camera-retro fa-2x"></i>
-							<UploadWidget
-								imageType="profilePic"
-								handler={url => this.handleImage(url)}
-								class="upload-widget"
-							/>
-						</div>
-					</div>
-
-					<div id="test" className="col text-center">
-						<h3>Welcome - {this.props.user.name}!</h3><br />
 					</div>
 					<div id="test" className="col text-center">
-
-						<p><strong>Bio:</strong> {this.props.user.about}</p>
+						<h3>Welcome - {this.props.user.name}!</h3>
+						<br />
 					</div>
-					<i id="cameraimg" className="fas fa-marker"></i>
+					<div id="test" className="col text-center">
+						<p>
+							<strong>Bio:</strong> {this.props.user.about}
+						</p>
+					</div>
+					<div>
+						<Button className="btn btn-primary" onClick={this.modalToggle}>
+							<i className="fas fa-pencil-alt" />
+						</Button>
+						<UpdateUserModal
+							user={this.props.user}
+							modalOpen={this.state.modalOpen}
+							toggleModal={this.modalToggle}
+							handler={state => this.handleUserUpdate(state)}
+							user={this.props.user}
+						/>
+					</div>
 				</div>
-
-
-
-				<form onSubmit={(e) => this.handleSubmit(e)}>
-          Name: <input type="text" name="name" onChange={(e) => this.handleChange(e)} />
-          About: <input type="textarea" name="about" onChange={(e) => this.handleChange(e)} />
-					<button type="submit">Submit me!</button>
-				</form>
-
-			</div >
+			</div>
 		);
 	}
 }

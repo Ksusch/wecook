@@ -38,7 +38,7 @@ export default class UploadWidget extends Component {
 					className={this.props.class || ''}
 					onClick={this.uploadWidget.bind(this)}
 				>
-					Add Picture
+          Update Picture
 				</Button>
 			</React.Fragment>
 		);
