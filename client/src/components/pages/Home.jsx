@@ -28,7 +28,7 @@ export default class Home extends Component {
 						)}
 					</div>
 
-					<div className="circular">
+					<div className="profile-pic">
 						<img
 							className="home-image"
 							src="../../images/home-image.jpg"

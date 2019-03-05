@@ -1,10 +1,10 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
-@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
-@import url("https://fonts.googleapis.com/css?family=Gaegu");
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
 // Navbar
 nav {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
   line-height: 40px;
   font-size: 2rem;
   padding: 10px;
@@ -47,7 +47,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
 }
 
 .header img {
@@ -96,15 +96,40 @@ h4 {
 .pet-card {
   width: 450px;
   height: 250px;
-  border: 1px solid black;
+  border: 1px solid rgba(0, 0, 0, 0.363);
+  border-radius: 8px;
   text-align: justify;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+  margin: 7px;
+}
+
+.pet-card-container {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .pet-image-wrapper {
   width: 150px;
   height: 150px;
   margin: 25% 0;
-  border: 1px solid black;
+  // border: 1px solid black;
+  border-radius: 50%;
+}
+
+.card-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.pet-card-button-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin: 7px;
 }
 
 .pet-details {

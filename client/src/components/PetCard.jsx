@@ -23,43 +23,52 @@ export default class PetCard extends Component {
 	render() {
 		return (
 			<div className="pet-card d-flex flex-nowrap justify-content-between">
+				<div className="card-top">
+					<div>
+						<ul className="pet-details">
+							<h3> {this.props.pet.name || ''}</h3>
+							<li>
+								Animal: {this.props.pet.animal || ''} &nbsp;
+								<i
+									className={`fas fa-${this.props.pet.animal.toLowerCase()}`}
+								/>
+							</li>
+						</ul>
+						<div className="pet-description">
+							{this.props.pet.description || ''}
+						</div>
+					</div>
+					<div>
+						<div className="pet-image-wrapper">
+							{this.props.pet.image === undefined ? (
+								<i className="fas fa-camera fa-2x" />
+							) : (
+								<img
+									src={this.props.pet.image}
+									className="profile-pic"
+									alt="this pet"
+								/>
+							)}
+						</div>
+					</div>
+				</div>
+
+
+
+
 				<div className="pet-card-button-wrapper">
 					<div>
 						<Button
-							className="btn btn-outline-success"
+							className="btn btn-primary"
 							onClick={this.deletePet.bind(this)}
 						>
 							<i className="far fa-trash-alt" />
 						</Button>
 					</div>
 					<div>
-						<Button
-							className="btn btn-outline-success"
-							onClick={this.modalToggle}
-						>
+						<Button className="btn btn-primary" onClick={this.modalToggle}>
 							<i className="fas fa-edit small-btn" />
 						</Button>
-					</div>
-				</div>
-				<div>
-					<div className="pet-image-wrapper">
-						{this.props.pet.image === undefined ? (
-							<i className="fas fa-camera"></i>
-						) : (
-							<img src={this.props.pet.image} alt="this pet" />
-						)}
-					</div>
-				</div>
-				<div>
-					<ul className="pet-details">
-						<li>Name: {this.props.pet.name || ''}</li>
-						<li>
-							Animal: {this.props.pet.animal || ''}
-							<i className={`fas fa-${this.props.pet.animal.toLowerCase()}`} />
-						</li>
-					</ul>
-					<div className="pet-description">
-						{this.props.pet.description || ''}
 					</div>
 				</div>
 				<PetModal
