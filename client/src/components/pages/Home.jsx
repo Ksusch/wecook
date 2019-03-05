@@ -6,7 +6,7 @@ export default class Home extends Component {
 		return (
 			<div>
 				<div className="header">
-					<h1>Welcome to WePet</h1>
+					<h1>Welcome to WePet</h1> &nbsp;
 					<i className="fas fa-paw fa-2x" />
 					{/* <img src="../../images/pawprint.png" alt="paws" /> */}
 				</div>
