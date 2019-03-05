@@ -1,7 +1,7 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
-@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
-@import url("https://fonts.googleapis.com/css?family=Gaegu");
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
 // Navbar
 nav {
     font-family: "Gaegu", cursive;
@@ -10,8 +10,8 @@ nav {
     padding: 10px;
     background-color: #f8f9fa;
     div {
-      width: 300px;
-  }
+        width: 300px;
+    }
 }
 
 .navbar-link {
@@ -37,11 +37,6 @@ nav {
     }
 }
 
-.header {
-    display: flex;
-    align-items: center;
-}
-
 h1,
 h2,
 h3,
@@ -49,39 +44,36 @@ h4 {
     font-family: "Gaegu", cursive;
 }
 
-.header img {
-    width: 30px;
-}
-
-.home-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center; // align-items: center;
-}
-
-.left-container {
-    width: 300px;
-    margin: 20px;
-    text-align: left;
-}
-
-.circular {
-    width: 400px;
-    height: 400px;
-    border-radius: 50%;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 5px 5px 10px silver;
-    img {
-      height: 300px;
-      width: 300px;
-      min-width: 100%;
-      min-height: 100%;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%); // align-items: baseline;
-  }
+.home-component {
+    .header {
+      align-items: center;  
+      img {
+            width: 30px;
+        }
+    }
+    .left-container {
+        width: 300px;
+        margin: 20px;
+        text-align: left;
+    }
+    .circular {
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 5px 5px 10px silver;
+        img {
+            height: 300px;
+            width: 300px;
+            min-width: 100%;
+            min-height: 100%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%); // align-items: baseline;
+        }
+    }
 }
 
 // mapbox GL container
@@ -94,15 +86,39 @@ h4 {
 .pet-card {
     width: 450px;
     height: 250px;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.363);
+    border-radius: 8px;
     text-align: justify;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    margin: 7px;
+}
+
+.pet-card-container {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .pet-image-wrapper {
     width: 150px;
     height: 150px;
-    margin: 25% 0;
-    border: 1px solid black;
+    margin: 25% 0; // border: 1px solid black;
+    border-radius: 50%;
+}
+
+.card-top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.pet-card-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 7px;
 }
 
 .pet-details {
@@ -281,10 +297,10 @@ h4 {
         }
     }
     .event-description {
-      padding: 10px;
-      text-align: justify
+        padding: 10px;
+        text-align: justify
     }
     hr {
-      height: 1px
+        height: 1px
     }
 }
