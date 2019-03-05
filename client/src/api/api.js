@@ -1,9 +1,6 @@
 import axios from 'axios';
-const ServerUrl =
-  process.env.NODE_ENV === 'production' ? 'hereoku' : 'http://localhost:4000';
+const ServerUrl = process.env.NODE_ENV === 'production' ? 'hereoku' : 'http://localhost:4000';
 
-// const SocketServerUrl = process.env.NODE_ENV === 'production' ? "/auth" : "http://localhost:4000/auth"
-// TODO: update this with heroku application address
 class ApiService {
 	constructor() {
 		this.service = axios.create({
@@ -18,7 +15,6 @@ class ApiService {
 		return this.service.get('/pet');
 	}
 	createPet(pet) {
-		console.log('fired in api, sending pet data to server', pet);
 		return this.service.post('/pet', pet);
 	}
 	updatePet(id, pet) {
@@ -26,6 +22,18 @@ class ApiService {
 	}
 	deletePet(id) {
 		return this.service.delete(`/pet/${id}`);
+	}
+	getEvents() {
+		return this.service.get('/event');
+	}
+	createEvent(event) {
+		return this.service.post('/event', event);
+	}
+	updateEvent(id, event) {
+		return this.service.put(`/event/${id}`, event);
+	}
+	deleteEvent(id) {
+		return this.service.delete(`/event/${id}`);
 	}
 	addImageUrl(url, type, id = null) {
 		return this.service.post('/image/add', {

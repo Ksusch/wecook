@@ -7,30 +7,30 @@ import {
 	ModalFooter,
 	Form,
 	FormGroup,
-	Input
+	Input,
 } from 'reactstrap';
 import '../styles.scss';
 import UploadWidget from './UploadWidget';
 
-export default class PetModal extends Component {
+export default class EventModal extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			modal: false,
-			image: '',
 			name: '',
-			animal: '',
-			description: ''
+			description: '',
+			location: '',
+			image: '',
 		};
 		this.toggle = this.toggle.bind(this);
 	}
 	componentDidMount() {
-		if (this.props.pet) {
+		if (this.props.event) {
 			this.setState({
-				image: this.props.pet.image,
-				name: this.props.pet.name,
-				description: this.props.pet.description,
-				animal: this.props.pet.animal
+				image: this.props.event.image,
+				name: this.props.event.name,
+				description: this.props.event.description,
+				location: this.props.event.location,
 			});
 		}
 	}
@@ -39,7 +39,7 @@ export default class PetModal extends Component {
 	}
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value
+			[e.target.name]: e.target.value,
 		});
 	}
 	handleSubmit(e) {
@@ -47,22 +47,18 @@ export default class PetModal extends Component {
 		if (
 			this.state.name &&
 			this.state.name.length > 0 &&
-			this.state.animal &&
-			this.state.animal.length > 0 &&
+			this.state.location &&
+			this.state.location.length > 0 &&
 			this.state.description &&
-			this.state.description.length > 0 &&
-			(this.state.name != this.props.pet.name ||
-				this.state.description != this.props.pet.description ||
-				this.state.animal != this.props.pet.animal ||
-				this.state.image != this.props.pet.image)
+			this.state.description.length > 0
 		) {
-			let pet = {
+			let event = {
 				name: this.state.name,
-				animal: this.state.animal,
+				location: this.state.location,
 				description: this.state.description,
-				image: this.state.image
+				image: this.state.image,
 			};
-			this.props.handler(pet);
+			this.props.handler(event);
 			this.toggle();
 		}
 	}
@@ -73,19 +69,19 @@ export default class PetModal extends Component {
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>Add a Pet</ModalHeader>
+					<ModalHeader toggle={this.toggle}>Add an Event</ModalHeader>
 					<ModalBody>
 						<UploadWidget
 							handler={url => this.handleImage(url)}
-							imageType="petPic"
+							imageType="eventPic"
 						/>
 						<Form onSubmit={e => this.handleSubmit(e)}>
 							<FormGroup>
 								<Input
 									placeholder={
-										this.props.pet.name === undefined
-											? 'Pet name'
-											: this.props.pet.name
+										this.props.event.name === undefined
+											? 'Event name'
+											: this.props.event.name
 									}
 									value={this.state.name}
 									name="name"
@@ -95,12 +91,12 @@ export default class PetModal extends Component {
 							<FormGroup>
 								<Input
 									placeholder={
-										this.props.pet.animal === undefined
-											? 'Animal'
-											: this.props.pet.animal
+										this.props.event.location === undefined
+											? 'Location'
+											: this.props.event.location
 									}
-									value={this.state.animal}
-									name="animal"
+									value={this.state.location}
+									name="location"
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
@@ -109,16 +105,20 @@ export default class PetModal extends Component {
 									type="textarea"
 									name="description"
 									placeholder={
-										this.props.pet.description === undefined
-											? 'Pet description'
-											: this.props.pet.description
+										this.props.event.description ===
+										undefined
+											? 'Event name'
+											: this.props.event.description
 									}
 									value={this.state.description}
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
 							<FormGroup>
-								<Button className="btn btn-primary" type="submit">
+								<Button
+									className="btn btn-primary"
+									type="submit"
+								>
 									<i className="fas fa-plus" />
 								</Button>
 							</FormGroup>

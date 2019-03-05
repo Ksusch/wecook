@@ -6,14 +6,14 @@ import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import { AuthService, StorageService, ApiService } from '../api/api';
-import PetCard from './PetCard';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			user: JSON.parse(localStorage.getItem('user')),
-			pets: null
+			pets: null,
+			events: [],
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -24,8 +24,9 @@ class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		if (
 			prevState.user !== null &&
-      this.state.user !== null &&
-      (prevState.user !== this.state.user || prevState.pets !== this.state.pets)
+			this.state.user !== null &&
+			(prevState.user !== this.state.user ||
+				prevState.pets !== this.state.pets)
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
@@ -34,7 +35,7 @@ class App extends Component {
 				this.AuthService.verify().then(res => {
 					if (res.status === 200) {
 						this.setState({
-							user: user
+							user: user,
 						});
 					} else {
 						this.StorageService.remove('user');
@@ -44,27 +45,27 @@ class App extends Component {
 		}
 	}
 	componentDidMount() {
-		// check if a user exists and storage
 		let user = this.StorageService.get('user');
 		if (user !== null) {
 			this.AuthService.verify().then(res => {
 				if (res.status === 200) {
 					this.setState({
-						user: user
+						user: user,
 					});
-					this.acquirePetsFromDb();
+					this.getUserData();
 				} else {
 					this.StorageService.remove('user');
 				}
 			});
 		}
 	}
-	acquirePetsFromDb(res) {
-		console.log('acquiring data from DB, state has been pushed up', res);
+	getUserData(res = undefined) {
 		this.ApiService.getPets().then(pets => {
-			console.log('pets acquired from the DB', pets);
-			this.setState({
-				pets: pets.data
+			this.ApiService.getEvents().then(events => {
+				this.setState({
+					pets: pets.data,
+					events: events.data,
+				});
 			});
 		});
 	}
@@ -72,21 +73,20 @@ class App extends Component {
 		let userData = user.data ? user.data : user;
 		this.StorageService.set('user', userData);
 		this.setState({
-			user: userData
+			user: userData,
 		});
-		this.acquirePetsFromDb();
+		this.getUserData();
 	}
 	handleLogout() {
 		this.setState({
-			user: null
+			user: null,
 		});
 		this.StorageService.remove('user');
 	}
-
 	handleConfirm(token) {
 		this.AuthService.confirmEmail(token).then(user =>
 			this.setState({
-				user: user
+				user: user,
 			})
 		);
 	}
@@ -99,7 +99,9 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						render={props => <Home {...props} user={this.state.user} />}
+						render={props => (
+							<Home {...props} user={this.state.user} />
+						)}
 					/>
 					<Route
 						path="/profile"
@@ -110,7 +112,7 @@ class App extends Component {
 									user={this.state.user}
 									pets={this.state.pets}
 									handler={user => this.handleLogin(user)}
-									handleUpdate={res => this.acquirePetsFromDb(res)}
+									handleUpdate={res => this.getUserData(res)}
 								/>
 							) : (
 								<Redirect to="/" />
@@ -133,7 +135,9 @@ class App extends Component {
 					<Route
 						path="/confirm/:confirmationToken"
 						render={props => {
-							this.handleConfirm(props.match.params.confirmationToken);
+							this.handleConfirm(
+								props.match.params.confirmationToken
+							);
 							return <Redirect to="/" />;
 						}}
 					/>
@@ -144,7 +148,6 @@ class App extends Component {
 							return <Redirect to="/" />;
 						}}
 					/>
-					<Route path="/petcard" render={() => <PetCard />} />
 				</Switch>
 			</div>
 		);

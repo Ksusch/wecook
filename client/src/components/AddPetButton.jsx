@@ -10,14 +10,14 @@ export default class AddPetButton extends Component {
 			image: null,
 			name: null,
 			animal: null,
-			description: null
+			description: null,
 		};
 		this.modalToggle = this.modalToggle.bind(this);
 	}
 
 	modalToggle() {
 		this.setState(prevState => ({
-			modalOpen: !prevState.modalOpen
+			modalOpen: !prevState.modalOpen,
 		}));
 	}
 	addPet(pet) {
@@ -26,24 +26,22 @@ export default class AddPetButton extends Component {
 
 	render() {
 		return (
-			<div>
-				<Button
-					className="btn btn-primary add-pet-button"
-					onClick={this.modalToggle}
-				>
-					<PetModal
-						modalOpen={this.state.modalOpen}
-						toggleModal={this.modalToggle}
-						handler={pet => this.addPet(pet)}
-						pet={{
-							image: undefined,
-							name: undefined,
-							description: undefined
-						}}
-					/>
-					<i className="fas fa-plus fa-5x" />
-				</Button>
-			</div>
+			<Button
+				className="btn btn-primary add-pet-button"
+				onClick={this.modalToggle}
+			>
+				<PetModal
+					modalOpen={this.state.modalOpen}
+					toggleModal={this.modalToggle}
+					handler={pet => this.addPet(pet)}
+					pet={{
+						image: undefined,
+						name: undefined,
+						description: undefined,
+					}}
+				/>
+				<i className="fas fa-plus fa-5x" />
+			</Button>
 		);
 	}
 }
