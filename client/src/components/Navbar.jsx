@@ -1,12 +1,13 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import "../styles.scss";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import '../styles.scss';
 
 export default class NavBar extends Component {
 	render() {
 		return (
 			<nav className="d-flex justify-content-between">
 				<NavLink to="/" exact className="navbar-link align-self-start">
+					<span id="logo">WePet</span>
 					<i className="fas fa-paw" />
 				</NavLink>
 				<div className="align-self-end d-flex justify-content-between">

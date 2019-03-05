@@ -1,15 +1,15 @@
-const passport = require("passport"),
-	User = require("../models/User"),
-	bcrypt = require("bcrypt"),
-	{ Strategy: LocalStrategy } = require("passport-local"),
-	{ Strategy: TwitterStrategy } = require("passport-twitter"),
-	{ OAuth2Strategy: GoogleStrategy } = require("passport-google-oauth"),
-	{ Strategy: FacebookStrategy } = require("passport-facebook");
+const passport = require('passport'),
+	User = require('../models/User'),
+	bcrypt = require('bcrypt'),
+	{ Strategy: LocalStrategy } = require('passport-local'),
+	{ Strategy: TwitterStrategy } = require('passport-twitter'),
+	{ OAuth2Strategy: GoogleStrategy } = require('passport-google-oauth'),
+	{ Strategy: FacebookStrategy } = require('passport-facebook');
 
 module.exports = () => {
 	passport.serializeUser((user, cb) => cb(null, user.id));
 	passport.deserializeUser((id, cb) => {
-		console.log("deserializer fired", id);
+		console.log('deserializer fired', id);
 		User.findOne(
 			{
 				$or: [
@@ -20,7 +20,7 @@ module.exports = () => {
 				],
 			},
 			function (err, user) {
-				console.log("got to deserializer callback");
+				console.log('got to deserializer callback');
 				console.log(user);
 				if (err) {
 					return cb(err);
@@ -32,10 +32,10 @@ module.exports = () => {
 	passport.use(
 		new LocalStrategy(
 			{
-				usernameField: "email",
-				passwordField: "password",
+				usernameField: 'email',
+				passwordField: 'password',
 			},
-			authCB("local")
+			authCB('local')
 		)
 	);
 	passport.use(
@@ -45,7 +45,7 @@ module.exports = () => {
 				consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
 				callbackURL: process.env.TWITTER_CALLBACK_URL,
 			},
-			authCB("twitter")
+			authCB('twitter')
 		)
 	);
 	passport.use(
@@ -55,7 +55,7 @@ module.exports = () => {
 				clientSecret: process.env.GOOGLE_APP_SECRET,
 				callbackURL: process.env.GOOGLE_CALLBACK_URL,
 			},
-			authCB("google")
+			authCB('google')
 		)
 	);
 	passport.use(
@@ -64,37 +64,37 @@ module.exports = () => {
 				clientID: process.env.FACEBOOK_APP_ID,
 				clientSecret: process.env.FACEBOOK_APP_SECRET,
 				callbackURL: process.env.FACEBOOK_CALLBACK_URL,
-				profileFields: ["id", "displayName", "picture", "email"],
+				profileFields: ['id', 'displayName', 'picture', 'email'],
 			},
-			authCB("facebook")
+			authCB('facebook')
 		)
 	);
 	function authCB(origin) {
-		if (origin !== "local") {
-			let ID = origin + "Id";
+		if (origin !== 'local') {
+			let ID = origin + 'Id';
 			return (accessToken, refreshToken, profile, done) => {
-				console.log("got to auth callback function, passport.js")
+				console.log('got to auth callback function, passport.js');
 				User.findOne({ [ID]: profile.id })
 					.then(user => {
-						console.log(profile, user)
+						console.log(profile, user);
 						if (!user) {
 							let name, image;
 							switch (origin) {
-								case "google":
-									image = profile.photos[0].value
-									// .replace(
-									// 	/sz=50/gi,
-									// 	"sz=250"
-									// );
-									name = profile.displayName
-									break;
-								case "facebook":
-									image = profile.photos[0].value;
-									name = profile.displayName
-									break;
-								case "twitter":
-									image = profile.profile_image_url
-									name = profile.name;
+							case 'google':
+								image = profile.photos[0].value;
+								// .replace(
+								// 	/sz=50/gi,
+								// 	"sz=250"
+								// );
+								name = profile.displayName;
+								break;
+							case 'facebook':
+								image = profile.photos[0].value;
+								name = profile.displayName;
+								break;
+							case 'twitter':
+								image = profile.profile_image_url;
+								name = profile.name;
 							}
 							User.create({
 								name: name,

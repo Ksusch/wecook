@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import mapboxgl from "mapbox-gl";
+import React, { Component } from 'react';
+import mapboxgl from 'mapbox-gl';
 // import api from "../api/api";
 
 mapboxgl.accessToken =
-	"pk.eyJ1IjoibmhpcnNjaGZlbGQiLCJhIjoiY2pzcHR1bXZ0MG9taDN5b2VteHVqNTRoYiJ9._5W0DOZMRMFN9ixppFaP1w";
+	'pk.eyJ1IjoibmhpcnNjaGZlbGQiLCJhIjoiY2pzcHR1bXZ0MG9taDN5b2VteHVqNTRoYiJ9._5W0DOZMRMFN9ixppFaP1w';
 
 export default class MapBox extends Component {
 	constructor(props) {
@@ -19,7 +19,7 @@ export default class MapBox extends Component {
 	initMap() {
 		this.map = new mapboxgl.Map({
 			container: this.mapRef.current,
-			style: "mapbox://styles/mapbox/streets-v10",
+			style: 'mapbox://styles/mapbox/streets-v10',
 			center: [13, 52],
 			zoom: 12,
 		});
@@ -28,10 +28,10 @@ export default class MapBox extends Component {
 	componentDidMount() {
 		this.initMap();
 		if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(position => {
+			navigator.geolocation.getCurrentPosition(position => {
 				let lng = position.coords.longitude,
 					lat = position.coords.latitude,
-					marker = new mapboxgl.Marker({ color: "blue" });
+					marker = new mapboxgl.Marker({ color: 'blue' });
 				this.map.setCenter([lng, lat]);
 				marker.setLngLat([lng, lat]).addTo(this.map);
 			});
