@@ -54,7 +54,9 @@ class Profile extends Component {
 		);
 	}
 	createEvent(event) {
-		this.ApiService.createEvent(event).then(res => this.props.handleUpdate(res));
+		this.ApiService.createEvent(event).then(res =>
+			this.props.handleUpdate(res)
+		);
 	}
 	deleteEvent(id) {
 		this.ApiService.deleteEvent(id).then(res => this.props.handleUpdate(res));
@@ -118,7 +120,7 @@ class Profile extends Component {
 					</div>
 				</div>
 				<div>
-					<br/>
+					<br />
 					<h2>Events section</h2>
 					<div className="event-card-wrapper">
 						{this.props.events ? (

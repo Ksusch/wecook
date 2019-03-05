@@ -21,19 +21,18 @@ export default class EventCard extends Component {
 	}
 	render() {
 		return (
-			<div className="event-card d-flex flex-nowrap justify-content-between">
-				<div className="event-card-button-wrapper">
-					<div>
+			<div className="event-card d-flex flex-column">
+				<div className="event-card-top d-flex justify-content-between">
+					<h3>{this.props.event.name}</h3>
+					<div className="d-flex justify-content-even">
 						<Button
-							className="btn btn-outline-success"
+							className="card-button event-delete-button"
 							onClick={this.deleteEvent.bind(this)}
 						>
 							<i className="far fa-trash-alt" />
 						</Button>
-					</div>
-					<div>
 						<Button
-							className="btn btn-outline-success"
+							className="card-button event-edit-button"
 							onClick={this.modalToggle}
 						>
 							<i className="fas fa-pen small-btn" />
@@ -41,25 +40,21 @@ export default class EventCard extends Component {
 					</div>
 				</div>
 				<div>
-					<div className="event-image-wrapper">
+					<div className="event-image-wrapper d-flex">
 						{this.props.event.image === undefined ? (
-							<i className="fas fa-camera"></i>
+							<i className="fas fa-camera fa-5x"></i>
 						) : (
 							<img src={this.props.event.image} alt="this event" />
 						)}
 					</div>
 				</div>
-				<div>
-					<ul className="event-details">
-						<li>Name: {this.props.event.name || ''}</li>
-						<li>
-							Location: {this.props.event.location || ''}
-							<i className={'fas fa-map-marker'} />
-						</li>
-					</ul>
-					<div className="event-description">
-						{this.props.event.description || ''}
-					</div>
+				<div className="event-card-location">
+					<i className={'fas fa-map-marker'} />
+					{this.props.event.location || ''}
+				</div>	
+				<hr/>
+				<div className="event-description">
+					{this.props.event.description || ''}
 				</div>
 				<EventModal
 					modalOpen={this.state.modalOpen}
