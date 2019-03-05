@@ -15,11 +15,9 @@ export default class PetCard extends Component {
 		}));
 	}
 	deletePet() {
-		console.log(this.props);
 		this.props.handleDelete(this.props.pet._id);
 	}
 	updatePet(pet) {
-		console.log('in pet card, pet in props is', this.props.pet);
 		this.props.handleUpdate(this.props.pet._id, pet);
 	}
 	render() {
@@ -45,10 +43,10 @@ export default class PetCard extends Component {
 				</div>
 				<div>
 					<div className="pet-image-wrapper">
-						{this.props.pet.image ? (
-							<img src={this.props.pet.image} alt="this pet" />
+						{this.props.pet.image === undefined ? (
+							<i className="fas fa-camera"></i>
 						) : (
-							<img src="" alt="this pet" />
+							<img src={this.props.pet.image} alt="this pet" />
 						)}
 					</div>
 				</div>

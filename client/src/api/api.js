@@ -1,6 +1,5 @@
 import axios from 'axios';
-const ServerUrl =
-	process.env.NODE_ENV === 'production' ? 'hereoku' : 'http://localhost:4000';
+const ServerUrl = process.env.NODE_ENV === 'production' ? 'hereoku' : 'http://localhost:4000';
 
 // const SocketServerUrl = process.env.NODE_ENV === 'production' ? "/auth" : "http://localhost:4000/auth"
 // TODO: update this with heroku application address
@@ -18,6 +17,7 @@ class ApiService {
 		return this.service.get('/pet');
 	}
 	createPet(pet) {
+		console.log('fired in api, sending pet data to server', pet);
 		return this.service.post('/pet', pet);
 	}
 	updatePet(id, pet) {

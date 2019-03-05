@@ -42,7 +42,7 @@ export default class Login extends Component {
 							<i className="fas fa-arrow-left" /> Back
 						</Button>
 						
-						<Button type="submit" className="btn btn-primary" onClick={e => this.props.toggleSignup(e)}>
+						<Button className="btn btn-primary" onClick={e => this.props.toggleSignup(e)}>
 							<i className="fas fa-user-plus fa-1x" /> Signup
 						</Button>
 						<Button type="submit" className="btn btn-primary">

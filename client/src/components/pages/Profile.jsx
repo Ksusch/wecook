@@ -36,6 +36,11 @@ class Profile extends Component {
 			this.props.handleUpdate(res)
 		);
 	}
+	addPet(pet) {
+		this.ApiService.createPet(pet).then(res =>
+			this.props.handleUpdate(res)
+		);
+	}
 	render() {
 		return (
 			<div>
@@ -54,7 +59,7 @@ class Profile extends Component {
 					)}
 				</div>
 				<div>
-					<AddPetButton handler={pet => this.updatePet(pet)} />
+					<AddPetButton handler={pet => this.addPet(pet)} />
 				</div>
 			</div>
 		);
