@@ -1,19 +1,17 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const { isActiveUser } = require("../src/middlewares");
-const Pet = require("../models/Pet");
-const User = require("../models/User");
-const Event = require("../models/Event");
+const { isActiveUser } = require('../src/middlewares');
+const Pet = require('../models/Pet');
+const User = require('../models/User');
+const Event = require('../models/Event');
 
 // User CRUD
 
-router.put("/user", isActiveUser, (req, res, next) => {
-  console.log("request received", req.body);
-  let data = {}
-  if (req.body.image) data.image = req.body.image
-  if (req.body.name) data.name = req.body.name
-  if (req.body.about) data.about = req.body.about
-  console.log("data", data)
+router.put('/user', isActiveUser, (req, res, next) => {
+	let data = {};
+	if (req.body.image) data.image = req.body.image;
+	if (req.body.name) data.name = req.body.name;
+	if (req.body.about) data.about = req.body.about;
 	User.findOneAndUpdate(
 		{
 			$or: [
@@ -27,17 +25,16 @@ router.put("/user", isActiveUser, (req, res, next) => {
 		{ new: true }
 	)
 		.then(user => {
-			console.log("user updated", user);
 			let userData = user;
 			userData.password = undefined;
 			res.status(200).json(userData);
 		})
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
 // Event CRUD
 
-router.get("/event", isActiveUser, (req, res, next) => {
+router.get('/event', isActiveUser, (req, res, next) => {
 	// TODO get only events from this user
 	User.findOne({
 		$or: [
@@ -49,10 +46,10 @@ router.get("/event", isActiveUser, (req, res, next) => {
 	})
 		.then(user => Event.find({ owner: user._id }))
 		.then(events => res.status(200).json(events))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.get("/allevents", isActiveUser, (req, res, next) => {
+router.get('/allevents', isActiveUser, (req, res, next) => {
 	// TODO get only events from this user
 	User.findOne({
 		$or: [
@@ -64,10 +61,10 @@ router.get("/allevents", isActiveUser, (req, res, next) => {
 	})
 		.then(user => Event.find({ $ne: { owner: user._id } }))
 		.then(events => res.status(200).json(events))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.post("/event", isActiveUser, (req, res, next) => {
+router.post('/event', isActiveUser, (req, res, next) => {
 	User.findOne({
 		$or: [
 			{ _id: req.user.id },
@@ -86,10 +83,10 @@ router.post("/event", isActiveUser, (req, res, next) => {
 			})
 		)
 		.then(event => res.status(200).json(event))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.put("/event/:id", isActiveUser, (req, res, next) => {
+router.put('/event/:id', isActiveUser, (req, res, next) => {
 	Event.findOneAndUpdate(
 		{ _id: req.params.id },
 		{
@@ -100,18 +97,18 @@ router.put("/event/:id", isActiveUser, (req, res, next) => {
 		}
 	)
 		.then(event => res.status(200).json(event))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.delete("/event/:id", isActiveUser, (req, res, next) => {
+router.delete('/event/:id', isActiveUser, (req, res, next) => {
 	Event.findOneAndDelete({ _id: req.params.id })
 		.then(event => res.status(200).json(event))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
 // Pet CRUD
 
-router.get("/pet", isActiveUser, (req, res, next) => {
+router.get('/pet', isActiveUser, (req, res, next) => {
 	// TODO get only pets from this user
 	User.findOne({
 		$or: [
@@ -123,10 +120,10 @@ router.get("/pet", isActiveUser, (req, res, next) => {
 	})
 		.then(user => Pet.find({ owner: user._id }))
 		.then(pets => res.status(200).json(pets))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.post("/pet", isActiveUser, (req, res, next) => {
+router.post('/pet', isActiveUser, (req, res, next) => {
 	User.findOne({
 		$or: [
 			{ _id: req.user.id },
@@ -145,10 +142,10 @@ router.post("/pet", isActiveUser, (req, res, next) => {
 			})
 		)
 		.then(pet => res.status(200).json(pet))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.put("/pet/:id", isActiveUser, (req, res, next) => {
+router.put('/pet/:id', isActiveUser, (req, res, next) => {
 	Pet.findOneAndUpdate(
 		{ _id: req.params.id },
 		{
@@ -159,24 +156,24 @@ router.put("/pet/:id", isActiveUser, (req, res, next) => {
 		}
 	)
 		.then(pet => res.status(200).json(pet))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
-router.delete("/pet/:id", isActiveUser, (req, res, next) => {
+router.delete('/pet/:id', isActiveUser, (req, res, next) => {
 	Pet.findOneAndDelete({ _id: req.params.id })
 		.then(pet => res.status(200).json(pet))
-		.catch(err => console.log(err));
+		.catch(err => console.error(err));
 });
 
 // add image
 
-router.post("/image/add", isActiveUser, (req, res, next) => {
+router.post('/image/add', isActiveUser, (req, res, next) => {
 	console.log(
-		"I am trying to update the user photo",
+		'I am trying to update the user photo',
 		req.body.imageUrl,
 		req.user
 	);
-	if (req.body.type === "User") {
+	if (req.body.type === 'User') {
 		User.findOneAndUpdate(
 			{
 				$or: [
@@ -191,7 +188,7 @@ router.post("/image/add", isActiveUser, (req, res, next) => {
 			}
 		)
 			.then(user => {
-				console.log("I have updated the user photo", user);
+				console.log('I have updated the user photo', user);
 				let userData = user;
 				userData.password = undefined;
 				res.status(200).json(userData);
