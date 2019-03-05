@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import "../styles.scss";
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import '../styles.scss';
 
 export default class NavBar extends Component {
 	render() {
@@ -19,15 +19,15 @@ export default class NavBar extends Component {
 							<i className="fas fa-user" />
 						</NavLink>
 					) : (
-							<div />
-						)}
+						<div />
+					)}
 					{this.props.user ? (
 						<NavLink to="/logout" exact className="navbar-link">
 							<i className="fas fa-sign-out-alt" />
 						</NavLink>
 					) : (
-							<div />
-						)}
+						<div />
+					)}
 				</div>
 			</nav>
 		);

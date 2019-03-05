@@ -6,14 +6,14 @@ import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
 import { AuthService, StorageService } from '../api/api';
-
-const AppContext = React.createContext();
+import PetCard from './PetCard';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: null
+			user: null,
+			pets: null,
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -34,7 +34,7 @@ class App extends Component {
 				this.AuthService.verify(user).then(res => {
 					if (res.status === 200) {
 						this.setState({
-							user: user
+							user: user,
 						});
 					} else {
 						this.StorageService.remove('user');
@@ -51,7 +51,7 @@ class App extends Component {
 			this.AuthService.verify(user).then(res => {
 				if (res.status === 200) {
 					this.setState({
-						user: user
+						user: user,
 					});
 				} else {
 					this.StorageService.remove('user');
@@ -63,13 +63,13 @@ class App extends Component {
 		let userData = user.data ? user.data : user;
 		this.StorageService.set('user', userData);
 		this.setState({
-			user: userData
+			user: userData,
 		});
 	}
 	handleLogout() {
 		console.log('handleLogout fired', this.state.user);
 		this.setState({
-			user: null
+			user: null,
 		});
 		console.log('after set state', this.state.user);
 		this.StorageService.remove('user');
@@ -79,7 +79,7 @@ class App extends Component {
 		this.AuthService.confirmEmail(token)
 			.then(user =>
 				this.setState({
-					user: user
+					user: user,
 				})
 			)
 			.then(console.log(this.state.user));
@@ -94,9 +94,7 @@ class App extends Component {
 						exact
 						path="/"
 						render={props => (
-							<AppContext.Provider value={this.state}>
-								<Home {...props} user={this.state.user} />
-							</AppContext.Provider>
+							<Home {...props} user={this.state.user} />
 						)}
 					/>
 					<Route
@@ -109,8 +107,8 @@ class App extends Component {
 									handler={user => this.handleLogin(user)}
 								/>
 							) : (
-									<Redirect to="/" />
-								)
+								<Redirect to="/" />
+							)
 						}
 					/>
 					<Route
@@ -122,14 +120,16 @@ class App extends Component {
 									handler={user => this.handleLogin(user)}
 								/>
 							) : (
-									<Redirect to="/" />
-								)
+								<Redirect to="/" />
+							)
 						}
 					/>
 					<Route
 						path="/confirm/:confirmationToken"
 						render={props => {
-							this.handleConfirm(props.match.params.confirmationToken);
+							this.handleConfirm(
+								props.match.params.confirmationToken
+							);
 							return <Redirect to="/" />;
 						}}
 					/>
@@ -140,6 +140,7 @@ class App extends Component {
 							return <Redirect to="/" />;
 						}}
 					/>
+					<Route path="/petcard" render={() => <PetCard />} />
 				</Switch>
 			</div>
 		);

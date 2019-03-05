@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { ApiService } from '../api/api';
-import AddPetModal from './AddPetModal';
+import PetModal from './PetModal';
 import { Button } from 'reactstrap';
 
 export default class AddPetButton extends Component {
@@ -32,7 +32,7 @@ export default class AddPetButton extends Component {
           className="btn btn-primary add-pet-button"
           onClick={this.modalToggle}
         >
-          <AddPetModal
+          <PetModal
             modalOpen={this.state.modalOpen}
             toggleModal={this.modalToggle}
             handler={pet => this.addPet(pet)}
