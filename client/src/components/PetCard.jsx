@@ -37,7 +37,7 @@ export default class PetCard extends Component {
 							className="btn btn-outline-success"
 							onClick={this.modalToggle}
 						>
-							<i className="fas fa-pen small-btn" />
+							<i className="fas fa-edit small-btn" />
 						</Button>
 					</div>
 				</div>

@@ -23,8 +23,10 @@ export default class UpdateUserModal extends Component {
 			about: ''
 		};
 		this.toggle = this.toggle.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 	componentDidMount() {
+		console.log('in cmdm', this.props.user);
 		let userData = {
 			name: this.props.user.name ? this.props.user.name : '',
 			about: this.props.user.about ? this.props.user.about : '',
@@ -38,6 +40,7 @@ export default class UpdateUserModal extends Component {
 		this.props.toggleModal();
 	}
 	handleChange(e) {
+		console.log('in handleChange', e.target);
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -54,9 +57,9 @@ export default class UpdateUserModal extends Component {
         this.props.user.image !== this.state.image)
 		) {
 			let userData = {};
-			if (this.state.user.name) userData.name = this.state.user.name;
-			if (this.state.user.about) userData.about = this.state.user.about;
-			if (this.state.user.image) userData.image = this.state.user.image;
+			if (this.state.name) userData.name = this.state.name;
+			if (this.state.about) userData.about = this.state.about;
+			if (this.state.image) userData.image = this.state.image;
 			this.props.handler(userData);
 			this.toggle();
 		} else {
