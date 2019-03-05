@@ -49,7 +49,7 @@ export default class PetCard extends Component {
 				<div>
 					<div className="pet-image-wrapper">
 						{this.props.pet.image ? (<img src={this.props.pet.image} alt="this pet" />) : 
-							<img src="" alt="this pet" /> } 
+							<div/> } 
 					</div>
 				</div>
 				<div>

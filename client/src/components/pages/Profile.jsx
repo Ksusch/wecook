@@ -34,7 +34,6 @@ class Profile extends Component {
 		console.log('user object as received in props', this.props.user);
 		return (
 			<div>
-
 				<div className="container mt-sm-4 mb-5">
 					<div id="test" className="row">
 						<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center">

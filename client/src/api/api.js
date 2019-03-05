@@ -15,7 +15,7 @@ class ApiService {
 		return this.service.put('/user', user);
 	}
 	getPets() {
-		return this.service.get('/pet', user);
+		return this.service.get('/pet');
 	}
 	createPet(pet) {
 		return this.service.post('/pet', pet);
