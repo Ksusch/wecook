@@ -5,7 +5,7 @@ import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
-import { AuthService, StorageService } from '../api/api';
+import { AuthService, StorageService, ApiService } from '../api/api';
 import PetCard from './PetCard';
 
 class App extends Component {
@@ -13,10 +13,11 @@ class App extends Component {
 		super(props);
 		this.state = {
 			user: null,
-			pets: null,
+			pets: null
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
+		this.ApiService = new ApiService();
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleConfirm = this.handleConfirm.bind(this);
 	}
@@ -24,16 +25,16 @@ class App extends Component {
 		if (
 			prevState.user !== null &&
 			this.state.user !== null &&
-			prevState.user !== this.state.user
+			(prevState.user !== this.state.user || prevState.pets !== this.state.pets)
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
 			let user = this.StorageService.get('user');
 			if (user !== null) {
-				this.AuthService.verify(user).then(res => {
+				this.AuthService.verify().then(res => {
 					if (res.status === 200) {
 						this.setState({
-							user: user,
+							user: user
 						});
 					} else {
 						this.StorageService.remove('user');
@@ -46,38 +47,48 @@ class App extends Component {
 		// check if a user exists and storage
 		let user = this.StorageService.get('user');
 		if (user !== null) {
-			this.AuthService.verify(user).then(res => {
+			this.AuthService.verify().then(res => {
 				if (res.status === 200) {
 					this.setState({
-						user: user,
+						user: user
 					});
+					this.acquirePetsFromDb();
 				} else {
 					this.StorageService.remove('user');
 				}
 			});
 		}
 	}
+	acquirePetsFromDb(res) {
+		console.log('acquiring data from DB, state has been pushed up', res);
+		this.ApiService.getPets().then(pets => {
+			console.log('pets acquired from the DB', pets);
+			this.setState({
+				pets: pets.data
+			});
+		});
+	}
 	handleLogin(user) {
 		let userData = user.data ? user.data : user;
 		this.StorageService.set('user', userData);
 		this.setState({
-			user: userData,
+			user: userData
 		});
+		this.acquirePetsFromDb();
 	}
 	handleLogout() {
 		this.setState({
-			user: null,
+			user: null
 		});
 		this.StorageService.remove('user');
 	}
 
 	handleConfirm(token) {
-		this.AuthService.confirmEmail(token)
-			.then(user =>
-				this.setState({
-					user: user,
-				})
-			);
+		this.AuthService.confirmEmail(token).then(user =>
+			this.setState({
+				user: user
+			})
+		);
 	}
 	render() {
 		console.log('user in app state after re-render: ', this.state.user);
@@ -88,9 +99,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						render={props => (
-							<Home {...props} user={this.state.user} />
-						)}
+						render={props => <Home {...props} user={this.state.user} />}
 					/>
 					<Route
 						path="/profile"
@@ -99,7 +108,9 @@ class App extends Component {
 								<Profile
 									{...props}
 									user={this.state.user}
+									pets={this.state.pets}
 									handler={user => this.handleLogin(user)}
+									handleUpdate={res => this.acquirePetsFromDb(res)}
 								/>
 							) : (
 								<Redirect to="/" />
@@ -122,9 +133,7 @@ class App extends Component {
 					<Route
 						path="/confirm/:confirmationToken"
 						render={props => {
-							this.handleConfirm(
-								props.match.params.confirmationToken
-							);
+							this.handleConfirm(props.match.params.confirmationToken);
 							return <Redirect to="/" />;
 						}}
 					/>

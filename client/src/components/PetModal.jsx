@@ -17,14 +17,23 @@ export default class PetModal extends Component {
 		super(props);
 		this.state = {
 			modal: false,
-			image: null,
-			name: null,
-			animal: null,
-			description: null
+			image: '',
+			name: '',
+			animal: '',
+			description: ''
 		};
 		this.toggle = this.toggle.bind(this);
 	}
-
+	componentDidMount() {
+		if (this.props.pet) {
+			this.setState({
+				image: this.props.pet.image,
+				name: this.props.pet.name,
+				description: this.props.pet.description,
+				animal: this.props.pet.animal
+			});
+		}
+	}
 	toggle() {
 		this.props.toggleModal();
 	}
@@ -37,11 +46,11 @@ export default class PetModal extends Component {
 		e.preventDefault();
 		if (
 			this.state.name &&
-      this.state.name.length > 0 &&
-      this.state.animal &&
-      this.state.animal.length > 0 &&
-      this.state.description &&
-      this.state.description.length > 0
+			this.state.name.length > 0 &&
+			this.state.animal &&
+			this.state.animal.length > 0 &&
+			this.state.description &&
+			this.state.description.length > 0
 		) {
 			let pet = {
 				name: this.state.name,
@@ -57,6 +66,7 @@ export default class PetModal extends Component {
 		this.setState({ image: url });
 	}
 	render() {
+		console.log('props in pet modal', this.props.pet);
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
@@ -69,16 +79,24 @@ export default class PetModal extends Component {
 						<Form onSubmit={e => this.handleSubmit(e)}>
 							<FormGroup>
 								<Input
-									placeholder={this.props.pet.name || 'Pet name'}
-									value={this.props.pet.name || ''}
+									placeholder={
+										this.props.pet.name === undefined
+											? 'Pet name'
+											: this.props.pet.name
+									}
+									value={this.state.name}
 									name="name"
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
 							<FormGroup>
 								<Input
-									placeholder={this.props.pet.animal || 'Animal'}
-									value={this.props.pet.animal || ''}
+									placeholder={
+										this.props.pet.animal === undefined
+											? 'Animal'
+											: this.props.pet.animal
+									}
+									value={this.state.animal}
 									name="animal"
 									onChange={e => this.handleChange(e)}
 								/>
@@ -88,8 +106,12 @@ export default class PetModal extends Component {
 									type="textarea"
 									bsSize="lg"
 									name="description"
-									placeholder={this.props.pet.description || 'Pet name'}
-									value={this.props.pet.description || ''}
+									placeholder={
+										this.props.pet.description === undefined
+											? 'Pet name'
+											: this.props.pet.description
+									}
+									value={this.state.description}
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
