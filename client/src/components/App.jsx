@@ -5,18 +5,19 @@ import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import Navbar from './Navbar';
-import { AuthService, StorageService } from '../api/api';
+import { AuthService, StorageService, ApiService } from '../api/api';
 import PetCard from './PetCard';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
-		this.AuthService = new AuthService();
-		this.StorageService = new StorageService();
 		this.state = {
-			user: this.StorageService.get('user'),
+			user: JSON.parse(localStorage.getItem('user')),
 			pets: null
 		};
+		this.AuthService = new AuthService();
+		this.StorageService = new StorageService();
+		this.ApiService = new ApiService();
 		this.handleLogout = this.handleLogout.bind(this);
 		this.handleConfirm = this.handleConfirm.bind(this);
 	}
@@ -24,13 +25,13 @@ class App extends Component {
 		if (
 			prevState.user !== null &&
       this.state.user !== null &&
-      prevState.user !== this.state.user
+      (prevState.user !== this.state.user || prevState.pets !== this.state.pets)
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
 			let user = this.StorageService.get('user');
 			if (user !== null) {
-				this.AuthService.verify(user).then(res => {
+				this.AuthService.verify().then(res => {
 					if (res.status === 200) {
 						this.setState({
 							user: user
@@ -46,16 +47,26 @@ class App extends Component {
 		// check if a user exists and storage
 		let user = this.StorageService.get('user');
 		if (user !== null) {
-			this.AuthService.verify(user).then(res => {
+			this.AuthService.verify().then(res => {
 				if (res.status === 200) {
 					this.setState({
 						user: user
 					});
+					this.acquirePetsFromDb();
 				} else {
 					this.StorageService.remove('user');
 				}
 			});
 		}
+	}
+	acquirePetsFromDb(res) {
+		console.log('acquiring data from DB, state has been pushed up', res);
+		this.ApiService.getPets().then(pets => {
+			console.log('pets acquired from the DB', pets);
+			this.setState({
+				pets: pets.data
+			});
+		});
 	}
 	handleLogin(user) {
 		let userData = user.data ? user.data : user;
@@ -63,6 +74,7 @@ class App extends Component {
 		this.setState({
 			user: userData
 		});
+		this.acquirePetsFromDb();
 	}
 	handleLogout() {
 		this.setState({
@@ -96,7 +108,9 @@ class App extends Component {
 								<Profile
 									{...props}
 									user={this.state.user}
+									pets={this.state.pets}
 									handler={user => this.handleLogin(user)}
+									handleUpdate={res => this.acquirePetsFromDb(res)}
 								/>
 							) : (
 								<Redirect to="/" />

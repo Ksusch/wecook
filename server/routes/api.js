@@ -18,8 +18,8 @@ router.put('/user', isActiveUser, (req, res, next) => {
 				{ _id: req.user.id },
 				{ googleId: req.user.id },
 				{ twitterId: req.user.id },
-				{ facebookId: req.user.id },
-			],
+				{ facebookId: req.user.id }
+			]
 		},
 		data,
 		{ new: true }
@@ -41,8 +41,8 @@ router.get('/event', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
+			{ facebookId: req.user.id }
+		]
 	})
 		.then(user => Event.find({ owner: user._id }))
 		.then(events => res.status(200).json(events))
@@ -56,8 +56,8 @@ router.get('/allevents', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
+			{ facebookId: req.user.id }
+		]
 	})
 		.then(user => Event.find({ $ne: { owner: user._id } }))
 		.then(events => res.status(200).json(events))
@@ -70,8 +70,8 @@ router.post('/event', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
+			{ facebookId: req.user.id }
+		]
 	})
 		.then(user =>
 			Event.create({
@@ -79,7 +79,7 @@ router.post('/event', isActiveUser, (req, res, next) => {
 				location: req.body.location,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id,
+				owner: user._id
 			})
 		)
 		.then(event => res.status(200).json(event))
@@ -93,7 +93,7 @@ router.put('/event/:id', isActiveUser, (req, res, next) => {
 			name: req.body.name,
 			location: req.body.location,
 			description: req.body.description,
-			image: req.body.image,
+			image: req.body.image
 		}
 	)
 		.then(event => res.status(200).json(event))
@@ -115,8 +115,8 @@ router.get('/pet', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
+			{ facebookId: req.user.id }
+		]
 	})
 		.then(user => Pet.find({ owner: user._id }))
 		.then(pets => res.status(200).json(pets))
@@ -129,8 +129,8 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
+			{ facebookId: req.user.id }
+		]
 	})
 		.then(user =>
 			Pet.create({
@@ -138,7 +138,7 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 				animal: req.body.animal,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id,
+				owner: user._id
 			})
 		)
 		.then(pet => res.status(200).json(pet))
@@ -146,33 +146,25 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 });
 
 router.put('/pet/:id', isActiveUser, (req, res, next) => {
-	Pet.findOneAndUpdate(
-		{ _id: req.params.id },
-		{
-			name: req.body.name,
-			animal: req.body.animal,
-			description: req.body.description,
-			image: req.body.image,
-		}
-	)
+	let petData = {};
+	if (req.body.name) petData.name = req.body.name;
+	if (req.body.animal) petData.animal = req.body.animal;
+	if (req.body.description) petData.description = req.body.description;
+	if (req.body.image) petData.image = req.body.image;
+	Pet.findOneAndUpdate({ _id: req.params.id }, petData, { new: true })
 		.then(pet => res.status(200).json(pet))
 		.catch(err => console.error(err));
 });
 
 router.delete('/pet/:id', isActiveUser, (req, res, next) => {
 	Pet.findOneAndDelete({ _id: req.params.id })
-		.then(pet => res.status(200).json(pet))
+		.then(() => res.status(200).json({ message: 'deleted' }))
 		.catch(err => console.error(err));
 });
 
 // add image
 
 router.post('/image/add', isActiveUser, (req, res, next) => {
-	console.log(
-		'I am trying to update the user photo',
-		req.body.imageUrl,
-		req.user
-	);
 	if (req.body.type === 'User') {
 		User.findOneAndUpdate(
 			{
@@ -180,11 +172,11 @@ router.post('/image/add', isActiveUser, (req, res, next) => {
 					{ _id: req.user.id },
 					{ googleId: req.user.id },
 					{ twitterId: req.user.id },
-					{ facebookId: req.user.id },
-				],
+					{ facebookId: req.user.id }
+				]
 			},
 			{
-				image: req.body.imageUrl,
+				image: req.body.imageUrl
 			}
 		)
 			.then(user => {
