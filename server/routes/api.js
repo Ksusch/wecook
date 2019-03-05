@@ -18,8 +18,8 @@ router.put('/user', isActiveUser, (req, res, next) => {
 				{ _id: req.user.id },
 				{ googleId: req.user.id },
 				{ twitterId: req.user.id },
-				{ facebookId: req.user.id }
-			]
+				{ facebookId: req.user.id },
+			],
 		},
 		data,
 		{ new: true }
@@ -41,26 +41,26 @@ router.get('/event', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id }
-		]
+			{ facebookId: req.user.id },
+		],
 	})
 		.then(user => Event.find({ owner: user._id }))
 		.then(events => res.status(200).json(events))
 		.catch(err => console.error(err));
 });
 
-router.get('/allevents', isActiveUser, (req, res, next) => {
-	// TODO get only events from this user
+router.get('/event', isActiveUser, (req, res, next) => {
+	// TODO get only pets from this user
 	User.findOne({
 		$or: [
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id }
-		]
+			{ facebookId: req.user.id },
+		],
 	})
-		.then(user => Event.find({ $ne: { owner: user._id } }))
-		.then(events => res.status(200).json(events))
+		.then(user => Event.find({ owner: user._id }))
+		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });
 
@@ -70,8 +70,8 @@ router.post('/event', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id }
-		]
+			{ facebookId: req.user.id },
+		],
 	})
 		.then(user =>
 			Event.create({
@@ -79,7 +79,7 @@ router.post('/event', isActiveUser, (req, res, next) => {
 				location: req.body.location,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id
+				owner: user._id,
 			})
 		)
 		.then(event => res.status(200).json(event))
@@ -87,14 +87,15 @@ router.post('/event', isActiveUser, (req, res, next) => {
 });
 
 router.put('/event/:id', isActiveUser, (req, res, next) => {
+	let eventData = {};
+	if (req.body.name) eventData.name = req.body.name;
+	if (req.body.location) eventData.location = req.body.location;
+	if (req.body.description) eventData.description = req.body.description;
+	if (req.body.image) eventData.image = req.body.image;
 	Event.findOneAndUpdate(
 		{ _id: req.params.id },
-		{
-			name: req.body.name,
-			location: req.body.location,
-			description: req.body.description,
-			image: req.body.image
-		}
+		eventData,
+		{new: true}
 	)
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
@@ -115,8 +116,8 @@ router.get('/pet', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id }
-		]
+			{ facebookId: req.user.id },
+		],
 	})
 		.then(user => Pet.find({ owner: user._id }))
 		.then(pets => res.status(200).json(pets))
@@ -129,8 +130,8 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 			{ _id: req.user.id },
 			{ googleId: req.user.id },
 			{ twitterId: req.user.id },
-			{ facebookId: req.user.id }
-		]
+			{ facebookId: req.user.id },
+		],
 	})
 		.then(user =>
 			Pet.create({
@@ -138,7 +139,7 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 				animal: req.body.animal,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id
+				owner: user._id,
 			})
 		)
 		.then(pet => res.status(200).json(pet))
@@ -172,15 +173,14 @@ router.post('/image/add', isActiveUser, (req, res, next) => {
 					{ _id: req.user.id },
 					{ googleId: req.user.id },
 					{ twitterId: req.user.id },
-					{ facebookId: req.user.id }
-				]
+					{ facebookId: req.user.id },
+				],
 			},
 			{
-				image: req.body.imageUrl
+				image: req.body.imageUrl,
 			}
 		)
 			.then(user => {
-				console.log('I have updated the user photo', user);
 				let userData = user;
 				userData.password = undefined;
 				res.status(200).json(userData);
