@@ -15,10 +15,10 @@ export default class PetCard extends Component {
 		}));
 	}
 	deletePet() {
-		this.props.handleDelete(this.props.pet._id);
+		this.props.deletePet(this.props.pet._id);
 	}
 	updatePet(pet) {
-		this.props.handleUpdate(this.props.pet._id, pet);
+		this.props.updatePet(this.props.pet._id, pet);
 	}
 	render() {
 		return (
@@ -52,10 +52,6 @@ export default class PetCard extends Component {
 						</div>
 					</div>
 				</div>
-
-
-
-
 				<div className="pet-card-button-wrapper">
 					<div>
 						<Button

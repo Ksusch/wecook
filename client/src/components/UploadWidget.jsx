@@ -3,33 +3,18 @@ import { Button } from 'reactstrap';
 
 export default class UploadWidget extends Component {
 	uploadWidget() {
-		if (this.props.imageType === 'profilePic') {
-			window.cloudinary.openUploadWidget(
-				{ cloud_name: 'dgxu6dbuw', upload_preset: 'profilePic' },
-				function(err, res) {
-					if (err) {
-						console.error(err);
-						return;
-					}
-					if (res.event === 'success') {
-						this.props.handler(res.info.url);
-					}
-				}.bind(this)
-			);
-		} else {
-			window.cloudinary.openUploadWidget(
-				{ cloud_name: 'dgxu6dbuw', upload_preset: 'petPic' },
-				function(err, res) {
-					if (err) {
-						console.error(err);
-						return;
-					}
-					if (res.event === 'success') {
-						this.props.handler(res.info.url);
-					}
-				}.bind(this)
-			);
-		}
+		window.cloudinary.openUploadWidget(
+			{ cloud_name: 'dgxu6dbuw', upload_preset: [this.props.imageType] },
+			function(err, res) {
+				if (err) {
+					console.error(err);
+					return;
+				}
+				if (res.event === 'success') {
+					this.props.handler(res.info.url);
+				}
+			}.bind(this)
+		);
 	}
 	render() {
 		return (
@@ -38,7 +23,7 @@ export default class UploadWidget extends Component {
 					className={this.props.class || ''}
 					onClick={this.uploadWidget.bind(this)}
 				>
-          Update Picture
+					<i className="fas fa-camera"></i>
 				</Button>
 			</React.Fragment>
 		);

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-//import UploadWidget from '../UploadWidget';
 import { ApiService } from '../../api/api';
 import UpdateUserModal from '../UpdateUserModal';
 import Img from 'react-image';
 import { Button } from 'reactstrap';
 import '../../styles.scss';
 import PetCard from '../PetCard';
+import EventCard from '../EventCard';
 import AddPetButton from '../AddPetButton';
+import AddEventButton from '../AddEventButton';
 
 class Profile extends Component {
 	constructor(props) {
@@ -16,20 +17,17 @@ class Profile extends Component {
 		};
 		this.ApiService = new ApiService();
 		this.modalToggle = this.modalToggle.bind(this);
-		this.handleUserUpdate = this.handleUserUpdate.bind(this);
+		this.updateUser = this.updateUser.bind(this);
 	}
 	modalToggle() {
 		this.setState(prevState => ({
 			modalOpen: !prevState.modalOpen
 		}));
 	}
-	handleUserUpdate(state) {
+	updateUser(state) {
 		this.ApiService.updateUser(state).then(user => this.props.handler(user));
 	}
-	handleDelete(id) {
-		this.ApiService.deletePet(id).then(res => this.props.handleUpdate(res));
-	}
-	handleUpdate(id, pet) {
+	updatePet(id, pet) {
 		let petData = {};
 		if (pet.name) petData.name = pet.name;
 		if (pet.animal) petData.animal = pet.animal;
@@ -39,15 +37,30 @@ class Profile extends Component {
 			this.props.handleUpdate(res)
 		);
 	}
-	updatePet(id, pet) {
-		this.ApiService.updatePet(id, pet).then(res =>
+	createPet(pet) {
+		this.ApiService.createPet(pet).then(res => this.props.handleUpdate(res));
+	}
+	deletePet(id) {
+		this.ApiService.deletePet(id).then(res => this.props.handleUpdate(res));
+	}
+	updateEvent(id, event) {
+		let eventData = {};
+		if (event.name) eventData.name = event.name;
+		if (event.animal) eventData.animal = event.animal;
+		if (event.description) eventData.description = event.description;
+		if (event.image) eventData.image = event.image;
+		this.ApiService.updateEvent(id, event).then(res =>
 			this.props.handleUpdate(res)
 		);
 	}
-	addPet(pet) {
-		this.ApiService.createPet(pet).then(res => this.props.handleUpdate(res));
+	createEvent(event) {
+		this.ApiService.createEvent(event).then(res => this.props.handleUpdate(res));
+	}
+	deleteEvent(id) {
+		this.ApiService.deleteEvent(id).then(res => this.props.handleUpdate(res));
 	}
 	render() {
+		console.log(this.props.events);
 		return (
 			<div className="container mt-sm-4 mb-5">
 				<div id="test" className="row">
@@ -80,7 +93,7 @@ class Profile extends Component {
 						user={this.props.user}
 						modalOpen={this.state.modalOpen}
 						toggleModal={this.modalToggle}
-						handler={state => this.handleUserUpdate(state)}
+						handler={state => this.updateUser(state)}
 						user={this.props.user}
 					/>
 				</div>
@@ -92,8 +105,8 @@ class Profile extends Component {
 								<PetCard
 									key={i}
 									pet={pet}
-									handleDelete={id => this.handleDelete(id)}
-									handleUpdate={(id, pet) => this.handleUpdate(id, pet)}
+									deletePet={id => this.deletePet(id)}
+									updatePet={(id, pet) => this.updatePet(id, pet)}
 								/>
 							))
 						) : (
@@ -101,7 +114,29 @@ class Profile extends Component {
 						)}
 					</div>
 					<div>
-						<AddPetButton handler={pet => this.addPet(pet)} />
+						<AddPetButton handler={pet => this.createPet(pet)} />
+					</div>
+				</div>
+				<div>
+					<br/>
+					<h2>Events section</h2>
+					<div className="event-card-wrapper">
+						{this.props.events ? (
+							this.props.events.map((event, i) => (
+								<EventCard
+									key={i}
+									event={event}
+									deleteEvent={id => this.deleteEvent(id)}
+									updateEvent={(id, event) => this.updateEvent(id, event)}
+								/>
+							))
+						) : (
+							<div />
+						)}
+					</div>
+					<div>
+						<h3>Add event</h3>
+						<AddEventButton handler={event => this.createEvent(event)} />
 					</div>
 				</div>
 			</div>
