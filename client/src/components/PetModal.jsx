@@ -73,13 +73,13 @@ export default class PetModal extends Component {
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>Add a Pet</ModalHeader>
-					<ModalBody>
-						<UploadWidget
-							handler={url => this.handleImage(url)}
-							imageType="petPic"
-						/>
-						<Form onSubmit={e => this.handleSubmit(e)}>
+					<Form onSubmit={e => this.handleSubmit(e)}>
+						<ModalHeader toggle={this.toggle}><h3>Add a Pet</h3></ModalHeader>
+						<ModalBody>
+							<UploadWidget
+								handler={url => this.handleImage(url)}
+								imageType="petPic"
+							/>
 							<FormGroup>
 								<Input
 									placeholder={
@@ -110,21 +110,22 @@ export default class PetModal extends Component {
 									name="description"
 									placeholder={
 										this.props.pet.description === undefined
-											? 'Pet description'
+											? 'description'
 											: this.props.pet.description
 									}
 									value={this.state.description}
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
+						</ModalBody>
+						<ModalFooter>
 							<FormGroup>
 								<Button className="btn btn-primary" type="submit">
-									<i className="fas fa-plus" />
+									<i className="fas fa-save" />
 								</Button>
 							</FormGroup>
-						</Form>
-					</ModalBody>
-					<ModalFooter />
+						</ModalFooter>
+					</Form>
 				</Modal>
 			</div>
 		);
