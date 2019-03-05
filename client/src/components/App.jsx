@@ -28,7 +28,6 @@ class App extends Component {
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
-			console.log('fired on ComponentDidUpdate, App.jsx. User was null');
 			let user = this.StorageService.get('user');
 			if (user !== null) {
 				this.AuthService.verify(user).then(res => {
@@ -41,7 +40,6 @@ class App extends Component {
 					}
 				});
 			}
-			console.log('user', this.state.user);
 		}
 	}
 	componentDidMount() {
@@ -67,11 +65,9 @@ class App extends Component {
 		});
 	}
 	handleLogout() {
-		console.log('handleLogout fired', this.state.user);
 		this.setState({
 			user: null,
 		});
-		console.log('after set state', this.state.user);
 		this.StorageService.remove('user');
 	}
 
@@ -81,11 +77,10 @@ class App extends Component {
 				this.setState({
 					user: user,
 				})
-			)
-			.then(console.log(this.state.user));
+			);
 	}
 	render() {
-		console.log('user in app state: ', this.state.user);
+		console.log('user in app state after re-render: ', this.state.user);
 		return (
 			<div className="App">
 				<Navbar user={this.state.user} />

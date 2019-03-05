@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import React, { Component } from 'react';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -25,10 +25,9 @@ export default class Login extends Component {
 			this.state.password.length > 5 &&
 			this.state.email &&
 			this.state.email.length > 5 &&
-			this.state.email.includes("@")
+			this.state.email.includes('@')
 		) {
-      console.log("this state", this.state)
-      this.props.handler(this.state);
+			this.props.handler(this.state);
 		} else {
 			this.setState({
 				name: null,
@@ -60,18 +59,18 @@ export default class Login extends Component {
 					</FormGroup>
 					<FormGroup />
 					<FormGroup className="d-flex justify-content-center">
-							<Input
-								type="password"
-								name="password"
-								placeholder="Password"
-								onChange={e => this.handleChange(e)}
-							/>
-							<Input
-								type="password"
-								name="passwordConfirm"
-								placeholder="Confirm"
-								onChange={e => this.handleChange(e)}
-							/>
+						<Input
+							type="password"
+							name="password"
+							placeholder="Password"
+							onChange={e => this.handleChange(e)}
+						/>
+						<Input
+							type="password"
+							name="passwordConfirm"
+							placeholder="Confirm"
+							onChange={e => this.handleChange(e)}
+						/>
 					</FormGroup>
 					<FormGroup className="d-flex justify-content-between">
 						<Button

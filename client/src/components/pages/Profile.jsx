@@ -19,7 +19,6 @@ class Profile extends Component {
 		});
 	}
 	handleImage(url) {
-		console.log('url received', url);
 		this.ApiService.updateUser({
 			image: url
 		}).then(user => this.props.handler(user));
@@ -32,7 +31,7 @@ class Profile extends Component {
 		}
 	}
 	render() {
-		console.log(this.props.user);
+		console.log('user object as received in props', this.props.user);
 		return (
 			<div>
 

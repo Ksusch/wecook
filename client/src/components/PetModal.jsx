@@ -57,7 +57,6 @@ export default class PetModal extends Component {
 		this.setState({ image: url });
 	}
 	render() {
-		console.log('im a modal and i fired', this.props.modalOpen);
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>

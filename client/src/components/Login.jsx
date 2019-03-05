@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Button, Form, FormGroup, Input } from "reactstrap";
+import React, { Component } from 'react';
+import { Button, Form, FormGroup, Input } from 'reactstrap';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
