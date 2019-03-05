@@ -21,15 +21,20 @@ class Profile extends Component {
 		this.ApiService.deletePet(id).then(res => this.props.handleUpdate(res));
 	}
 	handleUpdate(id, pet) {
+		console.log('in profile, received id is:', id);
 		let petData = {};
 		if (pet.name) petData.name = pet.name;
 		if (pet.animal) petData.animal = pet.animal;
 		if (pet.description) petData.description = pet.description;
 		if (pet.image) petData.image = pet.image;
-		this.ApiService.updatePet(id, petData);
+		this.ApiService.updatePet(id, petData).then(res =>
+			this.props.handleUpdate(res)
+		);
 	}
-	updatePet(pet) {
-		this.ApiService.createPet(pet).then(res => this.props.handleUpdate(res));
+	updatePet(id, pet) {
+		this.ApiService.updatePet(id, pet).then(res =>
+			this.props.handleUpdate(res)
+		);
 	}
 	render() {
 		return (

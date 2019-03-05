@@ -50,7 +50,11 @@ export default class PetModal extends Component {
 			this.state.animal &&
 			this.state.animal.length > 0 &&
 			this.state.description &&
-			this.state.description.length > 0
+			this.state.description.length > 0 &&
+			(this.state.name != this.props.pet.name ||
+				this.state.description != this.props.pet.description ||
+				this.state.animal != this.props.pet.animal ||
+				this.state.image != this.props.pet.image)
 		) {
 			let pet = {
 				name: this.state.name,
@@ -66,7 +70,6 @@ export default class PetModal extends Component {
 		this.setState({ image: url });
 	}
 	render() {
-		console.log('props in pet modal', this.props.pet);
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>

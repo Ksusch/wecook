@@ -19,7 +19,8 @@ export default class PetCard extends Component {
 		this.props.handleDelete(this.props.pet._id);
 	}
 	updatePet(pet) {
-		this.props.handleUpdate(this.props.idx, pet);
+		console.log('in pet card, pet in props is', this.props.pet);
+		this.props.handleUpdate(this.props.pet._id, pet);
 	}
 	render() {
 		return (

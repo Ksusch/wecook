@@ -21,7 +21,7 @@ class ApiService {
 		return this.service.post('/pet', pet);
 	}
 	updatePet(id, pet) {
-		return this.service.put('/pet/' + id, pet);
+		return this.service.put(`/pet/${id}`, pet);
 	}
 	deletePet(id) {
 		return this.service.delete(`/pet/${id}`);

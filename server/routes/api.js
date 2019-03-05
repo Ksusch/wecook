@@ -146,15 +146,12 @@ router.post('/pet', isActiveUser, (req, res, next) => {
 });
 
 router.put('/pet/:id', isActiveUser, (req, res, next) => {
-	Pet.findOneAndUpdate(
-		{ _id: req.params.id },
-		{
-			name: req.body.name,
-			animal: req.body.animal,
-			description: req.body.description,
-			image: req.body.image
-		}
-	)
+	let petData = {};
+	if (req.body.name) petData.name = req.body.name;
+	if (req.body.animal) petData.animal = req.body.animal;
+	if (req.body.description) petData.description = req.body.description;
+	if (req.body.image) petData.image = req.body.image;
+	Pet.findOneAndUpdate({ _id: req.params.id }, petData, { new: true })
 		.then(pet => res.status(200).json(pet))
 		.catch(err => console.error(err));
 });
@@ -168,11 +165,6 @@ router.delete('/pet/:id', isActiveUser, (req, res, next) => {
 // add image
 
 router.post('/image/add', isActiveUser, (req, res, next) => {
-	console.log(
-		'I am trying to update the user photo',
-		req.body.imageUrl,
-		req.user
-	);
 	if (req.body.type === 'User') {
 		User.findOneAndUpdate(
 			{
