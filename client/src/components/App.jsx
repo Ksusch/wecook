@@ -60,6 +60,7 @@ class App extends Component {
 		}
 	}
 	getUserData(res = undefined) {
+		console.log('acquiring user data');
 		this.ApiService.getPets().then(pets => {
 			this.ApiService.getEvents().then(events => {
 				this.setState({
@@ -91,7 +92,6 @@ class App extends Component {
 		);
 	}
 	render() {
-		console.log('user in app state after re-render: ', this.state.user);
 		return (
 			<div className="App">
 				<Navbar user={this.state.user} />
@@ -111,6 +111,7 @@ class App extends Component {
 									{...props}
 									user={this.state.user}
 									pets={this.state.pets}
+									events={this.state.events}
 									handler={user => this.handleLogin(user)}
 									handleUpdate={res => this.getUserData(res)}
 								/>

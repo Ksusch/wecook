@@ -15,10 +15,10 @@ export default class PetCard extends Component {
 		}));
 	}
 	deletePet() {
-		this.props.handleDelete(this.props.pet._id);
+		this.props.deletePet(this.props.pet._id);
 	}
 	updatePet(pet) {
-		this.props.handleUpdate(this.props.pet._id, pet);
+		this.props.updatePet(this.props.pet._id, pet);
 	}
 	render() {
 		return (
@@ -55,7 +55,7 @@ export default class PetCard extends Component {
 						<li>Name: {this.props.pet.name || ''}</li>
 						<li>
 							Animal: {this.props.pet.animal || ''}
-							<i className={`fas fa-${this.props.pet.animal.toLowerCase()}`} />
+							<i className={`fas fa-${this.props.pet.animal !== undefined ? this.props.pet.animal.toLowerCase() : 'question'}`} />
 						</li>
 					</ul>
 					<div className="pet-description">

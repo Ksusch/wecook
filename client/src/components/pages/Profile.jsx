@@ -53,14 +53,14 @@ class Profile extends Component {
 			this.props.handleUpdate(res)
 		);
 	}
-	addEvent(event) {
-		this.setState(prevState => ({ events: [...prevState.events, event] }));
+	createEvent(event) {
 		this.ApiService.createEvent(event).then(res => this.props.handleUpdate(res));
 	}
 	deleteEvent(id) {
 		this.ApiService.deleteEvent(id).then(res => this.props.handleUpdate(res));
 	}
 	render() {
+		console.log(this.props.events);
 		return (
 			<div className="container mt-sm-4 mb-5">
 				<div id="test" className="row">
@@ -106,7 +106,7 @@ class Profile extends Component {
 									key={i}
 									pet={pet}
 									deletePet={id => this.deletePet(id)}
-									handleUpdate={(id, pet) => this.updatePet(id, pet)}
+									updatePet={(id, pet) => this.updatePet(id, pet)}
 								/>
 							))
 						) : (
@@ -122,13 +122,12 @@ class Profile extends Component {
 					<h2>Events section</h2>
 					<div className="event-card-wrapper">
 						{this.props.events ? (
-							this.props.events.map(event => (
+							this.props.events.map((event, i) => (
 								<EventCard
+									key={i}
 									event={event}
-									handler={(id, event) =>
-										this.handleUpdate(id, event)
-									}
-									handleUpdate={(id, event) => this.updateEvent(id, event)}
+									deleteEvent={id => this.deleteEvent(id)}
+									updateEvent={(id, event) => this.updateEvent(id, event)}
 								/>
 							))
 						) : (
@@ -137,7 +136,7 @@ class Profile extends Component {
 					</div>
 					<div>
 						<h3>Add event</h3>
-						<AddEventButton handler={event => this.addEvent(event)} />
+						<AddEventButton handler={event => this.createEvent(event)} />
 					</div>
 				</div>
 			</div>

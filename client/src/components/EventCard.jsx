@@ -14,10 +14,10 @@ export default class EventCard extends Component {
 		}));
 	}
 	deleteEvent() {
-		this.props.handleDelete(this.props.event._id);
+		this.props.deleteEvent(this.props.event._id);
 	}
 	updateEvent(event) {
-		this.props.handleUpdate(this.props.event._id, event);
+		this.props.updateEvent(this.props.event._id, event);
 	}
 	render() {
 		return (
@@ -53,8 +53,8 @@ export default class EventCard extends Component {
 					<ul className="event-details">
 						<li>Name: {this.props.event.name || ''}</li>
 						<li>
-							Animal: {this.props.event.animal || ''}
-							<i className={`fas fa-${this.props.event.animal.toLowerCase()}`} />
+							Location: {this.props.event.location || ''}
+							<i className={'fas fa-map-marker'} />
 						</li>
 					</ul>
 					<div className="event-description">

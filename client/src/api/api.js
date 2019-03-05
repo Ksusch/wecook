@@ -27,6 +27,7 @@ class ApiService {
 		return this.service.get('/event');
 	}
 	createEvent(event) {
+		console.log('sending event');
 		return this.service.post('/event', event);
 	}
 	updateEvent(id, event) {
