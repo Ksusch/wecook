@@ -119,7 +119,7 @@ export default class EventModal extends Component {
 									className="btn btn-primary"
 									type="submit"
 								>
-									<i className="fas fa-plus" />
+									<i className="fas fa-save" />
 								</Button>
 							</FormGroup>
 						</Form>

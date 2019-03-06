@@ -24,25 +24,11 @@ export default class EventCard extends Component {
 			<div className="event-card d-flex flex-column">
 				<div className="event-card-top d-flex justify-content-between">
 					<h3>{this.props.event.name}</h3>
-					<div className="d-flex justify-content-even">
-						<Button
-							className="card-button event-delete-button"
-							onClick={this.deleteEvent.bind(this)}
-						>
-							<i className="far fa-trash-alt" />
-						</Button>
-						<Button
-							className="card-button event-edit-button"
-							onClick={this.modalToggle}
-						>
-							<i className="fas fa-pen small-btn" />
-						</Button>
-					</div>
 				</div>
 				<div>
 					<div className="event-image-wrapper d-flex">
 						{this.props.event.image === undefined ? (
-							<i className="fas fa-camera fa-5x"></i>
+							<i className="fas fa-camera fa-5x" />
 						) : (
 							<img src={this.props.event.image} alt="this event" />
 						)}
@@ -51,10 +37,26 @@ export default class EventCard extends Component {
 				<div className="event-card-location">
 					<i className={'fas fa-map-marker'} />
 					{this.props.event.location || ''}
-				</div>	
-				<hr/>
+				</div>
+				<hr />
 				<div className="event-description">
 					{this.props.event.description || ''}
+				</div>
+				<div className="d-flex justify-content-even pet-card-button-wrapper">
+					<div className="outer">
+						<Button
+							className="inner card-button event-delete-button"
+							onClick={this.deleteEvent.bind(this)}
+						>
+							<i className="far fa-trash-alt" />
+						</Button>
+					</div>
+					<Button
+						className="card-button event-edit-button"
+						onClick={this.modalToggle}
+					>
+						<i className="fas fa-pen small-btn" />
+					</Button>
 				</div>
 				<EventModal
 					modalOpen={this.state.modalOpen}

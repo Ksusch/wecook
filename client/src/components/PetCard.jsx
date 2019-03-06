@@ -55,15 +55,18 @@ export default class PetCard extends Component {
 				<div className="pet-card-button-wrapper">
 					<div>
 						<Button
-							className="btn btn-primary"
+							className="btn btn-primary pet-card-button"
 							onClick={this.deletePet.bind(this)}
 						>
-							<i className="far fa-trash-alt" />
+							<i className="far fa-trash-alt small-btn " />
 						</Button>
 					</div>
 					<div>
-						<Button className="btn btn-primary" onClick={this.modalToggle}>
-							<i className="fas fa-edit small-btn" />
+						<Button
+							className="btn btn-primary pet-card-button"
+							onClick={this.modalToggle}
+						>
+							<i className="fas fa-pen small-btn " />
 						</Button>
 					</div>
 				</div>

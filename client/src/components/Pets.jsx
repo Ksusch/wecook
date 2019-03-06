@@ -48,7 +48,7 @@ export default class Pets extends Component {
               {pet.name}
               <br />
               <Button>
-                <i className="fas fa-edit" />
+                <i className="fas fa-pen" />
               </Button>
             </div>
           ))}
