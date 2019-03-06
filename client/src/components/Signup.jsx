@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import {
+	Button,
+	Form,
+	FormGroup,
+	Input,
+	InputGroup,
+	InputGroupAddon,
+} from 'reactstrap';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -39,38 +46,61 @@ export default class Login extends Component {
 	}
 	render() {
 		return (
-			<div className="login-wrapper">
+			<div className="form-wrapper">
 				<Form onSubmit={e => this.handleSubmit(e)}>
 					<FormGroup>
-						<Input
-							type="text"
-							name="name"
-							placeholder="Jon Snow"
-							onChange={e => this.handleChange(e)}
-						/>
+						<InputGroup>
+							<InputGroupAddon addonType="prepend">
+								<div className="prepend-box">
+									<i className="fas fa-pen fa-2x" />
+								</div>
+							</InputGroupAddon>
+							<Input
+								type="text"
+								name="name"
+								placeholder="Jon Snow"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
 					</FormGroup>
 					<FormGroup>
-						<Input
-							type="email"
-							name="email"
-							placeholder="JonSnow@winterfeld.net"
-							onChange={e => this.handleChange(e)}
-						/>
+						<InputGroup>
+							<InputGroupAddon addonType="prepend">
+								<div className="prepend-box">
+									<i className="fas fa-envelope fa-2x" />
+								</div>
+							</InputGroupAddon>
+							<Input
+								type="email"
+								name="email"
+								placeholder="JonSnow@winterfeld.net"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
 					</FormGroup>
 					<FormGroup />
 					<FormGroup className="d-flex justify-content-center">
-						<Input
-							type="password"
-							name="password"
-							placeholder="Password"
-							onChange={e => this.handleChange(e)}
-						/>
-						<Input
-							type="password"
-							name="passwordConfirm"
-							placeholder="Confirm"
-							onChange={e => this.handleChange(e)}
-						/>
+						<InputGroup>
+							<InputGroupAddon addonType="prepend">
+								<div className="prepend-box">
+									<i className="fas fa-unlock fa-2x" />
+								</div>	
+							</InputGroupAddon>
+							<Input
+								type="password"
+								name="password"
+								placeholder="Password"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
+						<InputGroup>
+							<Input
+								type="password"
+								name="passwordConfirm"
+								placeholder="Confirm"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
 					</FormGroup>
 					<FormGroup className="d-flex justify-content-between">
 						<Button

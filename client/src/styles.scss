@@ -1,10 +1,10 @@
-@import '../node_modules/bootstrap/scss/bootstrap.scss';
-@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
-@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
-@import url('https://fonts.googleapis.com/css?family=Gaegu');
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
+@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
+@import url("https://fonts.googleapis.com/css?family=Gaegu");
 // Navbar
 nav {
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   line-height: 40px;
   font-size: 2rem;
   padding: 10px;
@@ -22,7 +22,7 @@ nav {
 
 .active {
   i {
-    color: #4285f4;
+    color: black;
   }
 }
 
@@ -41,7 +41,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
 }
 
 .home-component {
@@ -86,7 +86,7 @@ h4 {
 .pet-card {
   width: 450px;
   height: 250px;
-  border: 2px solid rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.363);
   border-radius: 8px;
   text-align: justify;
   background-color: #f8f9fa;
@@ -124,7 +124,7 @@ h4 {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
-  margin-bottom: 7px;
+  margin: 7px;
 }
 
 .pet-details {
@@ -182,7 +182,7 @@ h4 {
   background-color: #4285f4;
 }
 
-.login-wrapper {
+.form-wrapper {
   max-width: 500px;
   height: auto;
   margin: auto;
@@ -192,6 +192,14 @@ h4 {
 
 .loginsignup-main {
   margin-top: 10%;
+}
+
+.prepend-box {
+  height: 38px;
+  width: 43px;
+  padding: 3px 5px 0 5px;
+  background-color: #f8f9fa;
+  border: 1px solid lightgray;
 }
 
 #proceed-with {
@@ -249,22 +257,10 @@ h4 {
   padding-right: 15px;
 }
 
-.profile-container {
-  position: relative;
-}
-
-.edit-profile-icon {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  padding-right: 15px;
-}
-
 // event card
 .event-card {
   height: 550px;
   width: 300px;
-  margin: 7px;
   background-color: #f8f9fa;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 8px;
@@ -311,9 +307,26 @@ h4 {
   .event-description {
     padding: 10px;
     text-align: justify;
-    flex-grow: 1;
   }
   hr {
     height: 1px;
   }
+}
+
+.profile-container {
+  position: relative;
+}
+
+.edit-profile-icon {
+  position: absolute;
+  right: 10px;
+  bottom: 20px;
+}
+
+.bigHr {
+  background-color: dimgrey !important;
+  color: dimgrey !important;
+  border: solid 2px dimgrey !important;
+  height: 5px !important;
+  width: 1000px !important;
 }

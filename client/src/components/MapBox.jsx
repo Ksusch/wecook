@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import mapboxgl from 'mapbox-gl';
+
 // import api from "../api/api";
 
 mapboxgl.accessToken =
@@ -8,13 +9,13 @@ mapboxgl.accessToken =
 export default class MapBox extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			searchResults: [], //TODO: move these to props and remove state
-			userCoordinates: [],
-		};
 		this.mapRef = React.createRef();
 		this.map = null;
-		this.markers = [];
+	}
+	componentDidMount() {
+		this.initMap();
+		this.setCenter();
+		this.addMarkers();
 	}
 	initMap() {
 		this.map = new mapboxgl.Map({
@@ -25,20 +26,40 @@ export default class MapBox extends Component {
 		});
 		this.map.addControl(new mapboxgl.NavigationControl());
 	}
-	componentDidMount() {
-		this.initMap();
-		if (navigator.geolocation) {
+	setCenter() {
+		let marker = new mapboxgl.Marker({ color: 'red' });
+		if (!this.props.center && navigator.geolocation) {
 			navigator.geolocation.getCurrentPosition(position => {
 				let lng = position.coords.longitude,
-					lat = position.coords.latitude,
-					marker = new mapboxgl.Marker({ color: 'blue' });
+					lat = position.coords.latitude;
 				this.map.setCenter([lng, lat]);
 				marker.setLngLat([lng, lat]).addTo(this.map);
+			});
+		} else if (this.props.center) {
+			this.map.setCenter(this.props.center);
+			marker.setLngLat(this.props.center).addTo(this.map);
+		}
+	}
+	addMarkers() {
+		if (this.props.locations) {
+			this.props.locations.forEach(location => {
+				new mapboxgl.Marker({ color: 'green' })
+					.setLngLat(location)
+					.addTo(this.map);
 			});
 		}
 	}
 
 	render() {
-		return <div ref={this.mapRef} className="map" />;
+		return (
+			<div
+				ref={this.mapRef}
+				syle={{
+					height: [this.props.height],
+					width: [this.props.width],
+				}}
+				className="map"
+			/>
+		);
 	}
 }

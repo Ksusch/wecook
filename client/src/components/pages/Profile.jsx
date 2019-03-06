@@ -66,9 +66,13 @@ class Profile extends Component {
 		return (
 			<div className="container mt-sm-4 mb-5">
 				<div id="test" className="row">
-					<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center">
-						{this.props.user.image == '' ? (
-							<i className="fas fa-user-alt fa-3x" />
+					<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center d-flex justify-content-center profile-container">
+						{!this.props.user.image ? (
+							<Img
+								className="profile-pic"
+								src="images/camera.png"
+								alt="profile"
+							/>
 						) : (
 							<Img
 								className="profile-pic"
@@ -76,28 +80,29 @@ class Profile extends Component {
 								alt="profile"
 							/>
 						)}
+						<div className="edit-profile-icon">
+							<Button className="btn btn-primary" onClick={this.modalToggle}>
+								<i className="fas fa-pencil-alt" />
+							</Button>
+							<UpdateUserModal
+								user={this.props.user}
+								modalOpen={this.state.modalOpen}
+								toggleModal={this.modalToggle}
+								handler={state => this.updateUser(state)}
+								user={this.props.user}
+							/>
+						</div>
 					</div>
 				</div>
+
 				<div id="test" className="col text-center">
-					<h3>Welcome - {this.props.user.name}!</h3>
+					<h2>Welcome - {this.props.user.name}!</h2>
 					<br />
 				</div>
 				<div id="test" className="col text-center">
-					<p>
-						<strong>Bio:</strong> {this.props.user.about}
-					</p>
-				</div>
-				<div>
-					<Button className="btn btn-primary" onClick={this.modalToggle}>
-						<i className="fas fa-pen" />
-					</Button>
-					<UpdateUserModal
-						user={this.props.user}
-						modalOpen={this.state.modalOpen}
-						toggleModal={this.modalToggle}
-						handler={state => this.updateUser(state)}
-						user={this.props.user}
-					/>
+					<h3>
+						<strong>About:</strong> {this.props.user.about}
+					</h3>
 				</div>
 
 				<div>
@@ -116,6 +121,7 @@ class Profile extends Component {
 							<div />
 						)}
 					</div>
+					<hr />
 					<div>
 						<AddPetButton handler={pet => this.createPet(pet)} />
 					</div>

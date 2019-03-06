@@ -12,6 +12,12 @@ import {
 import '../styles.scss';
 import UploadWidget from './UploadWidget';
 
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const geocodingClient = mbxGeocoding({
+	accessToken:
+		'pk.eyJ1IjoibWMxMDBzIiwiYSI6ImNqb2E2ZTF3ODBxa3czd2xldHp1Z2FxbGYifQ.U4oatm5RsTXXHQLz5w66dQ',
+});
+
 export default class EventModal extends Component {
 	constructor(props) {
 		super(props);
@@ -21,6 +27,8 @@ export default class EventModal extends Component {
 			description: '',
 			location: '',
 			image: '',
+			searchResults: [],
+			coordinates: [],
 		};
 		this.toggle = this.toggle.bind(this);
 	}
@@ -41,6 +49,18 @@ export default class EventModal extends Component {
 		this.setState({
 			[e.target.name]: e.target.value,
 		});
+		if (e.target.name === 'location') {
+			geocodingClient
+				.forwardGeocode({
+					query: e.target.value,
+				})
+				.send()
+				.then(response => {
+					this.setState({
+						searchResults: response.body.features,
+					});
+				});
+		}
 	}
 	handleSubmit(e) {
 		e.preventDefault();
@@ -49,12 +69,15 @@ export default class EventModal extends Component {
 			this.state.name.length > 0 &&
 			this.state.location &&
 			this.state.location.length > 0 &&
+			this.state.coordinates &&
+			this.state.coordinates.length > 0 &&
 			this.state.description &&
 			this.state.description.length > 0
 		) {
 			let event = {
 				name: this.state.name,
 				location: this.state.location,
+				coordinates: this.state.coordinates,
 				description: this.state.description,
 				image: this.state.image,
 			};
@@ -64,6 +87,14 @@ export default class EventModal extends Component {
 	}
 	handleImage(url) {
 		this.setState({ image: url });
+	}
+	handleSearchResultClick(result) {
+		console.log(result);
+		this.setState({	
+			location: result.place_name,
+			coordinates: result.center,
+			searchResults: []
+		 });
 	}
 	render() {
 		return (
@@ -99,6 +130,16 @@ export default class EventModal extends Component {
 									name="location"
 									onChange={e => this.handleChange(e)}
 								/>
+								{this.state.searchResults.map(result => (
+									<div
+										onClick={() =>
+											this.handleSearchResultClick(result)
+										}
+									>
+										{result.place_name}
+										<hr />
+									</div>
+								))}
 							</FormGroup>
 							<FormGroup>
 								<Input

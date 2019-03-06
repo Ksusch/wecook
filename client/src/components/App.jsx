@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import '../styles.scss';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { AuthService, StorageService, ApiService } from '../api/api';
 import Home from './pages/Home';
 import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import Search from './pages/Search';
 import Navbar from './Navbar';
-import { AuthService, StorageService, ApiService } from '../api/api';
+import '../styles.scss';
 
 class App extends Component {
 	constructor(props) {
@@ -148,6 +149,10 @@ class App extends Component {
 							this.handleLogout();
 							return <Redirect to="/" />;
 						}}
+					/>
+					<Route
+						path="/search"
+						render={props => (<Search {...props} />)}
 					/>
 				</Switch>
 			</div>
