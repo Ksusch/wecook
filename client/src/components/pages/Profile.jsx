@@ -106,7 +106,7 @@ class Profile extends Component {
 				<hr className="bighr" />
 
 				<div>
-					<h2>Your pets</h2>
+					<h2>Pets</h2>
 					<div className="card-container">
 						{this.props.pets !== null ? (
 							this.props.pets.map((pet, i) => (
@@ -121,15 +121,15 @@ class Profile extends Component {
 							<div />
 						)}
 					</div>
-					<hr className="bighr" />
 					<div>
-						<h3>Add a pet</h3>
+						<h3>Add a Pet</h3>
 						<AddPetButton handler={pet => this.createPet(pet)} />
 					</div>
+					<hr className="bighr" />
 				</div>
 				<div>
 					<br />
-					<h2>Your events</h2>
+					<h2>Events</h2>
 					<div className="card-container">
 						{this.props.events ? (
 							this.props.events.map((event, i) => (
@@ -145,7 +145,7 @@ class Profile extends Component {
 						)}
 					</div>
 					<div>
-						<h3>Add an event</h3>
+						<h3>Add an Event</h3>
 						<AddEventButton handler={event => this.createEvent(event)} />
 					</div>
 				</div>
