@@ -22,29 +22,8 @@ export default class EventCard extends Component {
 	render() {
 		return (
 			<div className="event-card d-flex flex-column">
-				<div className="event-card-top d-flex justify-content-between">
+				<div className="event-card-top">
 					<h3>{this.props.event.name}</h3>
-<<<<<<< HEAD
-					{
-						!this.props.search ? (
-							<div className="d-flex justify-content-even">
-								<Button
-									className="card-button event-delete-button"
-									onClick={this.deleteEvent.bind(this)}
-								>
-									<i className="far fa-trash-alt" />
-								</Button>
-								<Button
-									className="card-button event-edit-button"
-									onClick={this.modalToggle}
-								>
-									<i className="fas fa-pen small-btn" />
-								</Button>
-							</div>
-						) :	(<div/>)
-					}
-=======
->>>>>>> 45d18d985b274e9d0eb0cc189da578665ce073ba
 				</div>
 				<div>
 					<div className="event-image-wrapper d-flex">
@@ -63,22 +42,24 @@ export default class EventCard extends Component {
 				<div className="event-description">
 					{this.props.event.description || ''}
 				</div>
-				<div className="d-flex justify-content-even pet-card-button-wrapper">
-					<div className="outer">
-						<Button
-							className="inner card-button event-delete-button"
-							onClick={this.deleteEvent.bind(this)}
-						>
-							<i className="far fa-trash-alt" />
-						</Button>
-					</div>
-					<Button
-						className="card-button event-edit-button"
-						onClick={this.modalToggle}
-					>
-						<i className="fas fa-pen small-btn" />
-					</Button>
-				</div>
+				{
+					!this.props.search ? (
+						<div className="d-flex justify-content-even pet-card-button-wrapper">
+							<Button
+								className="card-button event-delete-button"
+								onClick={this.deleteEvent.bind(this)}
+							>
+								<i className="far fa-trash-alt" />
+							</Button>
+							<Button
+								className="card-button event-edit-button"
+								onClick={this.modalToggle}
+							>
+								<i className="fas fa-pen small-btn" />
+							</Button>
+						</div>
+					) :	(<div/>)
+				}
 				<EventModal
 					modalOpen={this.state.modalOpen}
 					toggleModal={this.modalToggle}
