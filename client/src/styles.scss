@@ -173,8 +173,14 @@ h4 {
   height: 100px;
 }
 
-.btn-primary:hover {
+.btn-secondary:hover {
   background-color: #4285f4;
+  text-decoration: none;
+}
+
+.left-container a{
+  color: white;
+  text-decoration: none;
 }
 
 .form-wrapper {
