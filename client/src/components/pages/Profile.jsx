@@ -66,7 +66,7 @@ class Profile extends Component {
 		return (
 			<div className="container mt-sm-4 mb-5">
 				<div id="test" className="row">
-					<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center profile-container">
+					<div className="col-lg-4 pb-md-1 pl-5 justify-content-md-center d-flex justify-content-center profile-container">
 						{!this.props.user.image ? (
 							<Img
 								className="profile-pic"
