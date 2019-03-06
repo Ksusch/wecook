@@ -96,6 +96,7 @@ export default class UpdateUserModal extends Component {
 								<Input
 									type="textarea"
 									name="about"
+									id="about"
 									value={this.state.about}
 									onChange={e => this.handleChange(e)}
 								/>
