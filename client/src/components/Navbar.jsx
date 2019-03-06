@@ -11,7 +11,7 @@ export default class NavBar extends Component {
 					<i className="fas fa-paw" />
 				</NavLink>
 				<div className="align-self-end d-flex justify-content-between">
-					<NavLink to="/" exact className="navbar-link">
+					<NavLink to="/search" exact className="navbar-link">
 						<i className="fas fa-search" />
 					</NavLink>
 					{this.props.user ? (

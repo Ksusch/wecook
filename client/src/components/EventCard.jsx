@@ -24,20 +24,24 @@ export default class EventCard extends Component {
 			<div className="event-card d-flex flex-column">
 				<div className="event-card-top d-flex justify-content-between">
 					<h3>{this.props.event.name}</h3>
-					<div className="d-flex justify-content-even">
-						<Button
-							className="card-button event-delete-button"
-							onClick={this.deleteEvent.bind(this)}
-						>
-							<i className="far fa-trash-alt" />
-						</Button>
-						<Button
-							className="card-button event-edit-button"
-							onClick={this.modalToggle}
-						>
-							<i className="fas fa-pen small-btn" />
-						</Button>
-					</div>
+					{
+						!this.props.search ? (
+							<div className="d-flex justify-content-even">
+								<Button
+									className="card-button event-delete-button"
+									onClick={this.deleteEvent.bind(this)}
+								>
+									<i className="far fa-trash-alt" />
+								</Button>
+								<Button
+									className="card-button event-edit-button"
+									onClick={this.modalToggle}
+								>
+									<i className="fas fa-pen small-btn" />
+								</Button>
+							</div>
+						) :	(<div/>)
+					}
 				</div>
 				<div>
 					<div className="event-image-wrapper d-flex">

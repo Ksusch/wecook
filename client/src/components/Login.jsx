@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -19,30 +19,50 @@ export default class Login extends Component {
 	}
 	render() {
 		return (
-			<div className="login-wrapper">
+			<div className="form-wrapper">
 				<Form onSubmit={e => this.handleSubmit(e)}>
 					<FormGroup>
-						<Input
-							type="email"
-							name="email"
-							placeholder="JonSnow@winterfeld.net"
-							onChange={e => this.handleChange(e)}
-						/>
+						<InputGroup>
+							<InputGroupAddon addonType="prepend">
+								<div className="prepend-box">
+									<i className="fas fa-envelope fa-2x"></i>
+								</div>
+							</InputGroupAddon>
+							<Input
+								type="email"
+								name="email"
+								placeholder="JonSnow@winterfeld.net"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
 					</FormGroup>
 					<FormGroup>
-						<Input
-							type="password"
-							name="password"
-							placeholder="Your password"
-							onChange={e => this.handleChange(e)}
-						/>
+						<InputGroup>
+							<InputGroupAddon addonType="prepend">
+								<div className="prepend-box">
+									<i className="fas fa-unlock fa-2x"></i>
+								</div>
+							</InputGroupAddon>
+							<Input
+								type="password"
+								name="password"
+								placeholder="Your password"
+								onChange={e => this.handleChange(e)}
+							/>
+						</InputGroup>
 					</FormGroup>
 					<FormGroup className="d-flex justify-content-between">
-						<Button className="btn btn-primary" onClick={e => this.props.handleToggle(e)}>
+						<Button
+							className="btn btn-primary"
+							onClick={e => this.props.handleToggle(e)}
+						>
 							<i className="fas fa-arrow-left" /> Back
 						</Button>
-						
-						<Button className="btn btn-primary" onClick={e => this.props.toggleSignup(e)}>
+
+						<Button
+							className="btn btn-primary"
+							onClick={e => this.props.toggleSignup(e)}
+						>
 							<i className="fas fa-user-plus fa-1x" /> Signup
 						</Button>
 						<Button type="submit" className="btn btn-primary">
