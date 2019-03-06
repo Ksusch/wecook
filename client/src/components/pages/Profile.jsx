@@ -101,7 +101,8 @@ class Profile extends Component {
 				</div>
 
 				<div>
-					<div className="pet-card-container">
+					<h3>Your pets</h3>
+					<div className="card-container">
 						{this.props.pets !== null ? (
 							this.props.pets.map((pet, i) => (
 								<PetCard
@@ -122,7 +123,7 @@ class Profile extends Component {
 				<div>
 					<br />
 					<h2>Events section</h2>
-					<div className="event-card-wrapper">
+					<div className="card-container">
 						{this.props.events ? (
 							this.props.events.map((event, i) => (
 								<EventCard

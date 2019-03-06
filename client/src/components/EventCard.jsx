@@ -21,7 +21,7 @@ export default class EventCard extends Component {
 	}
 	render() {
 		return (
-			<div className="event-card d-flex flex-column">
+			<div className="event-card d-flex flex-nowrap flex-column">
 				<div className="event-card-top d-flex justify-content-between">
 					<h3>{this.props.event.name}</h3>
 				</div>
@@ -43,14 +43,13 @@ export default class EventCard extends Component {
 					{this.props.event.description || ''}
 				</div>
 				<div className="d-flex justify-content-even pet-card-button-wrapper">
-					<div className="outer">
-						<Button
-							className="inner card-button event-delete-button"
-							onClick={this.deleteEvent.bind(this)}
-						>
-							<i className="far fa-trash-alt" />
-						</Button>
-					</div>
+					<Button
+						className="card-button event-delete-button"
+						onClick={this.deleteEvent.bind(this)}
+					>
+						<i className="far fa-trash-alt" />
+					</Button>
+
 					<Button
 						className="card-button event-edit-button"
 						onClick={this.modalToggle}
