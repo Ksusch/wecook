@@ -80,6 +80,7 @@ export default class PetModal extends Component {
 								handler={url => this.handleImage(url)}
 								imageType="petPic"
 							/>
+							<div className="modal-camera-padding" />
 							<FormGroup>
 								<Input
 									placeholder={
