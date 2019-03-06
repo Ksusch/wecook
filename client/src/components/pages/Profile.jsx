@@ -101,7 +101,7 @@ class Profile extends Component {
 				</div>
 				<div id="test" className="col text-center">
 					<h3>
-						<strong>Bio:</strong> {this.props.user.about}
+						<strong>About:</strong> {this.props.user.about}
 					</h3>
 				</div>
 
@@ -120,6 +120,7 @@ class Profile extends Component {
 							<div />
 						)}
 					</div>
+					<hr />
 					<div>
 						<AddPetButton handler={pet => this.createPet(pet)} />
 					</div>
