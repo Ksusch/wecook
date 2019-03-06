@@ -7,7 +7,7 @@ import {
 	ModalFooter,
 	Form,
 	FormGroup,
-	Input,
+	Input
 } from 'reactstrap';
 import '../styles.scss';
 import UploadWidget from './UploadWidget';
@@ -15,7 +15,7 @@ import UploadWidget from './UploadWidget';
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({
 	accessToken:
-		'pk.eyJ1IjoibWMxMDBzIiwiYSI6ImNqb2E2ZTF3ODBxa3czd2xldHp1Z2FxbGYifQ.U4oatm5RsTXXHQLz5w66dQ',
+    'pk.eyJ1IjoibWMxMDBzIiwiYSI6ImNqb2E2ZTF3ODBxa3czd2xldHp1Z2FxbGYifQ.U4oatm5RsTXXHQLz5w66dQ'
 });
 
 export default class EventModal extends Component {
@@ -28,7 +28,7 @@ export default class EventModal extends Component {
 			location: '',
 			image: '',
 			searchResults: [],
-			coordinates: [],
+			coordinates: []
 		};
 		this.toggle = this.toggle.bind(this);
 	}
@@ -38,7 +38,7 @@ export default class EventModal extends Component {
 				image: this.props.event.image,
 				name: this.props.event.name,
 				description: this.props.event.description,
-				location: this.props.event.location,
+				location: this.props.event.location
 			});
 		}
 	}
@@ -47,17 +47,17 @@ export default class EventModal extends Component {
 	}
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		});
 		if (e.target.name === 'location') {
 			geocodingClient
 				.forwardGeocode({
-					query: e.target.value,
+					query: e.target.value
 				})
 				.send()
 				.then(response => {
 					this.setState({
-						searchResults: response.body.features,
+						searchResults: response.body.features
 					});
 				});
 		}
@@ -66,20 +66,20 @@ export default class EventModal extends Component {
 		e.preventDefault();
 		if (
 			this.state.name &&
-			this.state.name.length > 0 &&
-			this.state.location &&
-			this.state.location.length > 0 &&
-			this.state.coordinates &&
-			this.state.coordinates.length > 0 &&
-			this.state.description &&
-			this.state.description.length > 0
+      this.state.name.length > 0 &&
+      this.state.location &&
+      this.state.location.length > 0 &&
+      this.state.coordinates &&
+      this.state.coordinates.length > 0 &&
+      this.state.description &&
+      this.state.description.length > 0
 		) {
 			let event = {
 				name: this.state.name,
 				location: this.state.location,
 				coordinates: this.state.coordinates,
 				description: this.state.description,
-				image: this.state.image,
+				image: this.state.image
 			};
 			this.props.handler(event);
 			this.toggle();
@@ -90,11 +90,11 @@ export default class EventModal extends Component {
 	}
 	handleSearchResultClick(result) {
 		console.log(result);
-		this.setState({	
+		this.setState({
 			location: result.place_name,
 			coordinates: result.center,
 			searchResults: []
-		 });
+		});
 	}
 	render() {
 		return (
@@ -131,11 +131,7 @@ export default class EventModal extends Component {
 									onChange={e => this.handleChange(e)}
 								/>
 								{this.state.searchResults.map(result => (
-									<div
-										onClick={() =>
-											this.handleSearchResultClick(result)
-										}
-									>
+									<div onClick={() => this.handleSearchResultClick(result)}>
 										{result.place_name}
 										<hr />
 									</div>
@@ -146,8 +142,7 @@ export default class EventModal extends Component {
 									type="textarea"
 									name="description"
 									placeholder={
-										this.props.event.description ===
-										undefined
+										this.props.event.description === undefined
 											? 'Event name'
 											: this.props.event.description
 									}
@@ -155,17 +150,15 @@ export default class EventModal extends Component {
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
-							<FormGroup>
-								<Button
-									className="btn btn-primary"
-									type="submit"
-								>
-									<i className="fas fa-save" />
-								</Button>
-							</FormGroup>
 						</Form>
 					</ModalBody>
-					<ModalFooter />
+					<ModalFooter>
+						<FormGroup>
+							<Button className="btn btn-primary" type="submit">
+								<i className="fas fa-save" />
+							</Button>
+						</FormGroup>
+					</ModalFooter>
 				</Modal>
 			</div>
 		);

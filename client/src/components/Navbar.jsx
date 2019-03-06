@@ -6,11 +6,16 @@ export default class NavBar extends Component {
 	render() {
 		return (
 			<nav className="d-flex justify-content-between">
-				<NavLink to="/" exact className="navbar-link align-self-start">
+				<NavLink
+					style={{ textDecoration: 'none' }}
+					to="/"
+					exact
+					className="navbar-link align-self-start"
+				>
 					<span id="logo">WePet</span>
 					<i className="fas fa-paw" />
 				</NavLink>
-				<div className="align-self-end d-flex justify-content-between">
+				<div className="align-self-end d-flex justify-content-around">
 					<NavLink to="/search" exact className="navbar-link">
 						<i className="fas fa-search" />
 					</NavLink>
