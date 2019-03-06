@@ -79,8 +79,9 @@ export default class UpdateUserModal extends Component {
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}
-								imageType="petPic"
+								imageType="userPic"
 							/>{' '}
+							<div className="modal-camera-padding" />
 							<FormGroup>
 								<Input
 									type="text"
