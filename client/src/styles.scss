@@ -71,7 +71,7 @@ h4 {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%); // align-items: baseline;
+      transform: translate(-50%, -50%);
     }
   }
 }
@@ -103,7 +103,7 @@ h4 {
 .pet-image-wrapper {
   width: 150px;
   height: 150px;
-  margin: 25% 0; // border: 1px solid black;
+  margin: 25% 0;
   border-radius: 50%;
 }
 
@@ -218,10 +218,6 @@ h4 {
   margin-bottom: 10px;
 }
 
-// .centered0 {
-//   width: 100%;
-//   text-align: center;
-// }
 .right {
   text-align: right;
 }
@@ -264,6 +260,8 @@ h4 {
   background-color: #f8f9fa;
   border: 2px solid rgba(0, 0, 0, 0.5);
   border-radius: 8px;
+  margin: 7px;
+  padding: 7px;
   .event-card-top {
     height: 50px;
     h3 {
@@ -300,6 +298,7 @@ h4 {
   }
   .event-card-location {
     padding: 0 10px;
+    margin: 20px 0;
     i {
       margin-right: 5px;
     }
@@ -307,6 +306,7 @@ h4 {
   .event-description {
     padding: 10px;
     text-align: justify;
+    flex-grow: 1;
   }
   hr {
     height: 1px;
