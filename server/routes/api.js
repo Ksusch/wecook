@@ -64,6 +64,12 @@ router.get('/event', isActiveUser, (req, res, next) => {
 		.catch(err => console.error(err));
 });
 
+router.get('/allevents', isActiveUser, (req, res, next) => {
+	Event.find()
+		.then(events => res.status(200).json(events))
+		.catch(err => console.error(err));
+});
+
 router.post('/event', isActiveUser, (req, res, next) => {
 	User.findOne({
 		$or: [
@@ -92,11 +98,7 @@ router.put('/event/:id', isActiveUser, (req, res, next) => {
 	if (req.body.location) eventData.location = req.body.location;
 	if (req.body.description) eventData.description = req.body.description;
 	if (req.body.image) eventData.image = req.body.image;
-	Event.findOneAndUpdate(
-		{ _id: req.params.id },
-		eventData,
-		{new: true}
-	)
+	Event.findOneAndUpdate({ _id: req.params.id }, eventData, { new: true })
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });

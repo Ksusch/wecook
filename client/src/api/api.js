@@ -26,8 +26,10 @@ class ApiService {
 	getEvents() {
 		return this.service.get('/event');
 	}
+	getEventsInRadius() {
+		return this.service.get('/allevents');
+	}
 	createEvent(event) {
-		console.log('sending event');
 		return this.service.post('/event', event);
 	}
 	updateEvent(id, event) {
