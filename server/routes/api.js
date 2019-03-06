@@ -35,7 +35,6 @@ router.put('/user', isActiveUser, (req, res, next) => {
 // Event CRUD
 
 router.get('/event', isActiveUser, (req, res, next) => {
-	// TODO get only events from this user
 	User.findOne({
 		$or: [
 			{ _id: req.user.id },
@@ -46,21 +45,6 @@ router.get('/event', isActiveUser, (req, res, next) => {
 	})
 		.then(user => Event.find({ owner: user._id }))
 		.then(events => res.status(200).json(events))
-		.catch(err => console.error(err));
-});
-
-router.get('/event', isActiveUser, (req, res, next) => {
-	// TODO get only pets from this user
-	User.findOne({
-		$or: [
-			{ _id: req.user.id },
-			{ googleId: req.user.id },
-			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
-	})
-		.then(user => Event.find({ owner: user._id }))
-		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });
 
@@ -82,7 +66,10 @@ router.post('/event', isActiveUser, (req, res, next) => {
 		.then(user =>
 			Event.create({
 				name: req.body.name,
-				location: req.body.location,
+				location: {
+					address: req.body.location,
+					coordinates: req.body.coordinates
+				},
 				description: req.body.description,
 				image: req.body.image,
 				owner: user._id,
@@ -95,7 +82,8 @@ router.post('/event', isActiveUser, (req, res, next) => {
 router.put('/event/:id', isActiveUser, (req, res, next) => {
 	let eventData = {};
 	if (req.body.name) eventData.name = req.body.name;
-	if (req.body.location) eventData.location = req.body.location;
+	if (req.body.location) eventData.location.address = req.body.location;
+	if (req.body.coordinates) eventData.location.address = req.body.coordinates;
 	if (req.body.description) eventData.description = req.body.description;
 	if (req.body.image) eventData.image = req.body.image;
 	Event.findOneAndUpdate({ _id: req.params.id }, eventData, { new: true })
