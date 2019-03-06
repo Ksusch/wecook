@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 @import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
 @import url("https://fonts.googleapis.com/css?family=Gaegu");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.css");
+=======
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
+>>>>>>> 2805ee3e5ec4ce9a989151f63add45690d3b9fc3
 // Navbar
 nav {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
   line-height: 40px;
   font-size: 2rem;
   padding: 10px;
@@ -42,7 +49,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
 }
 
 .home-component {
@@ -72,7 +79,7 @@ h4 {
       position: absolute;
       left: 50%;
       top: 50%;
-      transform: translate(-50%, -50%); // align-items: baseline;
+      transform: translate(-50%, -50%);
     }
   }
 }
@@ -90,7 +97,7 @@ h4 {
   margin: 7px;
 }
 
-.pet-card-container {
+.card-container {
   display: flex;
   flex-wrap: wrap;
 }
@@ -98,7 +105,13 @@ h4 {
 .pet-image-wrapper {
   width: 150px;
   height: 150px;
-  margin: 25% 0; // border: 1px solid black;
+  margin: 25% 0;
+  border-radius: 50%;
+}
+
+.pet-card-button {
+  margin-bottom: 5px;
+  margin-right: 5px;
   border-radius: 50%;
 }
 
@@ -129,16 +142,6 @@ h4 {
   width: 45%;
   height: 250px;
   float: left;
-}
-
-.add-pet-button {
-  width: 100%;
-  height: 100%;
-}
-
-.add-pet-button {
-  width: 450px;
-  height: 250px;
 }
 
 .text-wrap {
@@ -217,10 +220,6 @@ h4 {
   margin-bottom: 10px;
 }
 
-// .centered0 {
-//   width: 100%;
-//   text-align: center;
-// }
 .right {
   text-align: right;
 }
@@ -254,14 +253,24 @@ h4 {
 
 #logo {
   padding-right: 15px;
+  color: black;
+  text-decoration: none;
+}
+
+#logo:hover {
+  color: black;
+  text-decoration: none;
 }
 
 // event card
 .event-card {
-  height: 600px;
+  height: 550px;
   width: 300px;
   background-color: #f8f9fa;
-  border-radius: 4%;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
+  margin: 7px;
+  // padding: 7px;
   .event-card-top {
     height: 50px;
     h3 {
@@ -270,13 +279,15 @@ h4 {
     }
   }
   .event-image-wrapper {
-    width: 300px;
+    width: 100%;
     height: 225px;
     line-height: 225px;
     img {
-      width: 300px;
+      width: 100%;
       height: 225px;
       object-fit: contain;
+      padding: 0px 7px;
+      margin: 0 auto;
     }
     i {
       margin: auto;
@@ -289,12 +300,15 @@ h4 {
     border-radius: 50%;
     width: 45px;
     height: 45px;
+    margin-bottom: 5px;
+    margin-right: 5px;
     i {
       color: black;
     }
   }
   .event-card-location {
     padding: 0 10px;
+    margin: 20px 0;
     i {
       margin-right: 5px;
     }
@@ -302,6 +316,7 @@ h4 {
   .event-description {
     padding: 10px;
     text-align: justify;
+    flex-grow: 1;
   }
   hr {
     height: 1px;
@@ -340,4 +355,17 @@ h4 {
 
 .search-result-button:hover {
   color: black
+}
+.bighr {
+  height: 8px !important;
+  background-color: gray;
+  border-radius: 20px;
+}
+
+.flex-test {
+  display: flex;
+  flex-direction: column;
+}
+.modal-camera-padding {
+  padding: 7px;
 }

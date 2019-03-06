@@ -21,8 +21,8 @@ export default class EventCard extends Component {
 	}
 	render() {
 		return (
-			<div className="event-card d-flex flex-column">
-				<div className="event-card-top">
+			<div className="event-card d-flex flex-nowrap flex-column">
+				<div className="event-card-top d-flex justify-content-between">
 					<h3>{this.props.event.name}</h3>
 				</div>
 				<div>
@@ -42,24 +42,21 @@ export default class EventCard extends Component {
 				<div className="event-description">
 					{this.props.event.description || ''}
 				</div>
-				{
-					!this.props.search ? (
-						<div className="d-flex justify-content-even pet-card-button-wrapper">
-							<Button
-								className="card-button event-delete-button"
-								onClick={this.deleteEvent.bind(this)}
-							>
-								<i className="far fa-trash-alt" />
-							</Button>
-							<Button
-								className="card-button event-edit-button"
-								onClick={this.modalToggle}
-							>
-								<i className="fas fa-pen small-btn" />
-							</Button>
-						</div>
-					) :	(<div/>)
-				}
+				<div className="d-flex justify-content-even pet-card-button-wrapper">
+					<Button
+						className="card-button event-delete-button"
+						onClick={this.deleteEvent.bind(this)}
+					>
+						<i className="far fa-trash-alt" />
+					</Button>
+
+					<Button
+						className="card-button event-edit-button"
+						onClick={this.modalToggle}
+					>
+						<i className="fas fa-pen small-btn" />
+					</Button>
+				</div>
 				<EventModal
 					modalOpen={this.state.modalOpen}
 					toggleModal={this.modalToggle}

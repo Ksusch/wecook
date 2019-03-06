@@ -93,19 +93,20 @@ class Profile extends Component {
 						</div>
 					</div>
 				</div>
-
 				<div id="test" className="col text-center">
 					<h2>Welcome - {this.props.user.name}!</h2>
 					<br />
 				</div>
 				<div id="test" className="col text-center">
 					<h3>
-						<strong>Bio:</strong> {this.props.user.about}
+						<strong>About:</strong> {this.props.user.about}
 					</h3>
 				</div>
+				<hr className="bighr" />
 
 				<div>
-					<div className="pet-card-container">
+					<h2>Pets</h2>
+					<div className="card-container">
 						{this.props.pets !== null ? (
 							this.props.pets.map((pet, i) => (
 								<PetCard
@@ -120,13 +121,15 @@ class Profile extends Component {
 						)}
 					</div>
 					<div>
+						<h3>Add a Pet</h3>
 						<AddPetButton handler={pet => this.createPet(pet)} />
 					</div>
+					<hr className="bighr" />
 				</div>
 				<div>
 					<br />
-					<h2>Events section</h2>
-					<div className="event-card-wrapper">
+					<h2>Events</h2>
+					<div className="card-container">
 						{this.props.events ? (
 							this.props.events.map((event, i) => (
 								<EventCard
@@ -141,7 +144,7 @@ class Profile extends Component {
 						)}
 					</div>
 					<div>
-						<h3>Add event</h3>
+						<h3>Add an Event</h3>
 						<AddEventButton handler={event => this.createEvent(event)} />
 					</div>
 				</div>

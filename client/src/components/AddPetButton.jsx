@@ -26,7 +26,7 @@ export default class AddPetButton extends Component {
 	render() {
 		return (
 			<Button
-				className="btn btn-primary add-pet-button"
+				className="btn btn-primary"
 				onClick={this.modalToggle}
 			>
 				<PetModal
@@ -39,7 +39,7 @@ export default class AddPetButton extends Component {
 						description: undefined,
 					}}
 				/>
-				<i className="fas fa-plus fa-5x" />
+				<i className="fas fa-plus" />
 			</Button>
 		);
 	}
