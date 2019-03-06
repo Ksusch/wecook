@@ -12,7 +12,6 @@ export default class MapBox extends Component {
 	componentDidUpdate(prevProps) {
 		if(prevProps.locations != this.props.locations && (this.props.locations.length > 0 || this.props.center)) {
 			this.initMap();
-			this.setCenter();
 			this.addMarkers();
 		}
 	}
@@ -26,19 +25,8 @@ export default class MapBox extends Component {
 		this.map.addControl(new mapboxgl.NavigationControl());
 		
 	}
-	setCenter() {
-		this.map.setCenter(this.props.locations[0]);
-		new mapboxgl.Marker({ color: 'blue' }).setLngLat(this.props.locations[0]).addTo(this.map);
-	}
 	addMarkers() {
-		if (this.props.locations.length > 0) {
-			this.props.locations.forEach((location, i) => {
-				if (i != 0) {
-					let marker = new mapboxgl.Marker({ color: 'green' });
-					marker.setLngLat(location).addTo(this.map);
-				}
-			});
-		}
+		this.props.locations.forEach((location) => new mapboxgl.Marker({ color: 'green' }).setLngLat(location).addTo(this.map));
 	}
 
 	render() {

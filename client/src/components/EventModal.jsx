@@ -30,7 +30,9 @@ export default class EventModal extends Component {
 		this.toggle = this.toggle.bind(this);
 	}
 	componentDidMount() {
-		if (this.props.event) {
+		if (this.props.event != undefined) {
+			
+			console.log(this.props.event);
 			this.setState({
 				image: this.props.event.image,
 				name: this.props.event.name,
@@ -97,14 +99,16 @@ export default class EventModal extends Component {
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>Add an Event</ModalHeader>
-					<ModalBody>
-						<UploadWidget
-							handler={url => this.handleImage(url)}
-							imageType="eventPic"
-						/>
-						<div className="modal-camera-padding" />
-						<Form onSubmit={e => this.handleSubmit(e)}>
+					<Form onSubmit={e => this.handleSubmit(e)}>
+						<ModalHeader toggle={this.toggle}>Add an Event</ModalHeader>
+					
+						<ModalBody>
+							<UploadWidget
+								handler={url => this.handleImage(url)}
+								imageType="eventPic"
+							/>
+							<div className="modal-camera-padding" />
+						
 							<FormGroup>
 								<Input
 									placeholder={
@@ -120,9 +124,9 @@ export default class EventModal extends Component {
 							<FormGroup>
 								<Input
 									placeholder={
-										this.props.event.location === undefined
+										this.state.event === undefined
 											? 'Location'
-											: this.props.event.location
+											: this.state.event.location.address
 									}
 									value={this.state.location}
 									name="location"
@@ -148,15 +152,16 @@ export default class EventModal extends Component {
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
-						</Form>
-					</ModalBody>
-					<ModalFooter>
-						<FormGroup>
-							<Button className="btn btn-primary" type="submit">
-								<i className="fas fa-save" />
-							</Button>
-						</FormGroup>
-					</ModalFooter>
+						
+						</ModalBody>
+						<ModalFooter>
+							<FormGroup>
+								<Button className="btn btn-primary" type="submit">
+									<i className="fas fa-save" />
+								</Button>
+							</FormGroup>
+						</ModalFooter>
+					</Form>
 				</Modal>
 			</div>
 		);
