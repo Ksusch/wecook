@@ -36,7 +36,7 @@ export default class EventCard extends Component {
 				</div>
 				<div className="event-card-location">
 					<i className={'fas fa-map-marker'} />
-					{this.props.event.location || ''}
+					{this.props.event.location.address || ''}
 				</div>
 				<hr />
 				<div className="event-description">
