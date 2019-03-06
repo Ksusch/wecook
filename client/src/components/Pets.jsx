@@ -54,7 +54,7 @@ export default class Pets extends Component {
           ))}
         <div className="pet-box">
           <Button
-            className="btn btn-primary add-pet-button"
+            className="btn btn-primary"
             onClick={this.modalToggle}
           >
             <i className="fas fa-plus fa-5x" />
