@@ -74,39 +74,49 @@ export default class UpdateUserModal extends Component {
 		return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
-					<ModalHeader toggle={this.toggle}>About me!</ModalHeader>
-					<ModalBody>
-						<UploadWidget
-							handler={url => this.handleImage(url)}
-							imageType="petPic"
-						/>
-						<Form onSubmit={e => this.handleSubmit(e)}>
+					<Form onSubmit={e => this.handleSubmit(e)}>
+						<ModalHeader toggle={this.toggle}>Update your info!</ModalHeader>
+						<ModalBody>
+							<UploadWidget
+								handler={url => this.handleImage(url)}
+								imageType="petPic"
+							/>{' '}
 							<FormGroup>
-								<Label for="name">Name</Label>
 								<Input
 									type="text"
 									name="name"
-									id="name"
+									placeholder={
+										this.props.user.name === undefined
+											? 'Name'
+											: this.props.user.name
+									}
 									value={this.state.name}
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
 							<FormGroup>
-								<Label for="about">About</Label>
 								<Input
 									type="textarea"
 									name="about"
-									id="about"
+									placeholder={
+										this.props.user.about === undefined
+											? 'Tell us more about you!'
+											: this.props.user.about
+									}
 									value={this.state.about}
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
+							{/* </Form> */}
+						</ModalBody>
+						<ModalFooter>
 							<FormGroup>
-								<Button type="submit">Update My Info!</Button>
+								<Button className="btn btn-primary" type="submit">
+									<i className="fas fa-save" />
+								</Button>
 							</FormGroup>
-						</Form>
-					</ModalBody>
-					<ModalFooter />
+						</ModalFooter>
+					</Form>
 				</Modal>
 			</div>
 		);

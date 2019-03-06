@@ -259,6 +259,13 @@ h4 {
 
 #logo {
   padding-right: 15px;
+  color: black;
+  text-decoration: none;
+}
+
+#logo:hover {
+  color: black;
+  text-decoration: none;
 }
 
 // event card
@@ -323,10 +330,8 @@ h4 {
   bottom: 20px;
 }
 
-.bigHr {
-  background-color: dimgrey !important;
-  color: dimgrey !important;
-  border: solid 2px dimgrey !important;
-  height: 5px !important;
-  width: 1000px !important;
+.bighr {
+  height: 8px !important;
+  background-color: gray;
+  border-radius: 20px;
 }
