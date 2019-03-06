@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { Container, Button } from 'reactstrap';
+import { AuthService } from '../../services/services';
 import OAuthWrapper from '../OAuth';
-import { AuthService } from '../../api/api';
 import Login from '../Login';
 import Signup from '../Signup';
-import { Container, Button } from 'reactstrap';
+
 export default class LoginSignup extends Component {
 	constructor(props) {
 		super(props);

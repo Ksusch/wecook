@@ -83,5 +83,4 @@ class StorageService {
 	}
 }
 
-
 export { ServerUrl as default, ApiService, AuthService, StorageService };

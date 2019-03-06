@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { AuthService, StorageService, ApiService } from '../api/api';
+import { AuthService, StorageService, ApiService } from '../services/services';
 import Home from './pages/Home';
 import LoginSignup from './pages/LoginSignup';
 import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Navbar from './Navbar';
+import Event from './pages/Event';
 import '../styles.scss';
 
 class App extends Component {
@@ -152,8 +153,12 @@ class App extends Component {
 					/>
 					<Route
 						path="/search"
-						render={props => (<Search {...props} />)}
+						render={props => <Search {...props} />}
 					/>
+					 <Route 
+					 	path="/event/:id"
+					 	render={props => <Event {...props} />} 
+						 />
 				</Switch>
 			</div>
 		);

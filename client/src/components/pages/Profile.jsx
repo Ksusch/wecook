@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { ApiService } from '../../api/api';
-import UpdateUserModal from '../UpdateUserModal';
-import Img from 'react-image';
+import { ApiService } from '../../services/services';
 import { Button } from 'reactstrap';
-import '../../styles.scss';
 import PetCard from '../PetCard';
 import EventCard from '../EventCard';
 import AddPetButton from '../AddPetButton';
 import AddEventButton from '../AddEventButton';
+import UpdateUserModal from '../UpdateUserModal';
+import Img from 'react-image';
 
 class Profile extends Component {
 	constructor(props) {

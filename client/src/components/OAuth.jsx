@@ -3,12 +3,9 @@
 
 import React, { Component } from "react";
 import io from "socket.io-client";
-import ServerUrl from "../api/api";
+import ServerUrl from "../services/services";
 import { Button } from "reactstrap";
 const providers = ["google", "facebook", "twitter"];
-// socket.on('connect', () => {console.log(socket.id)});
-
-// console.log(socket)
 class OAuthWrapper extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +19,6 @@ class OAuthWrapper extends Component {
   checkSocket() {
     let socketCheck;
     if (this.socket.id === undefined) {
-      // this.socket.on('reconnect_attempt', () => {console.log("reconnect_attempt: ", this.socket)})
-      // this.socket.on('connect', () => {console.log("connect: ")})
-      // this.socket.on('error', (error) => {console.log("error :", error)})
-      // this.socket.on('disconnect', () => {console.log("disconnect :")})
-      // this.socket.on('data', () => {console.log("data :")})
-      // this.socket.on('message', () => {console.log("message :")})
       socketCheck = setInterval(() => {
         if (this.socket.id !== undefined) {
           this.setState({
@@ -73,8 +64,6 @@ class OAuth extends Component {
     });
   }
 
-  // Routinely checks the popup to re-enable the login button
-  // if the user closes the popup without authenticating.
   checkPopup() {
     const check = setInterval(() => {
       const { popup } = this;
@@ -85,9 +74,6 @@ class OAuth extends Component {
     }, 1000);
   }
 
-  // Launches the popup by making a request to the server and then
-  // passes along the socket id so it can be used to send back user
-  // data to the appropriate socket on the connected client.
   openPopup() {
     const width = 600,
       height = 600,
@@ -106,9 +92,6 @@ class OAuth extends Component {
     );
   }
 
-  // Kicks off the processes of opening the popup on the server and listening
-  // to the popup. It also disables the login button so the user can not
-  // attempt to login to the provider twice.
   startAuth(e) {
     if (!this.state.disabled) {
       e.preventDefault();
@@ -128,12 +111,9 @@ class OAuth extends Component {
 			iconClass = "fab fa-google fa-3x";
 		} else if (this.props.provider === "twitter") {
 			iconClass = "fab fa-twitter fa-3x";
-		} else if (this.props.provider === "facebook") {
+		} else  {
 			iconClass = "fab fa-facebook-f fa-3x";
 		}	
-		// else {
-		// 	iconClass = "fab fa-instagram fa-5x";
-		// }
 		let providerName = this.props.provider[0].toUpperCase() + this.props.provider.substr(1)
 		return (
 			<div>

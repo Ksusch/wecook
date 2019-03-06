@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { ApiService } from '../api/api';
 import PetModal from './PetModal';
 import { Button } from 'reactstrap';
 

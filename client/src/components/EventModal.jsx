@@ -9,13 +9,10 @@ import {
 	FormGroup,
 	Input,
 } from 'reactstrap';
-import '../styles.scss';
 import UploadWidget from './UploadWidget';
-
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const geocodingClient = mbxGeocoding({
-	accessToken:
-		'pk.eyJ1IjoibWMxMDBzIiwiYSI6ImNqb2E2ZTF3ODBxa3czd2xldHp1Z2FxbGYifQ.U4oatm5RsTXXHQLz5w66dQ',
+	accessToken: 'pk.eyJ1IjoibWMxMDBzIiwiYSI6ImNqb2E2ZTF3ODBxa3czd2xldHp1Z2FxbGYifQ.U4oatm5RsTXXHQLz5w66dQ'
 });
 
 export default class EventModal extends Component {

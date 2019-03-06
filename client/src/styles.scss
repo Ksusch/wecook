@@ -2,6 +2,7 @@
 @import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
 @import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
 @import url("https://fonts.googleapis.com/css?family=Gaegu");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.css");
 // Navbar
 nav {
   font-family: "Gaegu", cursive;
@@ -74,12 +75,6 @@ h4 {
       transform: translate(-50%, -50%); // align-items: baseline;
     }
   }
-}
-
-// mapbox GL container
-.map {
-  width: 600px;
-  height: 600px;
 }
 
 // pet card and crud
@@ -321,4 +316,28 @@ h4 {
   position: absolute;
   right: 10px;
   bottom: 20px;
+}
+
+.search-box {
+  width: 500px;
+}
+
+.map-box-search {
+  width: 600px;
+  height: 600px;
+}
+
+.search-result-card {
+  width: 150px;
+  margin: 5px;
+}
+
+.search-result-button {
+  color: black;
+  border: none;
+  background-color: white;
+}
+
+.search-result-button:hover {
+  color: black
 }

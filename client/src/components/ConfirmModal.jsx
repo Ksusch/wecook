@@ -6,7 +6,6 @@ import {
 	ModalBody,
 	ModalFooter,
 } from 'reactstrap';
-import '../styles.scss';
 
 export default class ConfirmModal extends Component {
 	constructor(props) {
