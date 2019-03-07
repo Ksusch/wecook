@@ -1,7 +1,6 @@
 const bodyParser = require('body-parser'),
 	cors = require('cors'),
 	express = require('express'),
-	path = require('path'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	passportInit = require('./passport'),
