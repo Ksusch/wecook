@@ -18,10 +18,10 @@ export default class Home extends Component {
 						<div className="col-12 d-flex align-items-center flex-column home-text ">
 							<h1>Welcome to WePet</h1>
 							<p>
-                Running out of old tricks to entertain your pet at home? Looking
-                for cute animals to play with?
+								Running out of old tricks to entertain your pet at home? Looking
+								for cute animals to play with?
 								<br />
-                We have found a solution for you!
+								We have found a solution for you!
 							</p>
 							<br />
 							{!this.props.user ? (
@@ -29,7 +29,7 @@ export default class Home extends Component {
 									className="btn-secondary"
 									onClick={() => this.props.history.push('/loginsignup')}
 								>
-                  Login/Signup
+									Login/Signup
 								</Button>
 							) : (
 								<div />
@@ -58,11 +58,13 @@ export default class Home extends Component {
 								/>
 
 								<CardBody>
-									<CardTitle>Show your Pet</CardTitle>
+									<CardTitle>
+										<h3>Show your Pet</h3>
+									</CardTitle>
 
 									<CardText>
-                    Update and uplaod you and your pet's profiles to introduce
-                    him/her to connect with other pet lovers.
+										Update and uplaod you and your pet's profiles to introduce
+										him/her to connect with other pet lovers.
 									</CardText>
 									{/* <Button>Button</Button> */}
 								</CardBody>
@@ -80,11 +82,13 @@ export default class Home extends Component {
 								/>
 								<div className="test" />
 								<CardBody>
-									<CardTitle>Create an Event</CardTitle>
+									<CardTitle>
+										<h3>Create an Event</h3>
+									</CardTitle>
 
 									<CardText>
-                    Create an event and invite others to join. You know what
-                    they say 'the more the merrier'!
+										Create an event and invite others to join. You know what
+										they say 'the more the merrier'!
 									</CardText>
 									{/* <Button>Button</Button> */}
 								</CardBody>
@@ -101,11 +105,13 @@ export default class Home extends Component {
 									alt="Card image cap"
 								/>
 								<CardBody>
-									<CardTitle>Make New Friends</CardTitle>
+									<CardTitle>
+										<h3>Make new Friends</h3>
+									</CardTitle>
 
 									<CardText>
-                    Participate in events or bring your pet to events to make
-                    new pet abnd human friends.
+										Participate in events or bring your pet to events to make
+										new pet abnd human friends.
 									</CardText>
 									{/* <Button>Button</Button> */}
 								</CardBody>

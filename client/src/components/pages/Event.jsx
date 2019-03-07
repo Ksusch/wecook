@@ -98,7 +98,7 @@ export default class Event extends Component {
 								</h5>
 							</div>
 							<p>{this.props.event.description}</p>
-							<h2>owner</h2>
+							<h2>Owner</h2>
 							<img
 								src={this.state.owner && this.state.owner.image}
 								alt="owner photo"
@@ -108,7 +108,7 @@ export default class Event extends Component {
 								{this.state.owner && this.state.owner.name}
 							</span>
 
-							<h2>participants</h2>
+							<h2>Participants</h2>
 
 							{this.state.participants &&
 								this.state.participants.map(participant => (
