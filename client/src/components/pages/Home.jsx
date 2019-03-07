@@ -110,21 +110,9 @@ export default class Home extends Component {
 					<hr className="bighr" />
 				</div>
 
-				{/* <img
-					className="resize d-flex justify-content-center"
-					src="images/group-of-pets-together-15229056.jpg"
-					alt="landing-page-pic"
-				/> */}
-				{/* <img
-						className="resize "
-						src="images/pets_and_money_hero_image_-_minus_guinea.png"
-						alt="landing-page-pic"
-					/> */}
-				{/* <img
-					className="d-flex justify-content-center flex-end img-fluid "
-					src="images/national-pet-day.jpg"
-					alt="landing-page-pic"
-				/> */}
+				<footer>
+					<Link to="/privacy">Privacy Policy</Link>
+				</footer>
 			</div>
 		);
 	}
