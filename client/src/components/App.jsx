@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Navbar from './Navbar';
 import Event from './pages/Event';
+import PrivacyPolicy from './PrivacyPolicy';
 import '../styles.scss';
 
 class App extends Component {
@@ -163,6 +164,7 @@ class App extends Component {
 							/>)
 						}
 					/>
+					<Route exact path="/privacy" Component={PrivacyPolicy} />
 				</Switch>
 			</div>
 		);
