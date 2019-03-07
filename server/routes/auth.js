@@ -48,7 +48,7 @@ router.post('/signup', (req, res, next) => {
 					req.body.email,
 					'Confirm your email',
 					`Please confirm your email by proceeding to the following link: ${
-						process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://wepetevents.herokuapp.com' 
+						process.env.NODE_ENV === 'production' ?  'https://wepetevents.herokuapp.com' : 'http://localhost:3000'
 					}3000/confirm/${user.confirmationToken}`
 				);
 			});
