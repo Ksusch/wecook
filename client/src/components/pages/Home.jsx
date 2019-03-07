@@ -6,7 +6,7 @@ import {
 	CardImg,
 	CardText,
 	CardBody,
-	CardTitle,
+	CardTitle
 } from 'reactstrap';
 
 export default class Home extends Component {
@@ -46,18 +46,19 @@ export default class Home extends Component {
 								<CardImg
 									top
 									width="100%"
-									src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+									height="100%"
+									src="images/pet.png"
 									alt="Card image cap"
 								/>
+
 								<CardBody>
-									<CardTitle>Share your Pet</CardTitle>
+									<CardTitle>Show your Pet</CardTitle>
 
 									<CardText>
-										Some quick example text to build on the
-										card title and make up the bulk of the
-										card's content.
+                    Update and uplaod you and your pet's profiles to introduce
+                    him/her to connect with other pet lovers.
 									</CardText>
-									<Button>Button</Button>
+									{/* <Button>Button</Button> */}
 								</CardBody>
 							</Card>
 						</div>
@@ -67,39 +68,40 @@ export default class Home extends Component {
 								<CardImg
 									top
 									width="100%"
-									src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+									height="100%"
+									src="images/event.png"
 									alt="Card image cap"
 								/>
+								<div className="test" />
 								<CardBody>
 									<CardTitle>Create an Event</CardTitle>
 
 									<CardText>
-										Some quick example text to build on the
-										card title and make up the bulk of the
-										card's content.
+                    Create an event and invite others to join. You know what
+                    they say 'the more the merrier'!
 									</CardText>
-									<Button>Button</Button>
+									{/* <Button>Button</Button> */}
 								</CardBody>
 							</Card>
 						</div>
 						<div className="col-4">
 							{''}
-							<Card>
+							<Card className="home-card">
 								<CardImg
 									top
 									width="100%"
-									src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"
+									height="100%"
+									src="images/newfriends.png"
 									alt="Card image cap"
 								/>
 								<CardBody>
-									<CardTitle>Make New Pet Friends</CardTitle>
+									<CardTitle>Make New Friends</CardTitle>
 
 									<CardText>
-										Some quick example text to build on the
-										card title and make up the bulk of the
-										card's content.
+                    Participate in events or bring your pet to events to make
+                    new pet abnd human friends.
 									</CardText>
-									<Button>Button</Button>
+									{/* <Button>Button</Button> */}
 								</CardBody>
 							</Card>{' '}
 						</div>
@@ -107,21 +109,28 @@ export default class Home extends Component {
 					<hr className="bighr" />
 				</div>
 
-				{/* <img
-					className="resize d-flex justify-content-center"
-					src="images/group-of-pets-together-15229056.jpg"
-					alt="landing-page-pic"
-				/> */}
-				{/* <img
-						className="resize "
-						src="images/pets_and_money_hero_image_-_minus_guinea.png"
-						alt="landing-page-pic"
-					/> */}
-				{/* <img
-					className="d-flex justify-content-center flex-end img-fluid "
-					src="images/national-pet-day.jpg"
-					alt="landing-page-pic"
-				/> */}
+				{/* <div className="container">
+					<h1 className="test-header">Testimonial</h1>
+
+					<div className="row testimony-card">
+						<div className="col-4 test-img-box">
+							<img
+								className="test-img d-flex align-items-center"
+								src="images/dog.png"
+								alt="test-img1"
+							/>
+							<br />
+              Mr.Pug{' '}
+						</div>
+						<div className="col-8 test-textbox">
+							<p className="test-text">
+                "I cannot deal with my owner all by myself indoors every single
+                day! Thanks to Wepet, we got some fresh air and meet new
+                friends!"
+							</p>
+						</div>
+					</div>
+				</div> */}
 			</div>
 		);
 	}
