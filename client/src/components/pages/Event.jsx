@@ -11,7 +11,7 @@ export default class Event extends Component {
 		this.ApiService = new ApiService();
 	}
 	getParticipants(){
-		this.ApiService.getParticipants().then(participants => this.setState({participants: participants}));
+		this.ApiService.getParticipants(this.props.match.params.id).then(participants => this.setState({participants: participants}));
 	}
 	addParticipant(){
 		this.ApiService.addParticipant().then(res =>
