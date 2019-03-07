@@ -47,6 +47,7 @@ h4 {
 .home-component {
   .header {
     align-items: center;
+    padding-top: 30px;
     img {
       width: 30px;
     }
@@ -338,4 +339,51 @@ h4 {
 
 .modal-camera-padding {
   padding: 7px;
+}
+
+.resize {
+  height: 50vh;
+  width: auto;
+}
+
+//==================building grid=======
+
+//=====container======
+.container {
+  //   background-color: rgb(202, 195, 199);
+  width: 70%;
+}
+
+.home-text > div {
+  display: flex;
+  justify-content: center;
+}
+
+.home-text > p {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.wrapper {
+  padding: 50px 0px;
+}
+
+.profile-row {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.profile-img {
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.home-header {
+  padding-top: 100px;
+  padding-block-start: 30px;
+}
+
+.login-btn {
+  border-radius: 20px !important;
+  padding: 10px 20px;
 }
