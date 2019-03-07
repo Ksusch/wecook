@@ -67,10 +67,7 @@ router.post('/event', isActiveUser, (req, res, next) => {
 		.then(user =>
 			Event.create({
 				name: req.body.name,
-				location: {
-					address: req.body.location,
-					coordinates: req.body.coordinates
-				},
+				location: req.body.location,
 				description: req.body.description,
 				image: req.body.image,
 				owner: user._id,
@@ -83,8 +80,7 @@ router.post('/event', isActiveUser, (req, res, next) => {
 router.put('/event/:id', isActiveUser, (req, res, next) => {
 	let eventData = {};
 	if (req.body.name) eventData.name = req.body.name;
-	if (req.body.location) eventData.location.address = req.body.location;
-	if (req.body.coordinates) eventData.location.address = req.body.coordinates;
+	if (req.body.location) eventData.location = req.body.location;
 	if (req.body.description) eventData.description = req.body.description;
 	if (req.body.image) eventData.image = req.body.image;
 	Event.findOneAndUpdate({ _id: req.params.id }, eventData, { new: true })
@@ -120,7 +116,7 @@ router.post('/participant', isActiveUser, (req, res, next) => {
 	Event.findOneAndUpdate(
 		{_id: req.params.id}, { $push: { participants: req.user.id }}, {new: true}
 	)
-		.then(event => res.status(200).json(event))
+		.then(participant => res.status(200).json(participant))
 		.catch(err => console.error(err));
 });
 
@@ -128,7 +124,7 @@ router.delete('/participant', isActiveUser, (req, res, next) => {
 	Event.findOneAndUpdate(
 		{_id: req.params.id}, { $pull: { participants: req.user.id }}, {new: true}
 	)
-		.then(event => res.status(200).json(event))
+		.then(participant => res.status(200).json(participant))
 		.catch(err => console.error(err));
 });
 
