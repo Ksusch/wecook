@@ -6,7 +6,7 @@ import {
 	CardImg,
 	CardText,
 	CardBody,
-	CardTitle
+	CardTitle,
 } from 'reactstrap';
 
 export default class Home extends Component {
@@ -53,8 +53,9 @@ export default class Home extends Component {
 									<CardTitle>Share your Pet</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the
+										card title and make up the bulk of the
+										card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
@@ -73,8 +74,9 @@ export default class Home extends Component {
 									<CardTitle>Create an Event</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the
+										card title and make up the bulk of the
+										card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
@@ -93,8 +95,9 @@ export default class Home extends Component {
 									<CardTitle>Make New Pet Friends</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the
+										card title and make up the bulk of the
+										card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
