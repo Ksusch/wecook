@@ -24,10 +24,9 @@ export default class Home extends Component {
                 We have found a solution for you!
 							</p>
 							<br />
-
 							{!this.props.user ? (
-								<Button className="btn-secondary">
-									<Link to="/loginSignup">Login/Signup</Link>
+								<Button className="btn-secondary" onClick={() => this.props.history.push('/loginsignup')}>
+									Login/Signup
 								</Button>
 							) : (
 								<div />

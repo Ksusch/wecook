@@ -13,9 +13,10 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: JSON.parse(localStorage.getItem('user')),
+			user: null,
 			pets: null,
 			events: [],
+			allevents: [],
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -61,12 +62,12 @@ class App extends Component {
 		}
 	}
 	getUserData(res = undefined) {
-		console.log('acquiring user data');
 		this.ApiService.getPets().then(pets => {
 			this.ApiService.getEvents().then(events => {
 				this.setState({
-					pets: pets.data,
-					events: events.data
+					pets: pets,
+					events: events.filter(event => event.owner === this.state.user._id),
+					allevents: events
 				});
 			});
 		});
@@ -148,18 +149,19 @@ class App extends Component {
 					/>
 					<Route path="/search" render={props => <Search {...props} />} />
 					<Route
+						path="/search"
+						render={props => <Search {...props} events={this.state.allevents}/>}
+					/>
+					<Route
 						exact
 						path="/event/:id"
 						render={props => (
 							<Event
 								{...props}
-								event={
-									this.state.events.filter(
-										event => event._id === props.match.params.id
-									)[0]
-								}
-							/>
-						)}
+								event={this.state.allevents.filter(event => event._id === props.match.params.id)[0]}
+								handleUpdate={res => this.getUserData(res)}
+							/>)
+						}
 					/>
 				</Switch>
 			</div>
