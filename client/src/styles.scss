@@ -5,7 +5,7 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.css");
 // Navbar
 nav {
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
   line-height: 40px;
   font-size: 2rem;
   padding: 10px;
@@ -42,7 +42,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: 'Gaegu', cursive;
+  font-family: "Gaegu", cursive;
 }
 
 .home-component {
@@ -179,7 +179,7 @@ h4 {
   text-decoration: none;
 }
 
-.left-container a{
+.left-container a {
   color: white;
   text-decoration: none;
 }
@@ -338,7 +338,7 @@ h4 {
 }
 
 .map-box-search {
-  border: 1px solid black
+  border: 1px solid black;
 }
 
 .search-result-card {
@@ -353,7 +353,7 @@ h4 {
 }
 
 .search-result-button:hover {
-  color: black
+  color: black;
 }
 .bighr {
   height: 8px !important;
@@ -416,14 +416,18 @@ h4 {
   padding: 10px 20px;
 }
 .event-header {
-  width: 50%;
+  width: 100%;
   padding: 10px 0;
   vertical-align: center;
-  img {
-    width: inherit;
-    height: auto;
-    margin: auto;
-  }
+}
+
+.event-img-wrapper {
+     width: 250px;
+     img {
+       width: 100%;
+     }
+   
+
 }
 
 .event-details {

@@ -6,7 +6,7 @@ import {
 	FormGroup,
 	Input,
 	InputGroup,
-	InputGroupAddon,
+	InputGroupAddon
 } from 'reactstrap';
 import { ApiService } from '../../services/services';
 import MapBox from '../MapBox';
@@ -18,7 +18,7 @@ export default class Search extends Component {
 		this.state = {
 			search: '',
 			results: [],
-			events: [],
+			events: []
 		};
 		this.ApiService = new ApiService();
 	}
@@ -29,15 +29,12 @@ export default class Search extends Component {
 	}
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		});
 	}
 	handleSubmit(e) {
 		e.preventDefault();
-		if (
-			this.state.search.length != undefined &&
-			this.state.search.length > 2
-		) {
+		if (this.state.search.length != undefined && this.state.search.length > 2) {
 			let search = new RegExp(this.state.search),
 				results = this.state.events.filter(
 					event =>
@@ -75,35 +72,38 @@ export default class Search extends Component {
 								</FormGroup>
 							</Form>
 						</div>
-						<MapBox locations={this.state.events.map(event => event.location.coordinates)}/>
 					</div>
+					<MapBox
+						locations={this.state.events.map(
+							event => event.location.coordinates
+						)}
+					/>
 					<div>
-						<hr/>
+						<hr className="bighr" />
 					</div>
+					<h3>All Events</h3>
 					<div className="search-results d-flex">
-						{
-							this.state.results.length > 0
-								? this.state.results.map((event, i) => (
-									<Button className="search-result-button" onClick={() =>
+						{this.state.results.length > 0
+							? this.state.results.map((event, i) => (
+								<Button
+									className="search-result-button"
+									onClick={() =>
 										this.props.history.push(`/event/${event._id}`)
-									}>
-										<SearchResultCard
-											key={i}
-											event={event}
-										/>
-									</Button>
+									}
+								>
+									<SearchResultCard key={i} event={event} />
+								</Button>
 							  ))
-								: this.state.events.map((event, i) => (
-									<Button className="search-result-button" onClick={() =>
+							: this.state.events.map((event, i) => (
+								<Button
+									className="search-result-button"
+									onClick={() =>
 										this.props.history.push(`/event/${event._id}`)
-									}>
-										<SearchResultCard
-											key={i}
-											event={event}
-										/>
-									</Button>
-							  ))
-						}
+									}
+								>
+									<SearchResultCard key={i} event={event} />
+								</Button>
+							  ))}
 					</div>
 				</div>
 			</Container>

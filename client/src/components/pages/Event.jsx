@@ -10,8 +10,17 @@ export default class Event extends Component {
 		};
 		this.ApiService = new ApiService();
 	}
+	componentDidUpdate(){
+		this.getParticipants();	
+	}
 	getParticipants(){
-		this.ApiService.getParticipants(this.props.match.params.id).then(participants => this.setState({participants: participants}));
+		this.ApiService.getParticipants(this.props.match.params.id);
+		// .then(res => { 
+		// 	this.setState({
+		// 		participants: res.data.participants.map(v => {v.name, v.image;})
+		// 	});
+
+		// });
 	}
 	addParticipant(){
 		this.ApiService.addParticipant().then(res =>
@@ -39,25 +48,39 @@ export default class Event extends Component {
 						<div className="event-header">
 							<h1>{this.props.event.name}</h1>
 							<hr/>
-							<img src={this.props.event.image} alt="an event picture"/>
+							<div className="d-flex justify-content-around">
+								<div className="event-img-wrapper">
+									<img src={this.props.event.image} alt="an event picture"/>
+								</div>
+								<div className="d-flex flex-column align-items-start">
+									<p>
+										{this.props.event.description}
+									</p>
+									<h2>owner</h2>
+									{this.props.event.owner}
+									<h2>participants</h2>
+									{this.props.event.participants}
+									{
+										!this.state.attending ?
+											<Button className="mt-auto align-self-end" onClick={() => this.addParticipant()}>Attend</Button>
+											:
+											<Button className="mt-auto align-self-end" onClick={() => this.removeParticipant()}>Unattend</Button>
+									}
+								</div>
+
+							</div>
 						</div>
-						<MapBox locations={[this.props.event.location.coordinates]}/>
 					</div>
 					<div className="event-details">
 						<hr/>
 						<div className="d-flex justify-content-between">
-							{
-								!this.state.attending ?
-									<Button onClick={() => this.addParticipant()}>Attend</Button>
-									:
-									<Button onClick={() => this.removeParticipant()}>Unattend</Button>
-							}
+							
 							<h5>Address: {this.props.event.location.address}</h5>
 						</div>
-						<p>
-							{this.props.event.description}
-						</p>
+					
+					
 					</div>
+						<MapBox locations={[this.props.event.location.coordinates]}/>
 				</div>
 				
 			</Container>

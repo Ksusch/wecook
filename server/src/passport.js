@@ -7,18 +7,15 @@ const passport = require('passport'),
 	{ Strategy: FacebookStrategy } = require('passport-facebook');
 
 module.exports = () => {
-	passport.serializeUser((user, cb) => cb(null, user.id));
+	// serializeUser is triggered after the login
+	passport.serializeUser((user, cb) => {
+		console.log('TCL: user._id', user._id)
+		cb(null, user._id)
+	});
 	passport.deserializeUser((id, cb) => {
 		console.log('deserializer fired', id);
-		User.findOne(
-			{
-				$or: [
-					{ _id: id },
-					{ googleId: id },
-					{ twitterId: id },
-					{ facebookId: id },
-				],
-			},
+		User.findById(
+			id,
 			function (err, user) {
 				console.log('got to deserializer callback');
 				console.log(user);
@@ -93,8 +90,8 @@ module.exports = () => {
 								name = profile.displayName;
 								break;
 							case 'twitter':
-								image = profile.profile_image_url;
-								name = profile.name;
+								image = profile.photos[0].value;
+								name = profile.displayName;
 							}
 							User.create({
 								name: name,

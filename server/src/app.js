@@ -2,7 +2,6 @@ const bodyParser = require('body-parser'),
 	cors = require('cors'),
 	express = require('express'),
 	path = require('path'),
-	db = require('./db'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	passportInit = require('./passport'),
@@ -10,6 +9,8 @@ const bodyParser = require('body-parser'),
 	MongoStore = require('connect-mongo')(session),
 	app = express();
 
+require('./db');
+	
 app.use(
 	cors({
 		origin: (origin, cb) => {
