@@ -5,7 +5,8 @@ export default class Event extends Component {
 	
 	render() {
 		console.log(this.props);
-		return (
+		if(!this.props.event) return <div>loading</div>;
+		else return (
 			<Container>
 				<div>
 					<Button
@@ -22,6 +23,7 @@ export default class Event extends Component {
 							<hr/>
 							Address: {this.props.event.location.address}
 							<br/>
+							<hr/>
 							{this.props.event.description}
 						</div>
 						<MapBox locations={[this.props.event.location.coordinates]}/>

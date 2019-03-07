@@ -74,9 +74,11 @@ export default class Search extends Component {
 									</InputGroup>
 								</FormGroup>
 							</Form>
-							<hr/>
 						</div>
 						<MapBox locations={this.state.events.map(event => event.location.coordinates)}/>
+					</div>
+					<div>
+						<hr/>
 					</div>
 					<div className="search-results d-flex">
 						{

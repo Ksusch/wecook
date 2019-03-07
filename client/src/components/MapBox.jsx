@@ -41,6 +41,12 @@ export default class MapBox extends Component {
 			<div
 				ref={this.mapRef}
 				className="map-box-search"
+				style={
+					{
+						height: '300px',
+						width: '600px'
+					}
+				}
 			/>
 		);
 	}
