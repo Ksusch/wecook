@@ -87,13 +87,13 @@ router.put('/event/:id', isActiveUser, (req, res, next) => {
 	if (req.body.coordinates) eventData.location.address = req.body.coordinates;
 	if (req.body.description) eventData.description = req.body.description;
 	if (req.body.image) eventData.image = req.body.image;
-	Event.findOneAndUpdate({ _id: req.params.id }, eventData, { new: true })
+	Event.findOneAndUpdate({ _id: req.params.id, owner: req.user._id }, eventData, { new: true })
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });
 
 router.delete('/event/:id', isActiveUser, (req, res, next) => {
-	Event.findOneAndDelete({ _id: req.params.id })
+	Event.findOneAndDelete({ _id: req.params.id, owner: req.user._id })
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });
