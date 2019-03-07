@@ -16,6 +16,7 @@ class App extends Component {
 			user: null,
 			pets: null,
 			events: [],
+			currentEvent: null,
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -155,9 +156,27 @@ class App extends Component {
 						path="/search"
 						render={props => <Search {...props} />}
 					/>
-					<Route 
-						exact path="/event/:id"
-						render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
+					<Route
+						exact
+						path="/event/:id"
+						render={props => {
+							console.log('fired');
+							this.ApiService.getEventsInRadius().then(events =>
+								this.setState({
+									currentEvent: events.filter(
+										event =>
+											event._id === props.match.params.id
+									)[0],
+								})
+							);
+							return (
+								<Event
+									{...props}
+									event={this.state.currentEvent}
+									handleUpdate={res => this.getUserData(res)}
+								/>
+							);
+						}}
 					/>
 				</Switch>
 			</div>

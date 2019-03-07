@@ -26,13 +26,7 @@ router.post('/signup', (req, res, next) => {
 				});
 				return;
 			}
-			let token =
-        Math.random()
-        	.toString(36)
-        	.substr(2) +
-        Math.random()
-        	.toString(36)
-        	.substr(2);
+			let token = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
 			return User.create({
 				email: req.body.email,
 				password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),

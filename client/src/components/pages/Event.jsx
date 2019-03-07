@@ -13,6 +13,9 @@ export default class Event extends Component {
 	componentDidMount(){
 		this.getParticipants();	
 	}
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps === this.props && prevState === this.state) return false;
+	}
 	getParticipants(){
 		this.ApiService.getParticipants(this.props.match.params.id)
 			.then(res => {
@@ -41,7 +44,6 @@ export default class Event extends Component {
 		console.log(this.state);
 		if(!this.props.event) return <div>loading</div>;
 		else return (
-			
 			<Container>
 				<div>
 					<Button

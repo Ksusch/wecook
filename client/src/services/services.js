@@ -24,10 +24,10 @@ class ApiService {
 		return this.service.delete(`/pets/${id}`);
 	}
 	getEvents() {
-		return this.service.get('/events');
+		return this.service.get('/events').then(res => res.data);
 	}
 	getEventsInRadius() {
-		return this.service.get('/allevents');
+		return this.service.get('/allevents').then(res => res.data);
 	}
 	createEvent(event) {
 		return this.service.post('/events', event);

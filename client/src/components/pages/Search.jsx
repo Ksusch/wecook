@@ -24,7 +24,7 @@ export default class Search extends Component {
 	}
 	componentDidMount() {
 		this.ApiService.getEventsInRadius().then(events =>
-			this.setState({ events: events.data })
+			this.setState({ events: events })
 		);
 	}
 	handleChange(e) {
@@ -92,7 +92,7 @@ export default class Search extends Component {
 											event={event}
 										/>
 									</Button>
-							  ))
+								))
 								: this.state.events.map((event, i) => (
 									<Button className="search-result-button" onClick={() =>
 										this.props.history.push(`/event/${event._id}`)
@@ -102,7 +102,7 @@ export default class Search extends Component {
 											event={event}
 										/>
 									</Button>
-							  ))
+								))
 						}
 					</div>
 				</div>
