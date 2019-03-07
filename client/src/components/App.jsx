@@ -27,8 +27,7 @@ class App extends Component {
 		if (
 			prevState.user !== null &&
 			this.state.user !== null &&
-			(prevState.user !== this.state.user ||
-				prevState.pets !== this.state.pets)
+			(prevState.user !== this.state.user || prevState.pets !== this.state.pets)
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
@@ -37,7 +36,7 @@ class App extends Component {
 				this.AuthService.verify().then(res => {
 					if (res.status === 200) {
 						this.setState({
-							user: user,
+							user: user
 						});
 					} else {
 						this.StorageService.remove('user');
@@ -52,7 +51,7 @@ class App extends Component {
 			this.AuthService.verify().then(res => {
 				if (res.status === 200) {
 					this.setState({
-						user: user,
+						user: user
 					});
 					this.getUserData();
 				} else {
@@ -67,7 +66,7 @@ class App extends Component {
 			this.ApiService.getEvents().then(events => {
 				this.setState({
 					pets: pets.data,
-					events: events.data,
+					events: events.data
 				});
 			});
 		});
@@ -76,20 +75,20 @@ class App extends Component {
 		let userData = user.data ? user.data : user;
 		this.StorageService.set('user', userData);
 		this.setState({
-			user: userData,
+			user: userData
 		});
 		this.getUserData();
 	}
 	handleLogout() {
 		this.setState({
-			user: null,
+			user: null
 		});
 		this.StorageService.remove('user');
 	}
 	handleConfirm(token) {
 		this.AuthService.confirmEmail(token).then(user =>
 			this.setState({
-				user: user,
+				user: user
 			})
 		);
 	}
@@ -101,9 +100,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						render={props => (
-							<Home {...props} user={this.state.user} />
-						)}
+						render={props => <Home {...props} user={this.state.user} />}
 					/>
 					<Route
 						path="/profile"
@@ -138,9 +135,7 @@ class App extends Component {
 					<Route
 						path="/confirm/:confirmationToken"
 						render={props => {
-							this.handleConfirm(
-								props.match.params.confirmationToken
-							);
+							this.handleConfirm(props.match.params.confirmationToken);
 							return <Redirect to="/" />;
 						}}
 					/>
@@ -151,14 +146,21 @@ class App extends Component {
 							return <Redirect to="/" />;
 						}}
 					/>
+					<Route path="/search" render={props => <Search {...props} />} />
 					<Route
-						path="/search"
-						render={props => <Search {...props} />}
+						exact
+						path="/event/:id"
+						render={props => (
+							<Event
+								{...props}
+								event={
+									this.state.events.filter(
+										event => event._id === props.match.params.id
+									)[0]
+								}
+							/>
+						)}
 					/>
-					 <Route 
-					 	exact path="/event/:id"
-					 	render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
-						 />
 				</Switch>
 			</div>
 		);

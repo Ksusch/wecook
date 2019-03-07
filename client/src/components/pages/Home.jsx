@@ -12,33 +12,6 @@ import {
 export default class Home extends Component {
 	render() {
 		return (
-<<<<<<< HEAD
-			<div className="wrapper">
-				<div className="container">
-					<div className="row">
-						<div className="col-12 d-flex align-items-center flex-column home-text ">
-							<h1>Welcome to WePet</h1>
-							<p>
-                Running out of old tricks to entertain your pet at home? Looking
-                for cute animals to play with?
-								<br />
-                We have found a solution for you!
-							</p>
-							<br />
-
-							<Link className="btn btn-info login-btn" to="/loginSignup">
-                Login/Signup Now!
-							</Link>
-						</div>
-
-						<div className="col-12 align-self-center profile-img">
-							<img
-								className="d-flex justify-content-center flex-end img-fluid "
-								src="images/national-pet-day.jpg"
-								alt="landing-page-pic"
-							/>
-						</div>
-=======
 			<div className="home-component">
 				<div className="header d-flex">
 					<h1>Welcome to WePet</h1>
@@ -50,9 +23,8 @@ export default class Home extends Component {
 					<div className="left-container">
 						<p>A website by pet-lovers to pet-lovers.</p>
 						<p>
-							Join the community and look for pets in your
-							surrounding to visit, to sit or become a host for
-							your pet.
+							Join the community and look for pets in your surrounding to visit,
+							to sit or become a host for your pet.
 						</p>
 
 						{!this.props.user ? (
@@ -62,7 +34,6 @@ export default class Home extends Component {
 						) : (
 							<div />
 						)}
->>>>>>> 0f3b2bbe27c8d17d62d1e7d94f310dd40f829ce5
 					</div>
 					<hr className="bighr" />
 
@@ -79,8 +50,8 @@ export default class Home extends Component {
 									<CardTitle>Share your Pet</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the card title and make
+										up the bulk of the card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
@@ -99,8 +70,8 @@ export default class Home extends Component {
 									<CardTitle>Create an Event</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the card title and make
+										up the bulk of the card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
@@ -119,8 +90,8 @@ export default class Home extends Component {
 									<CardTitle>Make New Pet Friends</CardTitle>
 
 									<CardText>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+										Some quick example text to build on the card title and make
+										up the bulk of the card's content.
 									</CardText>
 									<Button>Button</Button>
 								</CardBody>
