@@ -93,8 +93,8 @@ module.exports = () => {
 								name = profile.displayName;
 								break;
 							case 'twitter':
-								image = profile.profile_image_url;
-								name = profile.name;
+								image = profile.photos[0].value;
+								name = profile.displayName;
 							}
 							User.create({
 								name: name,

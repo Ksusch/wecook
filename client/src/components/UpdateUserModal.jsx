@@ -25,16 +25,14 @@ export default class UpdateUserModal extends Component {
 		this.toggle = this.toggle.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
-	componentDidMount() {
-		console.log('in cmdm', this.props.user);
-		let userData = {
-			name: this.props.user.name ? this.props.user.name : '',
-			about: this.props.user.about ? this.props.user.about : '',
-			image: this.props.user.image ? this.props.user.image : ''
-		};
-		this.setState({
-			userData
-		});
+	componentDidUpdate(prevProps, prevState) {
+		if (prevProps.modalOpen !== this.props.modalOpen) {
+			this.setState({
+				image: this.props.user.image,
+				name: this.props.user.name,
+				about: this.props.user.about
+			})
+		}
 	}
 	toggle() {
 		this.props.toggleModal();
