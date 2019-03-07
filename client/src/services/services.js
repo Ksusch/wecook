@@ -12,43 +12,43 @@ class ApiService {
 		return this.service.put('/user', user);
 	}
 	getPets() {
-		return this.service.get('/pet');
+		return this.service.get('/pets');
 	}
 	createPet(pet) {
-		return this.service.post('/pet', pet);
+		return this.service.post('/pets', pet);
 	}
 	updatePet(id, pet) {
-		return this.service.put(`/pet/${id}`, pet);
+		return this.service.put(`/pets/${id}`, pet);
 	}
 	deletePet(id) {
-		return this.service.delete(`/pet/${id}`);
+		return this.service.delete(`/pets/${id}`);
 	}
 	getEvents() {
-		return this.service.get('/event');
+		return this.service.get('/events');
 	}
 	getEventsInRadius() {
 		return this.service.get('/allevents');
 	}
 	createEvent(event) {
-		return this.service.post('/event', event);
+		return this.service.post('/events', event);
 	}
 	updateEvent(id, event) {
-		return this.service.put(`/event/${id}`, event);
+		return this.service.put(`/events/${id}`, event);
 	}
 	deleteEvent(id) {
-		return this.service.delete(`/event/${id}`);
+		return this.service.delete(`/events/${id}`);
 	}
 	getParticipants(id) {
 		return this.service.get(`/participants/${id}`);
 	}
 	addParticipant() {
-		return this.service.post('/participant');
+		return this.service.post('/participants');
 	}
 	removeParticipant() {
-		return this.service.delete('/participant');
+		return this.service.delete('/participants');
 	}
 	addImageUrl(url, type, id = null) {
-		return this.service.post('/image/add', {
+		return this.service.post('/image', {
 			imageUrl: url,
 			model: type,
 			owner: id

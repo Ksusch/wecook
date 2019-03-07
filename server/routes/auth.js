@@ -10,12 +10,9 @@ const express = require('express'),
 	googleAuth = passport.authenticate('google', { scope: ['profile'] }),
 	facebookAuth = passport.authenticate('facebook'),
 	localAuth = passport.authenticate('local');
-
-// console.log("getting io in auth init: ", app.get("io"))
-
+	
 router.post('/signup', (req, res, next) => {
 	if (!req.body.email || !req.body.password) {
-		//TODO: Move this to the frontend!
 		res.status(400).json({
 			message: 'Email address and password are both required'
 		});
@@ -45,7 +42,6 @@ router.post('/signup', (req, res, next) => {
 			});
 		})
 		.then(user => {
-			console.log('got to this point', user);
 			req.login(user, err => {
 				if (err) {
 					console.error('Server Error', err);
@@ -111,7 +107,6 @@ router.get('/facebook', addSocketIdtoSession, facebookAuth);
 
 // callback routes -- these must correlate with the ones defined in each API
 router.get('/twitter/callback', twitterAuth, req => {
-	console.log('got to twitter callback');
 	let user = req.user;
 	user.password = undefined;
 	app

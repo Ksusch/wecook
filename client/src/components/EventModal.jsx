@@ -24,15 +24,14 @@ export default class EventModal extends Component {
 			description: '',
 			location: '',
 			image: '',
-			searchResults: [],
-			coordinates: []
+			searchResults: []
 		};
 		this.toggle = this.toggle.bind(this);
 	}
 	componentDidMount() {
 		if (this.props.event != undefined) {
 			
-			console.log(this.props.event);
+			console.log('event modal', this.props.event);
 			this.setState({
 				image: this.props.event.image,
 				name: this.props.event.name,
@@ -66,17 +65,16 @@ export default class EventModal extends Component {
 		if (
 			this.state.name &&
       this.state.name.length > 0 &&
-      this.state.location &&
-      this.state.location.length > 0 &&
-      this.state.coordinates &&
-      this.state.coordinates.length > 0 &&
+      this.state.location.address &&
+      this.state.location.address.length > 0 &&
+      this.state.location.coordinates &&
+      this.state.location.coordinates.length > 0 &&
       this.state.description &&
       this.state.description.length > 0
 		) {
 			let event = {
 				name: this.state.name,
 				location: this.state.location,
-				coordinates: this.state.coordinates,
 				description: this.state.description,
 				image: this.state.image
 			};
@@ -88,15 +86,17 @@ export default class EventModal extends Component {
 		this.setState({ image: url });
 	}
 	handleSearchResultClick(result) {
-		console.log(result);
 		this.setState({
-			location: result.place_name,
-			coordinates: result.center,
+			location: {
+				address: result.place_name,
+				coordinates: result.center
+			},
 			searchResults: []
 		});
 	}
 	render() {
-		return (
+		if (!this.props.event) return <div>Loading</div>;
+		else return (
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
@@ -123,12 +123,8 @@ export default class EventModal extends Component {
 							</FormGroup>
 							<FormGroup>
 								<Input
-									placeholder={
-										this.state.event === undefined
-											? 'Location'
-											: this.state.event.location.address
-									}
-									value={this.state.location}
+									placeholder='Location'
+									value={this.state.location && this.state.location.address}
 									name="location"
 									onChange={e => this.handleChange(e)}
 								/>
@@ -152,7 +148,6 @@ export default class EventModal extends Component {
 									onChange={e => this.handleChange(e)}
 								/>
 							</FormGroup>
-						
 						</ModalBody>
 						<ModalFooter>
 							<FormGroup>
