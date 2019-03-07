@@ -22,10 +22,12 @@ export default class Search extends Component {
 		};
 		this.ApiService = new ApiService();
 	}
-	componentDidMount() {
-		this.ApiService.getEventsInRadius().then(events =>
-			this.setState({ events: events })
-		);
+	componentDidUpdate(prevProps) {
+		if (prevProps !== this.props && this.props.events.length > 0) { 
+			this.setState({
+				events: this.props.events
+			});
+		}
 	}
 	handleChange(e) {
 		this.setState({

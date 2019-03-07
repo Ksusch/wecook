@@ -12,7 +12,7 @@ class ApiService {
 		return this.service.put('/user', user);
 	}
 	getPets() {
-		return this.service.get('/pets');
+		return this.service.get('/pets').then(res => res.data);
 	}
 	createPet(pet) {
 		return this.service.post('/pets', pet);
@@ -26,9 +26,6 @@ class ApiService {
 	getEvents() {
 		return this.service.get('/events').then(res => res.data);
 	}
-	getEventsInRadius() {
-		return this.service.get('/allevents').then(res => res.data);
-	}
 	createEvent(event) {
 		return this.service.post('/events', event);
 	}
@@ -41,11 +38,11 @@ class ApiService {
 	getParticipants(id) {
 		return this.service.get(`/participants/${id}`).then(res => res.data);
 	}
-	addParticipant() {
-		return this.service.post('/participants');
+	addParticipant(id) {
+		return this.service.post('/participants', {id: id});
 	}
-	removeParticipant() {
-		return this.service.delete('/participants');
+	removeParticipant(id) {
+		return this.service.delete('/participants', {id: id});
 	}
 	addImageUrl(url, type, id = null) {
 		return this.service.post('/image', {

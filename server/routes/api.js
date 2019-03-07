@@ -24,16 +24,11 @@ router.put('/user', isActiveUser, (req, res) => {
 // Event CRUD
 
 router.get('/events', isActiveUser, (req, res) => {
-	User.findOne({ _id: req.user.id })
-		.then(user => Event.find({ owner: user._id }))
-		.then(events => res.status(200).json(events))
-		.catch(err => console.error(err));
-});
-
-router.get('/allevents', isActiveUser, (req, res) => {
 	// { owner: { $ne: req.user.id } }
 	Event.find()
-		.then(events => res.status(200).json(events))
+		.then(events => 
+			res.status(200).json(events)
+		)
 		.catch(err => console.error(err));
 });
 
@@ -78,7 +73,7 @@ router.get('/participants/:id', isActiveUser, (req, res) => {
 		.then(result => {
 			let participants = result.participants;
 			if (participants.length > 0) {
-				participants.map(v => ({
+				participants = participants.map(v => ({
 					name: v.name,
 					image: v.image,
 				}));
@@ -100,21 +95,21 @@ router.get('/participants/:id', isActiveUser, (req, res) => {
 
 router.post('/participants', isActiveUser, (req, res) => {
 	Event.findOneAndUpdate(
-		{ _id: req.params.id },
+		{ _id: req.body.id },
 		{ $push: { participants: req.user.id } },
 		{ new: true }
 	)
-		.then(participant => res.status(200).json(participant))
+		.then(participants => res.status(200).json(participants))
 		.catch(err => console.error(err));
 });
 
 router.delete('/participants', isActiveUser, (req, res) => {
 	Event.findOneAndUpdate(
-		{ _id: req.params.id },
+		{ _id: req.body.id },
 		{ $pull: { participants: req.user.id } },
 		{ new: true }
 	)
-		.then(participant => res.status(200).json(participant))
+		.then(event => console.log(event))
 		.catch(err => console.error(err));
 });
 
