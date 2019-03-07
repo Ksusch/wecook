@@ -49,7 +49,8 @@ router.get('/event', isActiveUser, (req, res, next) => {
 });
 
 router.get('/allevents', isActiveUser, (req, res, next) => {
-	Event.find({ owner: { $ne: req.user.id } } )
+	// { owner: { $ne: req.user.id } }
+	Event.find()
 		.then(events => res.status(200).json(events))
 		.catch(err => console.error(err));
 });
@@ -100,8 +101,18 @@ router.delete('/event/:id', isActiveUser, (req, res, next) => {
 // event participant CRUD
 
 router.get('/participants/:id', isActiveUser, (req, res, next) => {
-	Event.findOne({_id: req.params.id}).populate()
-		.then(event => res.status(200).json(event))
+	Event.findOne({_id: req.params.id}).populate('owner').populate('participants')
+		.then(result => {
+			let participants = result.data.participants.map(v => ({name: v.name, image: v.image})),
+				owner = {name: result.data.owner.name, image: result.data.owner.image},
+				ownerCurrent = result.owner._id === req.user.id ? true : false;
+			
+			res.status(200).json({
+				participants: participants,
+				owner: owner,
+				ownerCurrent: ownerCurrent
+			});
+		})
 		.catch(err => console.error(err));
 });
 
