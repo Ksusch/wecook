@@ -7,15 +7,17 @@ import Profile from './pages/Profile';
 import Search from './pages/Search';
 import Navbar from './Navbar';
 import Event from './pages/Event';
+import PrivacyPolicy from './PrivacyPolicy';
 import '../styles.scss';
 
 class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: JSON.parse(localStorage.getItem('user')),
+			user: null,
 			pets: null,
 			events: [],
+			allevents: [],
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -27,8 +29,7 @@ class App extends Component {
 		if (
 			prevState.user !== null &&
 			this.state.user !== null &&
-			(prevState.user !== this.state.user ||
-				prevState.pets !== this.state.pets)
+			(prevState.user !== this.state.user || prevState.pets !== this.state.pets)
 		) {
 			this.StorageService.set('user', this.state.user);
 		} else if (prevState.user !== null && this.state.user === null) {
@@ -37,7 +38,7 @@ class App extends Component {
 				this.AuthService.verify().then(res => {
 					if (res.status === 200) {
 						this.setState({
-							user: user,
+							user: user
 						});
 					} else {
 						this.StorageService.remove('user');
@@ -52,7 +53,7 @@ class App extends Component {
 			this.AuthService.verify().then(res => {
 				if (res.status === 200) {
 					this.setState({
-						user: user,
+						user: user
 					});
 					this.getUserData();
 				} else {
@@ -62,12 +63,12 @@ class App extends Component {
 		}
 	}
 	getUserData(res = undefined) {
-		console.log('acquiring user data');
 		this.ApiService.getPets().then(pets => {
 			this.ApiService.getEvents().then(events => {
 				this.setState({
-					pets: pets.data,
-					events: events.data,
+					pets: pets,
+					events: events.filter(event => event.owner === this.state.user._id),
+					allevents: events
 				});
 			});
 		});
@@ -76,24 +77,25 @@ class App extends Component {
 		let userData = user.data ? user.data : user;
 		this.StorageService.set('user', userData);
 		this.setState({
-			user: userData,
+			user: userData
 		});
 		this.getUserData();
 	}
 	handleLogout() {
 		this.setState({
-			user: null,
+			user: null
 		});
 		this.StorageService.remove('user');
 	}
 	handleConfirm(token) {
 		this.AuthService.confirmEmail(token).then(user =>
 			this.setState({
-				user: user,
+				user: user
 			})
 		);
 	}
 	render() {
+		console.log('state in app', this.state);
 		return (
 			<div className="App">
 				<Navbar user={this.state.user} />
@@ -101,9 +103,7 @@ class App extends Component {
 					<Route
 						exact
 						path="/"
-						render={props => (
-							<Home {...props} user={this.state.user} />
-						)}
+						render={props => <Home {...props} user={this.state.user} />}
 					/>
 					<Route
 						path="/profile"
@@ -138,9 +138,7 @@ class App extends Component {
 					<Route
 						path="/confirm/:confirmationToken"
 						render={props => {
-							this.handleConfirm(
-								props.match.params.confirmationToken
-							);
+							this.handleConfirm(props.match.params.confirmationToken);
 							return <Redirect to="/" />;
 						}}
 					/>
@@ -151,14 +149,23 @@ class App extends Component {
 							return <Redirect to="/" />;
 						}}
 					/>
+					<Route path="/search" render={props => <Search {...props} />} />
 					<Route
 						path="/search"
-						render={props => <Search {...props} />}
+						render={props => <Search {...props} events={this.state.allevents} />}
 					/>
-					 <Route 
-					 	exact path="/event/:id"
-					 	render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
-						 />
+					<Route
+						exact
+						path="/event/:id"
+						render={props => (
+							<Event
+								{...props}
+								event={this.state.allevents.filter(event => event._id === props.match.params.id)[0]}
+								handleUpdate={res => this.getUserData(res)}
+							/>)
+						}
+					/>
+					<Route exact path="/privacy" Component={PrivacyPolicy} />
 				</Switch>
 			</div>
 		);

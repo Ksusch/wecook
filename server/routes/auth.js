@@ -10,12 +10,9 @@ const express = require('express'),
 	googleAuth = passport.authenticate('google', { scope: ['profile'] }),
 	facebookAuth = passport.authenticate('facebook'),
 	localAuth = passport.authenticate('local');
-
-// console.log("getting io in auth init: ", app.get("io"))
-
+	
 router.post('/signup', (req, res, next) => {
 	if (!req.body.email || !req.body.password) {
-		//TODO: Move this to the frontend!
 		res.status(400).json({
 			message: 'Email address and password are both required'
 		});
@@ -29,13 +26,7 @@ router.post('/signup', (req, res, next) => {
 				});
 				return;
 			}
-			let token =
-        Math.random()
-        	.toString(36)
-        	.substr(2) +
-        Math.random()
-        	.toString(36)
-        	.substr(2);
+			let token = Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2);
 			return User.create({
 				email: req.body.email,
 				password: bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10)),
@@ -45,7 +36,6 @@ router.post('/signup', (req, res, next) => {
 			});
 		})
 		.then(user => {
-			console.log('got to this point', user);
 			req.login(user, err => {
 				if (err) {
 					console.error('Server Error', err);
@@ -58,7 +48,7 @@ router.post('/signup', (req, res, next) => {
 					req.body.email,
 					'Confirm your email',
 					`Please confirm your email by proceeding to the following link: ${
-						process.env.SERVER_ADDRESS
+						process.env.NODE_ENV === 'production' ?  'https://wepetevents.herokuapp.com' : 'http://localhost:3000'
 					}3000/confirm/${user.confirmationToken}`
 				);
 			});
@@ -72,7 +62,6 @@ router.post('/confirm', (req, res) => {
 		{ $set: { active: true } }
 	)
 		.then(user => {
-			console.log('at this point', user, req.body.token);
 			res.status(200).json(user);
 		})
 		.catch(() =>
@@ -111,7 +100,6 @@ router.get('/facebook', addSocketIdtoSession, facebookAuth);
 
 // callback routes -- these must correlate with the ones defined in each API
 router.get('/twitter/callback', twitterAuth, req => {
-	console.log('got to twitter callback');
 	let user = req.user;
 	user.password = undefined;
 	app

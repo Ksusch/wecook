@@ -24,10 +24,13 @@ export default class Home extends Component {
                 We have found a solution for you!
 							</p>
 							<br />
-
-							<Link className="btn btn-info login-btn" to="/loginSignup">
-                Login/Signup Now!
-							</Link>
+							{!this.props.user ? (
+								<Button className="btn-secondary" onClick={() => this.props.history.push('/loginsignup')}>
+									Login/Signup
+								</Button>
+							) : (
+								<div />
+							)}
 						</div>
 
 						<div className="col-12 align-self-center profile-img">
@@ -109,6 +112,7 @@ export default class Home extends Component {
 					<hr className="bighr" />
 				</div>
 
+<<<<<<< HEAD
 				{/* <div className="container">
 					<h1 className="test-header">Testimonial</h1>
 
@@ -131,6 +135,11 @@ export default class Home extends Component {
 						</div>
 					</div>
 				</div> */}
+=======
+				<footer>
+					<Link to="/privacy">Privacy Policy</Link>
+				</footer>
+>>>>>>> 4fe55b82e0ebfc7007c6ad33dfeb134bce420e24
 			</div>
 		);
 	}

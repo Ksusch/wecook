@@ -7,21 +7,14 @@ const passport = require('passport'),
 	{ Strategy: FacebookStrategy } = require('passport-facebook');
 
 module.exports = () => {
-	passport.serializeUser((user, cb) => cb(null, user.id));
+	// serializeUser is triggered after the login
+	passport.serializeUser((user, cb) => {
+		cb(null, user._id);
+	});
 	passport.deserializeUser((id, cb) => {
-		console.log('deserializer fired', id);
-		User.findOne(
-			{
-				$or: [
-					{ _id: id },
-					{ googleId: id },
-					{ twitterId: id },
-					{ facebookId: id },
-				],
-			},
+		User.findById(
+			id,
 			function (err, user) {
-				console.log('got to deserializer callback');
-				console.log(user);
 				if (err) {
 					return cb(err);
 				}
@@ -73,10 +66,8 @@ module.exports = () => {
 		if (origin !== 'local') {
 			let ID = origin + 'Id';
 			return (accessToken, refreshToken, profile, done) => {
-				console.log('got to auth callback function, passport.js');
 				User.findOne({ [ID]: profile.id })
 					.then(user => {
-						console.log(profile, user);
 						if (!user) {
 							let name, image;
 							switch (origin) {
@@ -93,8 +84,8 @@ module.exports = () => {
 								name = profile.displayName;
 								break;
 							case 'twitter':
-								image = profile.profile_image_url;
-								name = profile.name;
+								image = profile.photos[0].value;
+								name = profile.displayName;
 							}
 							User.create({
 								name: name,
