@@ -14,6 +14,7 @@ export default class AddEvent extends Component {
 		}));
 	}
 	addEvent(event) {
+		console.log('fired on add event');
 		this.props.handler(event);
 	}
 	render() {

@@ -1,16 +1,34 @@
 import React, { Component } from 'react';
-import { Button } from 'reactstrap';
+import { Button, Container } from 'reactstrap';
+import MapBox from '../MapBox';
 export default class Event extends Component {
+	
 	render() {
+		console.log(this.props);
 		return (
-			<div>
-				<Button
-					className="btn btn-primary"
-							
-				>
-					<i className="fas fa-arrow-left" /> Back
-				</Button>
-			</div>
+			<Container>
+				<div>
+					<Button
+						className="btn btn-primary"
+						onClick={() => this.props.history.push('/search')}
+					>
+						<i className="fas fa-arrow-left" /> Back
+					</Button>
+					<div className="d-flex justify-content-between">
+						<div className="event-details">
+							<h1>{this.props.event.name}</h1>
+							<hr/>
+							<img src={this.props.event.image} alt="an event picture"/>
+							<hr/>
+							Address: {this.props.event.location.address}
+							<br/>
+							{this.props.event.description}
+						</div>
+						<MapBox locations={[this.props.event.location.coordinates]}/>
+					</div>
+				</div>
+				
+			</Container>
 		);
 	}
 }

@@ -156,8 +156,8 @@ class App extends Component {
 						render={props => <Search {...props} />}
 					/>
 					 <Route 
-					 	path="/event/:id"
-					 	render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)} />} 
+					 	exact path="/event/:id"
+					 	render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
 						 />
 				</Switch>
 			</div>

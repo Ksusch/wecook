@@ -9,7 +9,6 @@ import {
 	InputGroupAddon,
 } from 'reactstrap';
 import { ApiService } from '../../services/services';
-import EventCard from '../EventCard';
 import MapBox from '../MapBox';
 import SearchResultCard from '../SearchResultCard';
 

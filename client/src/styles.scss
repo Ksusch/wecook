@@ -339,6 +339,7 @@ h4 {
 .map-box-search {
   width: 600px;
   height: 600px;
+  border: 1px solid black
 }
 
 .search-result-card {
@@ -367,4 +368,15 @@ h4 {
 }
 .modal-camera-padding {
   padding: 7px;
+}
+
+.event-details {
+  width: 50%;
+  padding: 10px 0;
+  vertical-align: center;
+  img {
+    width: inherit;
+    height: auto;
+    margin: auto;
+  }
 }
