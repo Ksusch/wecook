@@ -151,7 +151,7 @@ class App extends Component {
 					<Route path="/search" render={props => <Search {...props} />} />
 					<Route
 						path="/search"
-						render={props => <Search {...props} events={this.state.allevents}/>}
+						render={props => <Search {...props} events={this.state.allevents} />}
 					/>
 					<Route
 						exact

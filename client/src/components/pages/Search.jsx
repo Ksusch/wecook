@@ -8,7 +8,6 @@ import {
 	InputGroup,
 	InputGroupAddon
 } from 'reactstrap';
-import { ApiService } from '../../services/services';
 import MapBox from '../MapBox';
 import SearchResultCard from '../SearchResultCard';
 
@@ -20,10 +19,14 @@ export default class Search extends Component {
 			results: [],
 			events: []
 		};
-		this.ApiService = new ApiService();
+	}
+	componentDidMount(){
+		this.setState({
+			events: this.props.events
+		});
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps !== this.props && this.props.events.length > 0) {
+		if (prevProps !== this.props && this.props.events && this.props.events.length > 0) {
 			this.setState({
 				events: this.props.events
 			});
@@ -36,7 +39,7 @@ export default class Search extends Component {
 	}
 	handleSubmit(e) {
 		e.preventDefault();
-		if (this.state.search.length != undefined && this.state.search.length > 2) {
+		if (this.state.search) {
 			let search = new RegExp(this.state.search),
 				results = this.state.events.filter(
 					event =>
@@ -44,13 +47,16 @@ export default class Search extends Component {
 						search.test(event.desciption) ||
 						search.test(event.location)
 				);
-			if (results.length > 0) {
+			if (results.length && results.length > 0) {
 				this.setState({ results: results });
 			}
 		}
 	}
 	render() {
-		return (
+		
+		console.log('state in search', this.state);
+		if(!this.state.events) return <div>Loading</div>;
+		else return (
 			<Container>
 				<div className="search-wrapper d-flex flex-column">
 					<div className="d-flex justify-content-between">

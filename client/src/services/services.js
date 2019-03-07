@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ServerUrl = process.env.REACT_APP_URL;
+const ServerUrl = process.env.NODE_ENV === 'production' ?  'https://wepetevents.herokuapp.com' : 'http://localhost:3000';
 
 class ApiService {
 	constructor() {

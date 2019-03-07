@@ -6,8 +6,7 @@ const bodyParser = require('body-parser'),
 	passportInit = require('./passport'),
 	session = require('express-session'),
 	MongoStore = require('connect-mongo')(session),
-	app = express(),
-	path = require('path');
+	app = express();
 
 require('./db');
 	
@@ -36,5 +35,5 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 passportInit();
-app.use(express.static(path.join(__dirname, '../../client/build')));
+
 module.exports = app;
