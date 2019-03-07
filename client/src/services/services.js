@@ -1,5 +1,5 @@
 import axios from 'axios';
-const ServerUrl = process.env.NODE_ENV === 'production' ? 'hereoku' : 'http://localhost:4000';
+const ServerUrl = process.env.REACT_APP_URL;
 
 class ApiService {
 	constructor() {
