@@ -20,13 +20,11 @@ export default class Search extends Component {
 			events: []
 		};
 	}
-	componentDidMount(){
-		this.setState({
-			events: this.props.events
-		});
+	componentDidMount() {
+		this.setState({events: this.props.events });
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps !== this.props && this.props.events && this.props.events.length > 0) {
+		if (prevProps !== this.props) {
 			this.setState({
 				events: this.props.events
 			});
@@ -54,7 +52,7 @@ export default class Search extends Component {
 	}
 	render() {
 		
-		console.log('state in search', this.state);
+		console.log('state in search', this.props.events);
 		if(!this.state.events) return <div>Loading</div>;
 		else return (
 			<Container>
