@@ -48,7 +48,7 @@ class ApiService {
 		return this.service.delete('/participant');
 	}
 	addImageUrl(url, type, id = null) {
-		return this.service.post('/image/add', {
+		return this.service.post('/image', {
 			imageUrl: url,
 			model: type,
 			owner: id
