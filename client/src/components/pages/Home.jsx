@@ -25,8 +25,11 @@ export default class Home extends Component {
 							</p>
 							<br />
 							{!this.props.user ? (
-								<Button className="btn-secondary" onClick={() => this.props.history.push('/loginsignup')}>
-									Login/Signup
+								<Button
+									className="btn-secondary"
+									onClick={() => this.props.history.push('/loginsignup')}
+								>
+                  Login/Signup
 								</Button>
 							) : (
 								<div />
@@ -112,7 +115,6 @@ export default class Home extends Component {
 					<hr className="bighr" />
 				</div>
 
-<<<<<<< HEAD
 				{/* <div className="container">
 					<h1 className="test-header">Testimonial</h1>
 
@@ -135,11 +137,9 @@ export default class Home extends Component {
 						</div>
 					</div>
 				</div> */}
-=======
 				<footer>
 					<Link to="/privacy">Privacy Policy</Link>
 				</footer>
->>>>>>> 4fe55b82e0ebfc7007c6ad33dfeb134bce420e24
 			</div>
 		);
 	}

@@ -416,25 +416,25 @@ h4 {
   padding: 10px 20px;
 }
 
-.testimony-card {
-  margin-top: 150px;
-  border: 10px solid hotpink;
-  .test-img-box {
-    border: 10px solid purple;
+// .testimony-card {
+//   margin-top: 150px;
+//   border: 10px solid hotpink;
+//   .test-img-box {
+//     border: 10px solid purple;
 
-    .test-img {
-      border-radius: 50%;
-      border: 2px solid grey;
-    }
-  }
-  .test-textbox {
-    border: 10px solid navy;
-    font-size: 30px;
-    .test-text {
-      font-style: italic;
-    }
-  }
-}
+//     .test-img {
+//       border-radius: 50%;
+//       border: 2px solid grey;
+//     }
+//   }
+//   .test-textbox {
+//     border: 10px solid navy;
+//     font-size: 30px;
+//     .test-text {
+//       font-style: italic;
+//     }
+//   }
+// }
 Card {
   text-align: center;
 }
@@ -450,18 +450,14 @@ Card {
 
 //=========================================
 .event-header {
-  width: 100%;
+  width: 50%;
   padding: 10px 0;
   vertical-align: center;
-}
-
-.event-img-wrapper {
-     width: 250px;
-     img {
-       width: 100%;
-     }
-   
-
+  img {
+    width: inherit;
+    height: auto;
+    margin: auto;
+  }
 }
 
 .event-details {
