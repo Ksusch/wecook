@@ -416,14 +416,18 @@ h4 {
   padding: 10px 20px;
 }
 .event-header {
-  width: 50%;
+  width: 100%;
   padding: 10px 0;
   vertical-align: center;
-  img {
-    width: inherit;
-    height: auto;
-    margin: auto;
-  }
+}
+
+.event-img-wrapper {
+     width: 250px;
+     img {
+       width: 100%;
+     }
+   
+
 }
 
 .event-details {
