@@ -12,18 +12,7 @@ router.put('/user', isActiveUser, (req, res, next) => {
 	if (req.body.image) data.image = req.body.image;
 	if (req.body.name) data.name = req.body.name;
 	if (req.body.about) data.about = req.body.about;
-	User.findOneAndUpdate(
-		{
-			$or: [
-				{ _id: req.user.id },
-				{ googleId: req.user.id },
-				{ twitterId: req.user.id },
-				{ facebookId: req.user.id },
-			],
-		},
-		data,
-		{ new: true }
-	)
+	User.findOneAndUpdate({ _id: req.user.id }, data, { new: true })
 		.then(user => {
 			let userData = user;
 			userData.password = undefined;
@@ -35,14 +24,7 @@ router.put('/user', isActiveUser, (req, res, next) => {
 // Event CRUD
 
 router.get('/event', isActiveUser, (req, res, next) => {
-	User.findOne({
-		$or: [
-			{ _id: req.user.id },
-			{ googleId: req.user.id },
-			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
-	})
+	User.findOne({ _id: req.user.id })
 		.then(user => Event.find({ owner: user._id }))
 		.then(events => res.status(200).json(events))
 		.catch(err => console.error(err));
@@ -56,14 +38,7 @@ router.get('/allevents', isActiveUser, (req, res, next) => {
 });
 
 router.post('/event', isActiveUser, (req, res, next) => {
-	User.findOne({
-		$or: [
-			{ _id: req.user.id },
-			{ googleId: req.user.id },
-			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
-	})
+	User.findOne({ _id: req.user.id })
 		.then(user =>
 			Event.create({
 				name: req.body.name,
@@ -97,16 +72,24 @@ router.delete('/event/:id', isActiveUser, (req, res, next) => {
 // event participant CRUD
 
 router.get('/participants/:id', isActiveUser, (req, res, next) => {
-	Event.findOne({_id: req.params.id}).populate('owner').populate('participants')
+	Event.findOne({ _id: req.params.id })
+		.populate('owner')
+		.populate('participants')
 		.then(result => {
-			let participants = result.data.participants.map(v => ({name: v.name, image: v.image})),
-				owner = {name: result.data.owner.name, image: result.data.owner.image},
+			let participants = result.data.participants.map(v => ({
+					name: v.name,
+					image: v.image,
+				})),
+				owner = {
+					name: result.data.owner.name,
+					image: result.data.owner.image,
+				},
 				ownerCurrent = result.owner._id === req.user.id ? true : false;
-			
+
 			res.status(200).json({
 				participants: participants,
 				owner: owner,
-				ownerCurrent: ownerCurrent
+				ownerCurrent: ownerCurrent,
 			});
 		})
 		.catch(err => console.error(err));
@@ -114,7 +97,9 @@ router.get('/participants/:id', isActiveUser, (req, res, next) => {
 
 router.post('/participant', isActiveUser, (req, res, next) => {
 	Event.findOneAndUpdate(
-		{_id: req.params.id}, { $push: { participants: req.user.id }}, {new: true}
+		{ _id: req.params.id },
+		{ $push: { participants: req.user.id } },
+		{ new: true }
 	)
 		.then(participant => res.status(200).json(participant))
 		.catch(err => console.error(err));
@@ -122,7 +107,9 @@ router.post('/participant', isActiveUser, (req, res, next) => {
 
 router.delete('/participant', isActiveUser, (req, res, next) => {
 	Event.findOneAndUpdate(
-		{_id: req.params.id}, { $pull: { participants: req.user.id }}, {new: true}
+		{ _id: req.params.id },
+		{ $pull: { participants: req.user.id } },
+		{ new: true }
 	)
 		.then(participant => res.status(200).json(participant))
 		.catch(err => console.error(err));
@@ -132,28 +119,14 @@ router.delete('/participant', isActiveUser, (req, res, next) => {
 
 router.get('/pet', isActiveUser, (req, res, next) => {
 	// TODO get only pets from this user
-	User.findOne({
-		$or: [
-			{ _id: req.user.id },
-			{ googleId: req.user.id },
-			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
-	})
+	User.findOne({ _id: req.user.id })
 		.then(user => Pet.find({ owner: user._id }))
 		.then(pets => res.status(200).json(pets))
 		.catch(err => console.error(err));
 });
 
 router.post('/pet', isActiveUser, (req, res, next) => {
-	User.findOne({
-		$or: [
-			{ _id: req.user.id },
-			{ googleId: req.user.id },
-			{ twitterId: req.user.id },
-			{ facebookId: req.user.id },
-		],
-	})
+	User.findOne({ _id: req.user.id })
 		.then(user =>
 			Pet.create({
 				name: req.body.name,
@@ -189,14 +162,7 @@ router.delete('/pet/:id', isActiveUser, (req, res, next) => {
 router.post('/image/add', isActiveUser, (req, res, next) => {
 	if (req.body.type === 'User') {
 		User.findOneAndUpdate(
-			{
-				$or: [
-					{ _id: req.user.id },
-					{ googleId: req.user.id },
-					{ twitterId: req.user.id },
-					{ facebookId: req.user.id },
-				],
-			},
+			{ _id: req.user.id },
 			{
 				image: req.body.imageUrl,
 			}
