@@ -38,6 +38,15 @@ class ApiService {
 	deleteEvent(id) {
 		return this.service.delete(`/event/${id}`);
 	}
+	getParticipants(id) {
+		return this.service.get(`/participants/${id}`);
+	}
+	addParticipant() {
+		return this.service.post('/participant');
+	}
+	removeParticipant() {
+		return this.service.delete('/participant');
+	}
 	addImageUrl(url, type, id = null) {
 		return this.service.post('/image/add', {
 			imageUrl: url,

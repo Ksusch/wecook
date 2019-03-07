@@ -337,8 +337,6 @@ h4 {
 }
 
 .map-box-search {
-  width: 600px;
-  height: 600px;
   border: 1px solid black
 }
 
@@ -370,7 +368,7 @@ h4 {
   padding: 7px;
 }
 
-.event-details {
+.event-header {
   width: 50%;
   padding: 10px 0;
   vertical-align: center;
@@ -378,5 +376,11 @@ h4 {
     width: inherit;
     height: auto;
     margin: auto;
+  }
+}
+
+.event-details {
+  h5 {
+    text-align: right;
   }
 }
