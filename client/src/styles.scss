@@ -374,12 +374,12 @@ h4 {
   width: auto;
 }
 
-//==================building grid=======
+//==================HomePage=======
 
-//=====container======
 .container {
   //   background-color: rgb(202, 195, 199);
   width: 70%;
+  align-content: center;
 }
 
 .home-text > div {
@@ -393,7 +393,7 @@ h4 {
 }
 
 .wrapper {
-  padding: 50px 0px;
+  padding: 60px 0px;
 }
 
 .profile-row {
@@ -415,6 +415,40 @@ h4 {
   border-radius: 20px !important;
   padding: 10px 20px;
 }
+
+.testimony-card {
+  margin-top: 150px;
+  border: 10px solid hotpink;
+  .test-img-box {
+    border: 10px solid purple;
+
+    .test-img {
+      border-radius: 50%;
+      border: 2px solid grey;
+    }
+  }
+  .test-textbox {
+    border: 10px solid navy;
+    font-size: 30px;
+    .test-text {
+      font-style: italic;
+    }
+  }
+}
+Card {
+  text-align: center;
+}
+
+.card-img-top {
+  width: 98%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+  height: 300px;
+  object-fit: cover;
+  margin: auto;
+}
+
+//=========================================
 .event-header {
   width: 100%;
   padding: 10px 0;
