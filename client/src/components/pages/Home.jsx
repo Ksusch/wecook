@@ -111,35 +111,9 @@ export default class Home extends Component {
 					</div>
 					<hr className="bighr" />
 				</div>
-
-<<<<<<< HEAD
-				{/* <div className="container">
-					<h1 className="test-header">Testimonial</h1>
-
-					<div className="row testimony-card">
-						<div className="col-4 test-img-box">
-							<img
-								className="test-img d-flex align-items-center"
-								src="images/dog.png"
-								alt="test-img1"
-							/>
-							<br />
-              Mr.Pug{' '}
-						</div>
-						<div className="col-8 test-textbox">
-							<p className="test-text">
-                "I cannot deal with my owner all by myself indoors every single
-                day! Thanks to Wepet, we got some fresh air and meet new
-                friends!"
-							</p>
-						</div>
-					</div>
-				</div> */}
-=======
 				<footer>
 					<Link to="/privacy">Privacy Policy</Link>
 				</footer>
->>>>>>> 4fe55b82e0ebfc7007c6ad33dfeb134bce420e24
 			</div>
 		);
 	}
