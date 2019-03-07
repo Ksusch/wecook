@@ -25,9 +25,13 @@ export default class Home extends Component {
 							</p>
 							<br />
 
-							<Link className="btn btn-info login-btn" to="/loginSignup">
-                Login/Signup Now!
-							</Link>
+							{!this.props.user ? (
+								<Button className="btn-secondary">
+									<Link to="/loginSignup">Login/Signup</Link>
+								</Button>
+							) : (
+								<div />
+							)}
 						</div>
 
 						<div className="col-12 align-self-center profile-img">

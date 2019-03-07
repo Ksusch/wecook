@@ -79,7 +79,7 @@ export default class UpdateUserModal extends Component {
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}
-								imageType="userPic"
+								imageType="profilePic"
 							/>{' '}
 							<div className="modal-camera-padding" />
 							<FormGroup>
