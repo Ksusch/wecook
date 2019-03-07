@@ -17,7 +17,7 @@ class App extends Component {
 			user: null,
 			pets: null,
 			events: [],
-			allevents: [],
+			allevents: []
 		};
 		this.AuthService = new AuthService();
 		this.StorageService = new StorageService();
@@ -149,7 +149,6 @@ class App extends Component {
 							return <Redirect to="/" />;
 						}}
 					/>
-					<Route path="/search" render={props => <Search {...props} />} />
 					<Route
 						path="/search"
 						render={props => <Search {...props} events={this.state.allevents} />}
