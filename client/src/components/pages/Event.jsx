@@ -14,12 +14,13 @@ export default class Event extends Component {
 		this.getParticipants();	
 	}
 	getParticipants(){
-		this.ApiService.getParticipants(this.props.match.params.id)
-			.then(res => { 
-				this.setState({
-					participants: res.data.participants.map(v => {v.name, v.image;})
-				});
-			});
+		this.ApiService.getParticipants(this.props.match.params.id);
+		// .then(res => { 
+		// 	this.setState({
+		// 		participants: res.data.participants.map(v => {v.name, v.image;})
+		// 	});
+
+		// });
 	}
 	addParticipant(){
 		this.ApiService.addParticipant().then(res =>
