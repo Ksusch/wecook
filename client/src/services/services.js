@@ -39,7 +39,7 @@ class ApiService {
 		return this.service.delete(`/events/${id}`);
 	}
 	getParticipants(id) {
-		return this.service.get(`/participants/${id}`);
+		return this.service.get(`/participants/${id}`).then(res => res.data);
 	}
 	addParticipant() {
 		return this.service.post('/participants');

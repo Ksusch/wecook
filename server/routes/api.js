@@ -76,20 +76,23 @@ router.get('/participants/:id', isActiveUser, (req, res, next) => {
 		.populate('owner')
 		.populate('participants')
 		.then(result => {
-			let participants = result.data.participants.map(v => ({
+			let participants = result.participants;
+			if (participants.length > 0) {
+				participants.map(v => ({
 					name: v.name,
 					image: v.image,
-				})),
-				owner = {
-					name: result.data.owner.name,
-					image: result.data.owner.image,
+				}));
+			}
+			let owner = {
+					name: result.owner.name,
+					image: result.owner.image,
 				},
-				ownerCurrent = result.owner._id === req.user.id ? true : false;
-
+				ownerCurrent = String(result.owner._id) == req.user.id ? true : false;
 			res.status(200).json({
 				participants: participants,
 				owner: owner,
 				ownerCurrent: ownerCurrent,
+				currentUser: req.user.id
 			});
 		})
 		.catch(err => console.error(err));

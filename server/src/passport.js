@@ -9,16 +9,12 @@ const passport = require('passport'),
 module.exports = () => {
 	// serializeUser is triggered after the login
 	passport.serializeUser((user, cb) => {
-		console.log('TCL: user._id', user._id)
-		cb(null, user._id)
+		cb(null, user._id);
 	});
 	passport.deserializeUser((id, cb) => {
-		console.log('deserializer fired', id);
 		User.findById(
 			id,
 			function (err, user) {
-				console.log('got to deserializer callback');
-				console.log(user);
 				if (err) {
 					return cb(err);
 				}
@@ -70,10 +66,8 @@ module.exports = () => {
 		if (origin !== 'local') {
 			let ID = origin + 'Id';
 			return (accessToken, refreshToken, profile, done) => {
-				console.log('got to auth callback function, passport.js');
 				User.findOne({ [ID]: profile.id })
 					.then(user => {
-						console.log(profile, user);
 						if (!user) {
 							let name, image;
 							switch (origin) {

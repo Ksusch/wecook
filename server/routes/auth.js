@@ -68,7 +68,6 @@ router.post('/confirm', (req, res) => {
 		{ $set: { active: true } }
 	)
 		.then(user => {
-			console.log('at this point', user, req.body.token);
 			res.status(200).json(user);
 		})
 		.catch(() =>

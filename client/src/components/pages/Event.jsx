@@ -10,32 +10,38 @@ export default class Event extends Component {
 		};
 		this.ApiService = new ApiService();
 	}
-	componentDidUpdate(){
+	componentDidMount(){
 		this.getParticipants();	
 	}
 	getParticipants(){
-		this.ApiService.getParticipants(this.props.match.params.id);
-		// .then(res => { 
-		// 	this.setState({
-		// 		participants: res.data.participants.map(v => {v.name, v.image;})
-		// 	});
-
-		// });
+		this.ApiService.getParticipants(this.props.match.params.id)
+			.then(res => {
+				let attending = res.participants.includes(res.currentUser) ? true : false;
+				this.setState({
+					participants: res.participants,
+					owner: res.owner,
+					ownerCurrent: res.ownerCurrent,
+					attending: attending
+				});
+			});
 	}
 	addParticipant(){
 		this.ApiService.addParticipant().then(res =>
 			this.props.handleUpdate(res)
 		);
+		this.setState({attending: true});
 	}
 	removeParticipant(){
 		this.ApiService.removeParticipant().then(res =>
 			this.props.handleUpdate(res)
 		);
+		this.setState({attending: false});
 	}
 	render() {
-		console.log(this.props);
+		console.log(this.state);
 		if(!this.props.event) return <div>loading</div>;
 		else return (
+			
 			<Container>
 				<div>
 					<Button
@@ -56,10 +62,16 @@ export default class Event extends Component {
 						<hr/>
 						<div className="d-flex justify-content-between">
 							{
-								!this.state.attending ?
-									<Button onClick={() => this.addParticipant()}>Attend</Button>
+								!this.state.ownerCurrent ?
+									(
+										this.state.attending ?
+											<Button onClick={() => this.removeParticipant()}>Unattend</Button>
+											:
+											<Button onClick={() => this.addParticipant()}>Attend</Button>
+									)
 									:
-									<Button onClick={() => this.removeParticipant()}>Unattend</Button>
+									(<div/>)
+			
 							}
 							<h5>Address: {this.props.event.location.address}</h5>
 						</div>
@@ -67,12 +79,21 @@ export default class Event extends Component {
 							{this.props.event.description}
 						</p>
 						<h2>owner</h2>
-						{this.props.event.owner}	
+						<img src={this.state.owner && this.state.owner.image} alt="owner photo"/>
+						<br/>
+						<span>{this.state.owner && this.state.owner.name}</span>	
+						
 						<h2>participants</h2>
-						{this.props.event.participants}
+						
+						{this.state.participants && this.state.participants.map(participant => (
+							<div className="participant-wrapper">
+								<img src={participant.image} alt="participant photo"/>
+								<br/>
+								<span>{participant.name}</span> 
+							</div>	
+						))}
 					</div>
 				</div>
-				
 			</Container>
 		);
 	}

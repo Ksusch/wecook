@@ -13,7 +13,7 @@ class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			user: JSON.parse(localStorage.getItem('user')),
+			user: null,
 			pets: null,
 			events: [],
 		};
@@ -155,10 +155,10 @@ class App extends Component {
 						path="/search"
 						render={props => <Search {...props} />}
 					/>
-					 <Route 
-					 	exact path="/event/:id"
-					 	render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
-						 />
+					<Route 
+						exact path="/event/:id"
+						render={props => <Event {...props} event={this.state.events.filter(event => event._id === props.match.params.id)[0]} />} 
+					/>
 				</Switch>
 			</div>
 		);
