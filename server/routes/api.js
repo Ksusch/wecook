@@ -49,7 +49,7 @@ router.get('/event', isActiveUser, (req, res, next) => {
 });
 
 router.get('/allevents', isActiveUser, (req, res, next) => {
-	Event.find()
+	Event.find({ owner: { $ne: req.user.id } } )
 		.then(events => res.status(200).json(events))
 		.catch(err => console.error(err));
 });
@@ -93,6 +93,30 @@ router.put('/event/:id', isActiveUser, (req, res, next) => {
 
 router.delete('/event/:id', isActiveUser, (req, res, next) => {
 	Event.findOneAndDelete({ _id: req.params.id })
+		.then(event => res.status(200).json(event))
+		.catch(err => console.error(err));
+});
+
+// event participant CRUD
+
+router.get('/participants/:id', isActiveUser, (req, res, next) => {
+	Event.findOne({_id: req.params.id}).populate()
+		.then(event => res.status(200).json(event))
+		.catch(err => console.error(err));
+});
+
+router.post('/participant', isActiveUser, (req, res, next) => {
+	Event.findOneAndUpdate(
+		{_id: req.params.id}, { $push: { participants: req.user.id }}, {new: true}
+	)
+		.then(event => res.status(200).json(event))
+		.catch(err => console.error(err));
+});
+
+router.delete('/participant', isActiveUser, (req, res, next) => {
+	Event.findOneAndUpdate(
+		{_id: req.params.id}, { $pull: { participants: req.user.id }}, {new: true}
+	)
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });

@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { ApiService } from '../../api/api';
-import UpdateUserModal from '../UpdateUserModal';
-import Img from 'react-image';
+import { ApiService } from '../../services/services';
 import { Button } from 'reactstrap';
-import '../../styles.scss';
 import PetCard from '../PetCard';
 import EventCard from '../EventCard';
 import AddPetButton from '../AddPetButton';
 import AddEventButton from '../AddEventButton';
+import UpdateUserModal from '../UpdateUserModal';
+import Img from 'react-image';
 
 class Profile extends Component {
 	constructor(props) {
@@ -106,7 +105,7 @@ class Profile extends Component {
 				<hr className="bighr" />
 
 				<div>
-					<h3>Your pets</h3>
+					<h2>Pets</h2>
 					<div className="card-container">
 						{this.props.pets !== null ? (
 							this.props.pets.map((pet, i) => (
@@ -121,14 +120,15 @@ class Profile extends Component {
 							<div />
 						)}
 					</div>
-					<hr className="bighr" />
 					<div>
+						<h3>Add a Pet</h3>
 						<AddPetButton handler={pet => this.createPet(pet)} />
 					</div>
+					<hr className="bighr" />
 				</div>
 				<div>
 					<br />
-					<h2>Events section</h2>
+					<h2>Events</h2>
 					<div className="card-container">
 						{this.props.events ? (
 							this.props.events.map((event, i) => (
@@ -144,7 +144,7 @@ class Profile extends Component {
 						)}
 					</div>
 					<div>
-						<h3>Add event</h3>
+						<h3>Add an Event</h3>
 						<AddEventButton handler={event => this.createEvent(event)} />
 					</div>
 				</div>

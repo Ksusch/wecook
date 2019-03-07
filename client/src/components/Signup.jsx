@@ -73,7 +73,7 @@ export default class Login extends Component {
 							<Input
 								type="email"
 								name="email"
-								placeholder="JonSnow@winterfeld.net"
+								placeholder="JonSnow@winterfell.net"
 								onChange={e => this.handleChange(e)}
 							/>
 						</InputGroup>
