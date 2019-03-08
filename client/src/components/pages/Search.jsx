@@ -21,7 +21,7 @@ export default class Search extends Component {
 		};
 	}
 	componentDidMount() {
-		this.setState({events: this.props.events });
+		this.setState({ events: this.props.events });
 	}
 	componentDidUpdate(prevProps) {
 		if (prevProps !== this.props) {
@@ -51,68 +51,68 @@ export default class Search extends Component {
 		}
 	}
 	render() {
-		
 		console.log('state in search', this.props.events);
-		if(!this.state.events) return <div>Loading</div>;
-		else return (
-			<Container>
-				<div className="search-wrapper d-flex flex-column">
-					<div className="d-flex justify-content-between">
-						<div className="search-box d-flex flex-column justify-content-center">
-							<Form onSubmit={e => this.handleSubmit(e)}>
-								<FormGroup>
-									<InputGroup>
-										<InputGroupAddon addonType="prepend">
-											<div className="prepend-box">
-												<i className="fas fa-search fa-2x" />
-											</div>
-										</InputGroupAddon>
-										<Input
-											value={this.state.search}
-											onChange={e => this.handleChange(e)}
-											type="text"
-											name="search"
-											placeholder="Search events near you"
-										/>
-									</InputGroup>
-								</FormGroup>
-							</Form>
+		if (!this.state.events) return <div>Loading</div>;
+		else
+			return (
+				<Container>
+					<div className="search-wrapper d-flex flex-column">
+						<div className="d-flex justify-content-between">
+							<div className="search-box d-flex flex-column justify-content-center">
+								<Form onSubmit={e => this.handleSubmit(e)}>
+									<FormGroup>
+										<InputGroup>
+											<InputGroupAddon addonType="prepend">
+												<div className="prepend-box">
+													<i className="fas fa-search fa-2x" />
+												</div>
+											</InputGroupAddon>
+											<Input
+												value={this.state.search}
+												onChange={e => this.handleChange(e)}
+												type="text"
+												name="search"
+												placeholder="Search events near you"
+											/>
+										</InputGroup>
+									</FormGroup>
+								</Form>
+							</div>
+						</div>
+						<MapBox
+							locations={this.state.events.map(
+								event => event.location.coordinates
+							)}
+						/>
+						<div>
+							<hr className="bighr" />
+						</div>
+						<h3>All Events</h3>
+						<div className="search-results d-flex align-items-start">
+							{this.state.results.length > 0
+								? this.state.results.map((event, i) => (
+									<Button
+										className="search-result-button"
+										onClick={() =>
+											this.props.history.push(`/event/${event._id}`)
+										}
+									>
+										<SearchResultCard key={i} event={event} />
+									</Button>
+								  ))
+								: this.state.events.map((event, i) => (
+									<Button
+										className="search-result-button"
+										onClick={() =>
+											this.props.history.push(`/event/${event._id}`)
+										}
+									>
+										<SearchResultCard key={i} event={event} />
+									</Button>
+								  ))}
 						</div>
 					</div>
-					<MapBox
-						locations={this.state.events.map(
-							event => event.location.coordinates
-						)}
-					/>
-					<div>
-						<hr className="bighr" />
-					</div>
-					<h3>All Events</h3>
-					<div className="search-results d-flex">
-						{this.state.results.length > 0
-							? this.state.results.map((event, i) => (
-								<Button
-									className="search-result-button"
-									onClick={() =>
-										this.props.history.push(`/event/${event._id}`)
-									}
-								>
-									<SearchResultCard key={i} event={event} />
-								</Button>
-							  ))
-							: this.state.events.map((event, i) => (
-								<Button
-									className="search-result-button"
-									onClick={() =>
-										this.props.history.push(`/event/${event._id}`)
-									}
-								>
-									<SearchResultCard key={i} event={event} />
-								</Button>
-							  ))}
-					</div>
-				</div>
-			</Container>
-		);
+				</Container>
+			);
 	}
 }

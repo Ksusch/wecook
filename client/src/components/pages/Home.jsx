@@ -26,7 +26,7 @@ export default class Home extends Component {
 							<br />
 							{!this.props.user ? (
 								<Button
-									className="btn-secondary"
+									className="btn-secondary login-signup-button"
 									onClick={() => this.props.history.push('/loginsignup')}
 								>
 									Login/Signup

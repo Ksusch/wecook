@@ -26,9 +26,7 @@ router.put('/user', isActiveUser, (req, res) => {
 router.get('/events', isActiveUser, (req, res) => {
 	// { owner: { $ne: req.user.id } }
 	Event.find()
-		.then(events => 
-			res.status(200).json(events)
-		)
+		.then(events => res.status(200).json(events))
 		.catch(err => console.error(err));
 });
 
@@ -40,7 +38,7 @@ router.post('/events', isActiveUser, (req, res) => {
 				location: req.body.location,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id,
+				owner: user._id
 			})
 		)
 		.then(event => res.status(200).json(event))
@@ -53,7 +51,11 @@ router.put('/events/:id', isActiveUser, (req, res) => {
 	if (req.body.location) eventData.location = req.body.location;
 	if (req.body.description) eventData.description = req.body.description;
 	if (req.body.image) eventData.image = req.body.image;
-	Event.findOneAndUpdate({ _id: req.params.id, owner: req.user._id }, eventData, { new: true })
+	Event.findOneAndUpdate(
+		{ _id: req.params.id, owner: req.user._id },
+		eventData,
+		{ new: true }
+	)
 		.then(event => res.status(200).json(event))
 		.catch(err => console.error(err));
 });
@@ -74,15 +76,18 @@ router.get('/participants/:id', isActiveUser, (req, res) => {
 			let participants = result.participants;
 			if (participants.length > 0) {
 				participants = participants.map(v => ({
+					id: v._id,
 					name: v.name,
-					image: v.image,
+					image: v.image
 				}));
 			}
 			let owner = {
 					name: result.owner.name,
 					image: result.owner.image,
+					id: result.owner.id
 				},
-				ownerCurrent = String(result.owner._id) == req.user.id ? true : false;
+				ownerCurrent = String(result.owner._id) == req.user.id;
+
 			res.status(200).json({
 				participants: participants,
 				owner: owner,
@@ -93,23 +98,23 @@ router.get('/participants/:id', isActiveUser, (req, res) => {
 		.catch(err => console.error(err));
 });
 
-router.post('/participants', isActiveUser, (req, res) => {
+router.post('/participants/:id', isActiveUser, (req, res) => {
 	Event.findOneAndUpdate(
-		{ _id: req.body.id },
+		{ _id: req.params.id },
 		{ $push: { participants: req.user.id } },
 		{ new: true }
 	)
-		.then(participants => res.status(200).json(participants))
+		.then(ev => res.status(200).json(ev))
 		.catch(err => console.error(err));
 });
 
-router.delete('/participants', isActiveUser, (req, res) => {
+router.delete('/participants/:id', isActiveUser, (req, res) => {
 	Event.findOneAndUpdate(
-		{ _id: req.body.id },
+		{ _id: req.params.id },
 		{ $pull: { participants: req.user.id } },
 		{ new: true }
 	)
-		.then(event => console.log(event))
+		.then(ev => res.status(200).json(ev))
 		.catch(err => console.error(err));
 });
 
@@ -131,7 +136,7 @@ router.post('/pets', isActiveUser, (req, res) => {
 				animal: req.body.animal,
 				description: req.body.description,
 				image: req.body.image,
-				owner: user._id,
+				owner: user._id
 			})
 		)
 		.then(pet => res.status(200).json(pet))
@@ -162,7 +167,7 @@ router.post('/image', isActiveUser, (req, res) => {
 		User.findOneAndUpdate(
 			{ _id: req.user.id },
 			{
-				image: req.body.imageUrl,
+				image: req.body.imageUrl
 			}
 		)
 			.then(user => {

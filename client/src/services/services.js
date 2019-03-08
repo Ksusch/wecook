@@ -1,5 +1,8 @@
 import axios from 'axios';
-const ServerUrl = process.env.NODE_ENV === 'production' ?  'https://wepetevents.herokuapp.com' : 'http://localhost:4000';
+const ServerUrl =
+	process.env.NODE_ENV === 'production'
+		? 'https://wepetevents.herokuapp.com'
+		: 'http://localhost:4000';
 
 class ApiService {
 	constructor() {
@@ -39,10 +42,10 @@ class ApiService {
 		return this.service.get(`/participants/${id}`).then(res => res.data);
 	}
 	addParticipant(id) {
-		return this.service.post('/participants', {id: id});
+		return this.service.post(`/participants/${id}`);
 	}
 	removeParticipant(id) {
-		return this.service.delete('/participants', {id: id});
+		return this.service.delete(`/participants/${id}`);
 	}
 	addImageUrl(url, type, id = null) {
 		return this.service.post('/image', {

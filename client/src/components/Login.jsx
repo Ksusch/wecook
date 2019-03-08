@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
-import { Button, Form, FormGroup, Input, InputGroup, InputGroupAddon } from 'reactstrap';
+import {
+	Button,
+	Form,
+	FormGroup,
+	Input,
+	InputGroup,
+	InputGroupAddon
+} from 'reactstrap';
 export default class Login extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			email: null,
-			password: null,
+			password: null
 		};
 	}
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value,
+			[e.target.name]: e.target.value
 		});
 	}
 	handleSubmit(e) {
@@ -25,7 +32,7 @@ export default class Login extends Component {
 						<InputGroup>
 							<InputGroupAddon addonType="prepend">
 								<div className="prepend-box">
-									<i className="fas fa-envelope fa-2x"></i>
+									<i className="fas fa-envelope fa-2x" />
 								</div>
 							</InputGroupAddon>
 							<Input
@@ -40,7 +47,7 @@ export default class Login extends Component {
 						<InputGroup>
 							<InputGroupAddon addonType="prepend">
 								<div className="prepend-box">
-									<i className="fas fa-unlock fa-2x"></i>
+									<i className="fas fa-unlock fa-2x" />
 								</div>
 							</InputGroupAddon>
 							<Input
@@ -52,20 +59,14 @@ export default class Login extends Component {
 						</InputGroup>
 					</FormGroup>
 					<FormGroup className="d-flex justify-content-between">
-						<Button
-							className="btn btn-primary"
-							onClick={e => this.props.handleToggle(e)}
-						>
+						<Button color="secondary" onClick={e => this.props.handleToggle(e)}>
 							<i className="fas fa-arrow-left" /> Back
 						</Button>
 
-						<Button
-							className="btn btn-primary"
-							onClick={e => this.props.toggleSignup(e)}
-						>
+						<Button color="secondary" onClick={e => this.props.toggleSignup(e)}>
 							<i className="fas fa-user-plus fa-1x" /> Signup
 						</Button>
-						<Button type="submit" className="btn btn-primary">
+						<Button type="submit" color="secondary">
 							<i className="fas fa-sign-in-alt fa-1x" /> Login
 						</Button>
 					</FormGroup>

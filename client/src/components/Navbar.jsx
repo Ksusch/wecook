@@ -15,25 +15,21 @@ export default class NavBar extends Component {
 					<span id="logo">WePet</span>
 					<i className="fas fa-paw" />
 				</NavLink>
-				<div className="align-self-end d-flex justify-content-around">
-					<NavLink to="/search" exact className="navbar-link">
-						<i className="fas fa-search" />
-					</NavLink>
-					{this.props.user ? (
+				{this.props.user ? (
+					<div className="align-self-end d-flex justify-content-around">
+						<NavLink to="/search" exact className="navbar-link">
+							<i className="fas fa-search" />
+						</NavLink>
 						<NavLink to="/profile" exact className="navbar-link">
 							<i className="fas fa-user" />
 						</NavLink>
-					) : (
-						<div />
-					)}
-					{this.props.user ? (
 						<NavLink to="/logout" exact className="navbar-link">
 							<i className="fas fa-sign-out-alt" />
 						</NavLink>
-					) : (
-						<div />
-					)}
-				</div>
+					</div>
+				) : (
+					<div />
+				)}
 			</nav>
 		);
 	}

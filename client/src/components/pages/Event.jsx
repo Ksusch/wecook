@@ -15,8 +15,8 @@ export default class Event extends Component {
 	}
 	getParticipants() {
 		this.ApiService.getParticipants(this.props.match.params.id).then(res => {
-			console.log(res);
-			let attending = res.participants.includes(res.currentUser) ? true : false;
+			let attending = res.participants.map(p => p.id).includes(res.currentUser);
+
 			this.setState({
 				participants: res.participants,
 				owner: res.owner,
@@ -26,16 +26,16 @@ export default class Event extends Component {
 		});
 	}
 	addParticipant() {
-		this.ApiService.addParticipant(this.props.match.params.id).then(res =>
-			this.props.handleUpdate(res)
-		);
-		this.setState({ attending: true });
+		this.ApiService.addParticipant(this.props.match.params.id).then(res => {
+			this.props.handleUpdate(res);
+			this.getParticipants();
+		});
 	}
 	removeParticipant() {
-		this.ApiService.removeParticipant(this.props.match.params.id).then(res =>
-			this.props.handleUpdate(res)
-		);
-		this.setState({ attending: false });
+		this.ApiService.removeParticipant(this.props.match.params.id).then(res => {
+			this.props.handleUpdate(res);
+			this.getParticipants();
+		});
 	}
 	render() {
 		if (!this.props.event) return <div>loading</div>;
@@ -77,24 +77,32 @@ export default class Event extends Component {
 								<h5>Address: {this.props.event.location.address}</h5>
 							</div>
 							<p>{this.props.event.description}</p>
-							<h2>Owner</h2>
-							<img
-								src={this.state.owner && this.state.owner.image}
-								alt="owner photo"
-							/>
-							<br />
-							<span>{this.state.owner && this.state.owner.name}</span>
+							<div className="owner-wrapper">
+								<h2>Owner</h2>
+								<img
+									src={this.state.owner && this.state.owner.image}
+									alt="owner photo"
+								/>
+								<br />
+								<span>{this.state.owner && this.state.owner.name}</span>
+							</div>
 
-							<h2>Participants</h2>
+							<div className="participants-wrapper">
+								<h2>Participants</h2>
+								{this.state.participants &&
+									this.state.participants.map(participant => (
+										<div className="participant-wrapper">
+											<img src={participant.image} alt="participant photo" />
+											<br />
+											<span>{participant.name}</span>
+										</div>
+									))}
 
-							{this.state.participants &&
-								this.state.participants.map(participant => (
-									<div className="participant-wrapper">
-										<img src={participant.image} alt="participant photo" />
-										<br />
-										<span>{participant.name}</span>
-									</div>
-								))}
+								{this.state.participants && !this.state.participants.length && (
+									<div>No participants registered, yet.</div>
+								)}
+							</div>
+							<div className="clearfix" />
 						</div>
 					</div>
 				</Container>
