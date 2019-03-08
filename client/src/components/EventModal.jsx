@@ -100,7 +100,7 @@ export default class EventModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}>Add an Event</ModalHeader>
+						<ModalHeader toggle={this.toggle}><h3>Add an Event</h3></ModalHeader>
 					
 						<ModalBody>
 							<UploadWidget

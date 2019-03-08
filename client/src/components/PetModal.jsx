@@ -74,7 +74,7 @@ export default class PetModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}>Add a Pet</ModalHeader>
+						<ModalHeader toggle={this.toggle}><h3>Add a Pet</h3></ModalHeader>
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}

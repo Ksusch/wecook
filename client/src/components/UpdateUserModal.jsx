@@ -73,7 +73,7 @@ export default class UpdateUserModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}>Update your info!</ModalHeader>
+						<ModalHeader toggle={this.toggle}><h3>Update your info!</h3></ModalHeader>
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}

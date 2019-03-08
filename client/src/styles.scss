@@ -1,11 +1,11 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss";
-@import url("https://use.fontawesome.com/releases/v5.7.2/css/all.css");
-@import url("https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu");
-@import url("https://fonts.googleapis.com/css?family=Gaegu");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.css");
+@import '../node_modules/bootstrap/scss/bootstrap.scss';
+@import url('https://use.fontawesome.com/releases/v5.7.2/css/all.css');
+@import url('https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Pacifico|Roboto+Slab|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Gaegu');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/mapbox-gl/0.53.1/mapbox-gl.css');
 // Navbar
 nav {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
   line-height: 40px;
   font-size: 2rem;
   padding: 10px;
@@ -42,7 +42,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Gaegu", cursive;
+  font-family: 'Gaegu', cursive;
 }
 
 .home-component {
@@ -463,5 +463,12 @@ Card {
 .event-details {
   h5 {
     text-align: right;
+  }
+}
+
+.event-img-wrapper {
+  width: 250px;
+  img {
+    width: 100%;
   }
 }

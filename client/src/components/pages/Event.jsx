@@ -6,7 +6,7 @@ export default class Event extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			attending: false,
+			attending: false
 		};
 		this.ApiService = new ApiService();
 	}
@@ -14,20 +14,16 @@ export default class Event extends Component {
 		this.getParticipants();
 	}
 	getParticipants() {
-		this.ApiService.getParticipants(this.props.match.params.id).then(
-			res => {
-				console.log(res);
-				let attending = res.participants.includes(res.currentUser)
-					? true
-					: false;
-				this.setState({
-					participants: res.participants,
-					owner: res.owner,
-					ownerCurrent: res.ownerCurrent,
-					attending: attending,
-				});
-			}
-		);
+		this.ApiService.getParticipants(this.props.match.params.id).then(res => {
+			console.log(res);
+			let attending = res.participants.includes(res.currentUser) ? true : false;
+			this.setState({
+				participants: res.participants,
+				owner: res.owner,
+				ownerCurrent: res.ownerCurrent,
+				attending: attending
+			});
+		});
 	}
 	addParticipant() {
 		this.ApiService.addParticipant(this.props.match.params.id).then(res =>
@@ -58,44 +54,27 @@ export default class Event extends Component {
 							<div className="event-header">
 								<h1>{this.props.event.name}</h1>
 								<hr />
-								<img
-									src={this.props.event.image}
-									alt="an event picture"
-								/>
+								<img src={this.props.event.image} alt="an event picture" />
 							</div>
-							<MapBox
-								locations={[
-									this.props.event.location.coordinates,
-								]}
-							/>
+							<MapBox locations={[this.props.event.location.coordinates]} />
 						</div>
 						<div className="event-details">
-							<hr />
+							<hr className="bighr" />
 							<div className="d-flex justify-content-between">
 								{!this.state.ownerCurrent ? (
 									this.state.attending ? (
-										<Button
-											onClick={() =>
-												this.removeParticipant()
-											}
-										>
+										<Button onClick={() => this.removeParticipant()}>
 											Unattend
 										</Button>
 									) : (
-										<Button
-											onClick={() =>
-												this.addParticipant()
-											}
-										>
+										<Button onClick={() => this.addParticipant()}>
 											Attend
 										</Button>
 									)
 								) : (
 									<div />
 								)}
-								<h5>
-									Address: {this.props.event.location.address}
-								</h5>
+								<h5>Address: {this.props.event.location.address}</h5>
 							</div>
 							<p>{this.props.event.description}</p>
 							<h2>Owner</h2>
@@ -104,19 +83,14 @@ export default class Event extends Component {
 								alt="owner photo"
 							/>
 							<br />
-							<span>
-								{this.state.owner && this.state.owner.name}
-							</span>
+							<span>{this.state.owner && this.state.owner.name}</span>
 
 							<h2>Participants</h2>
 
 							{this.state.participants &&
 								this.state.participants.map(participant => (
 									<div className="participant-wrapper">
-										<img
-											src={participant.image}
-											alt="participant photo"
-										/>
+										<img src={participant.image} alt="participant photo" />
 										<br />
 										<span>{participant.name}</span>
 									</div>
