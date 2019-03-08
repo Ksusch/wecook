@@ -40,7 +40,6 @@ export default class Event extends Component {
 	render() {
 		if (!this.props.event) return <div>loading</div>;
 		else {
-			console.log(this.state);
 			return (
 				<Container>
 					<div>
@@ -54,7 +53,7 @@ export default class Event extends Component {
 							<div className="event-header">
 								<h1>{this.props.event.name}</h1>
 								<hr />
-								<img src={this.props.event.image} alt="an event picture" />
+								<img src={this.props.event.image} alt="an event" />
 							</div>
 							<MapBox locations={[this.props.event.location.coordinates]} />
 						</div>
@@ -81,7 +80,7 @@ export default class Event extends Component {
 								<h2>Owner</h2>
 								<img
 									src={this.state.owner && this.state.owner.image}
-									alt="owner photo"
+									alt="owner"
 								/>
 								<br />
 								<span>{this.state.owner && this.state.owner.name}</span>
@@ -90,9 +89,9 @@ export default class Event extends Component {
 							<div className="participants-wrapper">
 								<h2>Participants</h2>
 								{this.state.participants &&
-									this.state.participants.map(participant => (
-										<div className="participant-wrapper">
-											<img src={participant.image} alt="participant photo" />
+									this.state.participants.map((participant, i) => (
+										<div className="participant-wrapper" key={i}>
+											<img src={participant.image} alt="participant" />
 											<br />
 											<span>{participant.name}</span>
 										</div>

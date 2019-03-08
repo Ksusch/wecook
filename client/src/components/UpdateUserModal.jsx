@@ -7,8 +7,7 @@ import {
 	ModalFooter,
 	Form,
 	FormGroup,
-	Input,
-	Label
+	Input
 } from 'reactstrap';
 
 import '../styles.scss';
@@ -31,14 +30,13 @@ export default class UpdateUserModal extends Component {
 				image: this.props.user.image,
 				name: this.props.user.name,
 				about: this.props.user.about
-			})
+			});
 		}
 	}
 	toggle() {
 		this.props.toggleModal();
 	}
 	handleChange(e) {
-		console.log('in handleChange', e.target);
 		this.setState({
 			[e.target.name]: e.target.value
 		});
@@ -65,7 +63,6 @@ export default class UpdateUserModal extends Component {
 		}
 	}
 	handleImage(url) {
-		console.log('hello from updaterender');
 		this.setState({ image: url });
 	}
 	render() {
@@ -73,7 +70,7 @@ export default class UpdateUserModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}><h3>Update your info!</h3></ModalHeader>
+						<ModalHeader toggle={this.toggle}><span className="modal-header">Update your info!</span></ModalHeader>
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}

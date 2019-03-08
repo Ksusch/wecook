@@ -1,16 +1,7 @@
-WeCook
+WePet v1.0.0
 
-TODO: 
+This app is a social site for pet owners. It was written as a final project at IronHack Berlin (2019). 
 
-1. upgrade the login and signup paths to send error messages to the front end to be displayed
-2. make sure the email confirmation is clear on the frontend
+Stack: NodeJS, ReactJS, ExpressJS, Socket.IO, MapBoxGL, Cloudinary, Nodemailer
 
-
-Client flow design:
-
-Entry Point - "/" 
-->  IF a session exists
-
-
-
- Login / Signup
+Authors: Naaman Hirschfeld, Ksenia Danniker, Ruby Lai

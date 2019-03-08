@@ -51,10 +51,10 @@ export default class PetModal extends Component {
       this.state.animal.length > 0 &&
       this.state.description &&
       this.state.description.length > 0 &&
-      (this.state.name != this.props.pet.name ||
-        this.state.description != this.props.pet.description ||
-        this.state.animal != this.props.pet.animal ||
-        this.state.image != this.props.pet.image)
+      (this.state.name !== this.props.pet.name ||
+        this.state.description !== this.props.pet.description ||
+        this.state.animal !== this.props.pet.animal ||
+        this.state.image !== this.props.pet.image)
 		) {
 			let pet = {
 				name: this.state.name,
@@ -74,7 +74,7 @@ export default class PetModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}><h3>Add a Pet</h3></ModalHeader>
+						<ModalHeader toggle={this.toggle}><span className="modal-header">Add a Pet</span></ModalHeader>
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}

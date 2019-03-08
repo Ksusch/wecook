@@ -51,7 +51,6 @@ export default class Search extends Component {
 		}
 	}
 	render() {
-		console.log('state in search', this.props.events);
 		if (!this.state.events) return <div>Loading</div>;
 		else
 			return (
@@ -88,7 +87,7 @@ export default class Search extends Component {
 							<hr className="bighr" />
 						</div>
 						<h3>All Events</h3>
-						<div className="search-results d-flex align-items-start">
+						<div className="search-results d-flex align-items-start flex-wrap">
 							{this.state.results.length > 0
 								? this.state.results.map((event, i) => (
 									<Button
@@ -96,6 +95,7 @@ export default class Search extends Component {
 										onClick={() =>
 											this.props.history.push(`/event/${event._id}`)
 										}
+										key={i}
 									>
 										<SearchResultCard key={i} event={event} />
 									</Button>
@@ -106,6 +106,7 @@ export default class Search extends Component {
 										onClick={() =>
 											this.props.history.push(`/event/${event._id}`)
 										}
+										key={i}
 									>
 										<SearchResultCard key={i} event={event} />
 									</Button>

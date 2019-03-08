@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardText, CardBody,
-	CardTitle, CardSubtitle, Button } from 'reactstrap';
+	CardTitle } from 'reactstrap';
 
 export default class SearchResultCard extends Component {
 	render() {

@@ -16,7 +16,7 @@ export default class MapBox extends Component {
 		}
 	}
 	componentDidUpdate(prevProps) {
-		if(prevProps.locations != this.props.locations && (this.props.locations.length > 0 || this.props.center)) {
+		if(prevProps.locations !== this.props.locations && (this.props.locations.length > 0 || this.props.center)) {
 			this.initMap();
 			this.addMarkers();
 		}
@@ -36,7 +36,6 @@ export default class MapBox extends Component {
 	}
 
 	render() {
-		console.log('mapbox mounting, props are', this.props);
 		return (
 			<div
 				ref={this.mapRef}

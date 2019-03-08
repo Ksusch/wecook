@@ -95,7 +95,6 @@ class App extends Component {
 		);
 	}
 	render() {
-		console.log('state in app', this.state);
 		return (
 			<div className="App">
 				<Navbar user={this.state.user} />

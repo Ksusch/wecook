@@ -29,9 +29,7 @@ export default class EventModal extends Component {
 		this.toggle = this.toggle.bind(this);
 	}
 	componentDidMount() {
-		if (this.props.event != undefined) {
-			
-			console.log('event modal', this.props.event);
+		if (this.props.event !== undefined) {
 			this.setState({
 				image: this.props.event.image,
 				name: this.props.event.name,
@@ -100,8 +98,7 @@ export default class EventModal extends Component {
 			<div>
 				<Modal isOpen={this.props.modalOpen} toggle={this.toggle}>
 					<Form onSubmit={e => this.handleSubmit(e)}>
-						<ModalHeader toggle={this.toggle}><h3>Add an Event</h3></ModalHeader>
-					
+						<ModalHeader toggle={this.toggle}><span className="modal-header">Add an Event</span></ModalHeader>
 						<ModalBody>
 							<UploadWidget
 								handler={url => this.handleImage(url)}

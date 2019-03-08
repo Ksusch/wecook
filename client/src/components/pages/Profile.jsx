@@ -61,7 +61,6 @@ class Profile extends Component {
 		this.ApiService.deleteEvent(id).then(res => this.props.handleUpdate(res));
 	}
 	render() {
-		console.log(this.props.events);
 		return (
 			<div className="container mt-sm-4 mb-5">
 				<div id="test" className="row">
@@ -88,7 +87,6 @@ class Profile extends Component {
 								modalOpen={this.state.modalOpen}
 								toggleModal={this.modalToggle}
 								handler={state => this.updateUser(state)}
-								user={this.props.user}
 							/>
 						</div>
 					</div>
