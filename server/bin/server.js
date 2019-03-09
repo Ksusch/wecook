@@ -1,14 +1,16 @@
 require('dotenv').config();
-const express = require('express');
-const path = require('path');
-const app = require('../src/app');
-const server = require('http').createServer(app).listen(process.env.PORT || 8080, () => {
-	console.log('Listening');
-});
-const socketServer = require('socket.io');
-const io = new socketServer(server).origins('http://localhost:*');
+const express = require('express'),
+	path = require('path'),
+	app = require('../src/app'),
+	port = process.env.PORT ? process.env.PORT : 8080,
+	server = require('http')
+		.createServer(app)
+		.listen(port, () => {
+			console.log(`Listening on ${port}`);
+		}),
+	socketServer = require('socket.io'),
+	io = new socketServer(server);
 app.set('io', io);
 require('../src/routing')(app);
 app.use(express.static(path.join(__dirname, '../../client/build')));
 io.on('connection', () => console.log('socket connected'));
-
